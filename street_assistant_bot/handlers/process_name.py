@@ -11,4 +11,4 @@ async def process_name(message: types.Message, state: FSMContext):
         data['name'] = message.text
 
     await Form.next()
-    await message.reply('Введите Ваш возраст')
+    await message.answer('Введите Ваш возраст')

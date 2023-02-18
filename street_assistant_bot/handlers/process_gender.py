@@ -18,9 +18,8 @@ async def process_gender(message: types.Message, state: FSMContext):
         await bot.send_message(
             message.chat.id,
             md.text(
-                md.text('Hi! Nice to meet you,', md.bold(data['name'])),
-                md.text('Age:', md.code(data['age'])),
-                md.text('Gender:', data['gender']),
+                md.text('Спасибо', md.bold(data['name'])),
+                md.text('Теперь мы можем приступать!'),
                 sep='\n',
             ),
             reply_markup=markup,
