@@ -15,4 +15,4 @@ async def process_age(message: types.Message, state: FSMContext):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
     markup.add('Муж.', 'Жен.')
 
-    await message.reply('Укажите Ваш пол', reply_markup=markup)
+    await message.answer('Укажите Ваш пол', reply_markup=markup)
