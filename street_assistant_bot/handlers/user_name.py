@@ -1,13 +1,13 @@
 from aiogram import types
-from aiogram.dispatcher.filters import CommandStart
 
 from street_assistant_bot.misc import dp
 from street_assistant_bot.states import Form
 
 
-@dp.message_handler(CommandStart())
-async def cmd_start(message: types.Message):
-    await Form.name.set()
-    await message.answer(
-        'Для корректной коммуникации с сервисами и магазинами введите корректное имя'
+@dp.message_handler(commands='start')
+async def cmd_start(msg: types.Message): 
+    await msg.answer(
+        text = '<p>Для корректной коммуникации с сервисами и магазинами введите <b>корректное имя</b></p>',
+        parse_mode='HTML'
     )
+    await Form.name.set()
