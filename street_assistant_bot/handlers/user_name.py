@@ -7,7 +7,7 @@ from street_assistant_bot.states import Form
 @dp.message_handler(commands='start')
 async def cmd_start(msg: types.Message): 
     await msg.answer(
-        text = '<p>Для корректной коммуникации с сервисами и магазинами введите <b>корректное имя</b></p>',
+        text = 'Для корректной коммуникации с сервисами и магазинами введите <b>корректное имя</b>',
         parse_mode='HTML'
     )
     await Form.name.set()

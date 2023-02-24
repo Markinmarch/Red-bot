@@ -11,7 +11,7 @@ async def process_gender(message: types.Message, state: FSMContext):
         data['gender'] = message.text
 
     await message.answer(
-        text = '<p>Введите Ваш номер телефона <i>(начиная с 8, например 89781234567)</i></p>',
+        text = 'Введите Ваш номер телефона <i>(начиная с 8, например 89781234567)</i>',
         parse_mode= 'HTML'
     )
     await Form.next()
