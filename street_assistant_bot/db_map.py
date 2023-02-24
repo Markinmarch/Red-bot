@@ -64,7 +64,6 @@ class Database:
             self._conn.commit()
         cursor.close()
 
-<<<<<<< HEAD
     async def insert_users(
         self,
         user_id: int,
@@ -89,11 +88,9 @@ class Database:
                             {user_phone}
                         )
                         '''
-=======
     async def insert_users(self, user_id: int, leagues: str):
         insert_query = f"""INSERT INTO users (id, leagues)
                                        VALUES ({user_id}, "{leagues}")"""
->>>>>>> parent of df8fba4 (подключение локальной БД)
         self._execute_query(insert_query)
         logging.info(f"Leagues for user {user_id} added")
 
