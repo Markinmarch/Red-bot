@@ -12,16 +12,13 @@ class Cache(redis.StrictRedis):
     def __init__(self, host, port, password,
                  charset="utf-8",
                  decode_responses=True):
-        super(Cache, self).__init__(
-            host,
-            port,
-            password=password,
-            charset=charset,
-            decode_responses=decode_responses
-        )
+        super(Cache, self).__init__(host, port,
+                                    password=password,
+                                    charset=charset,
+                                    decode_responses=decode_responses)
         logging.info("Redis start")
 
-    def jset(self, name, value):
+    def jset(self, name, value, ex=0):
         """функция конвертирует python-объект в Json и сохранит"""
         request = self.get(name)
         if request is None:
@@ -44,17 +41,9 @@ class Database:
         connection = sqlite3.connect(f"{self.name}.db")
         logging.info("Database created")
         cursor = connection.cursor()
-        cursor.execute(
-            '''
-            CREATE TABLE users (
-                id INTEGER PRIMARY KEY,
-                user_name VARCHAR NOT NULL,
-                user_age INTEGER NOT NULL,
-                user_gender VARCHAR NOT NULL,
-                user_phone INTEGER NOT NULL
-            );
-            '''
-        )
+        cursor.execute('''CREATE TABLE users 
+                          (id INTEGER PRIMARY KEY,
+                           leagues VARCHAR NOT NULL);''')
         connection.commit()
         cursor.close()
 
@@ -75,6 +64,7 @@ class Database:
             self._conn.commit()
         cursor.close()
 
+<<<<<<< HEAD
     async def insert_users(
         self,
         user_id: int,
@@ -99,6 +89,11 @@ class Database:
                             {user_phone}
                         )
                         '''
+=======
+    async def insert_users(self, user_id: int, leagues: str):
+        insert_query = f"""INSERT INTO users (id, leagues)
+                                       VALUES ({user_id}, "{leagues}")"""
+>>>>>>> parent of df8fba4 (подключение локальной БД)
         self._execute_query(insert_query)
         logging.info(f"Leagues for user {user_id} added")
 
@@ -108,6 +103,12 @@ class Database:
         record = self._execute_query(select_query, select=True)
         return record
 
+    async def update_users(self, user_id: int, leagues: str):
+        update_query = f"""Update leagues 
+                              set leagues = "{leagues}" where id = {user_id}"""
+        self._execute_query(update_query)
+        logging.info(f"Leagues for user {user_id} updated")
+
     async def delete_users(self, user_id: int):
         delete_query = f"""DELETE FROM users WHERE id = {user_id}"""
         self._execute_query(delete_query)
@@ -115,9 +116,9 @@ class Database:
 
 
 # создание объектов cache и database
-cache = Cache(
-    host=config.REDIS_HOST,
-    port=config.REDIS_PORT,
-    password=config.REDIS_PASSWORD
-)
-database = Database(config.DB_NAME)
+# cache = Cache(
+#     host=config.REDIS_HOST,
+#     port=config.REDIS_PORT,
+#     password=config.REDIS_PASSWORD
+# )
+# database = Database(config.BOT_DB_NAME)
