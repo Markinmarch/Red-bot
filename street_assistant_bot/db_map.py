@@ -23,17 +23,14 @@ class Cache(redis.StrictRedis):
 
     def jset(self, name, value):
         """функция конвертирует python-объект в Json и сохранит"""
-        r = self.get(name)
-        if r is None:
-            return r
-        return ujson.loads(r)
+        request = self.get(name)
+        if request is None:
+            return request
+        return ujson.loads(request)
 
     def jget(self, name):
         """функция возвращает Json и конвертирует в python-объект"""
         return ujson.loads(self.get(name))
-
-# fonlinebot/database.py
-#...
 
 
 class Database:
@@ -87,7 +84,13 @@ class Database:
         user_phone: int
     ):
         insert_query = f'''
-                        INSERT INTO users (id, leagues)
+                        INSERT INTO users (
+                            id,
+                            user_name,
+                            user_age,
+                            user_gender,
+                            user_phone
+                        )
                         VALUES (
                             {user_id},
                             {user_name},

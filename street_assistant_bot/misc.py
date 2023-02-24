@@ -1,4 +1,4 @@
-import logging, db_map
+import logging
 
 from aiogram import Bot, Dispatcher, executor
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
