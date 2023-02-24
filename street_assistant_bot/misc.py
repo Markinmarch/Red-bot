@@ -1,7 +1,7 @@
-import logging
+import logging 
 
-from aiogram import Bot, Dispatcher, executor
-from aiogram.contrib.fsm_storage.redis import RedisStorage2
+from aiogram import Bot, Dispatcher, types, executor
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from street_assistant_bot import config
 
@@ -10,12 +10,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-bot = Bot(token=config.BOT_TOKEN, parse_mode='HTML')
+bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 
-storage = RedisStorage2(host='localhost', port=6379, db=5)
+storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
+
 
 def main():
     from street_assistant_bot import handlers
 
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp)

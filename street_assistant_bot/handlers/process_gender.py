@@ -6,10 +6,10 @@ from street_assistant_bot.misc import dp, bot
 from street_assistant_bot.states import Form
 
 
-@dp.message_handler(state=Form.phone)
-async def process_phone(message: types.Message, state: FSMContext):
+@dp.message_handler(state=Form.gender)
+async def process_gender(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['phone'] = message.text
+        data['gender'] = message.text
 
         # Remove keyboard
         markup = types.ReplyKeyboardRemove()
@@ -18,12 +18,13 @@ async def process_phone(message: types.Message, state: FSMContext):
         await bot.send_message(
             message.chat.id,
             md.text(
-                md.text('Спасибо', md.bold(data['name'])),
-                md.text('Теперь мы можем приступать!'),
+                md.text('Hi! Nice to meet you,', md.bold(data['name'])),
+                md.text('Age:', md.code(data['age'])),
+                md.text('Gender:', data['gender']),
                 sep='\n',
             ),
             reply_markup=markup,
-            parse_mode='Markdown',
+            parse_mode=types.ParseMode.MARKDOWN,
         )
 
     # Finish conversation

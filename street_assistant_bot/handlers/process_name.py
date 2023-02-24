@@ -9,7 +9,6 @@ from street_assistant_bot.states import Form
 async def process_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['name'] = message.text
-    
+
     await Form.next()
-    await message.answer('Введите Ваш возраст')
-    
+    await message.reply('Введите Ваш возраст')
