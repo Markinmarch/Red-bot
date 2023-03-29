@@ -1,12 +1,14 @@
 from hot_offer_bot.core.settings import bot
 from telebot import types
+from telebot.callback_data import CallbackData
 
 
 @bot.message_handler(commands = ['help', 'start'])
 async def send_welcom(message: types.Message):
+    register_command = CallbackData('registration', prefix = 'qwerty')
     markup = types.ReplyKeyboardMarkup(resize_keyboard = True)
-    registration_btn = types.KeyboardButton(text = '📝 Регистрация', )
-    exit_btn = types.KeyboardButton('🙅‍♂️ Выход')
+    registration_btn = types.InlineKeyboardButton(text = '📝 Регистрация', callback_data = register_command.new(function = 'add_user'))
+    exit_btn = types.InlineKeyboardButton('🙅‍♂️ Выход')
     markup.add(registration_btn, exit_btn)
     await bot.send_message(
         message.chat.id,
