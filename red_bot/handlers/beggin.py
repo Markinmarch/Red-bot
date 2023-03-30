@@ -1,16 +1,18 @@
-from hot_offer_bot.core.settings import bot
-from telebot import types
-from telebot.callback_data import CallbackData
+from aiogram import types
+from aiogram.dispatcher.filters import CommandStart
 
 
-@bot.message_handler(commands = ['help', 'start'])
-async def send_welcom(message: types.Message):
-    register_command = CallbackData('registration', prefix = 'qwerty')
+from red_bot.settings.setting import dp
+from red_bot.settings.state import AddUser
+
+
+@dp.message_handler(commands = ['start', 'help'])
+async def cmd_beggin(message: types.Message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard = True)
-    registration_btn = types.InlineKeyboardButton(text = '📝 Регистрация', callback_data = register_command.new(function = 'add_user'))
-    exit_btn = types.InlineKeyboardButton('🙅‍♂️ Выход')
+    registration_btn = types.KeyboardButton(text = '📝 Регистрация')
+    exit_btn = types.KeyboardButton('🙅‍♂️ Выход')
     markup.add(registration_btn, exit_btn)
-    await bot.send_message(
+    await message.answer(
         message.chat.id,
         text = 'Привет! Я бот, который поможет тебе найти быструю работу или разместить своё объявление с предложением.\n'
         'Но для начала тебе необходимо ознакомиться с некоторыми правилами и юридическими аспектами, чтобы не стать жертвой мошенников.\n'
@@ -19,7 +21,3 @@ async def send_welcom(message: types.Message):
         parse_mode = 'HTML',
         reply_markup = markup
     )
-
-    
-
-
