@@ -2,7 +2,7 @@ import logging
 
 
 from aiogram import Bot, Dispatcher, types, executor
-from aiogram.contrib.fsm_storage.redis import RedisStorage
+from aiogram.contrib.fsm_storage.redis import RedisStorage2
 
 
 from red_bot.settings import config
@@ -19,7 +19,7 @@ bot = Bot(
     parse_mode = 'HTML'
 )
 
-storage = RedisStorage(
+storage = RedisStorage2(
     host = config.REDIS_HOST,
     port = config.REDIS_PORT,
     db = config.REDIS_BD

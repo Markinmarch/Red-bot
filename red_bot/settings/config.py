@@ -21,6 +21,10 @@ REDIS_PORT = os.getenv('REDIS_PORT', '')
 
 REDIS_BD = os.getenv('REDIS_DB', '')
 
+DB_NAME = os.getenv('DB_NAME', '')
+
+DB_PATH = os.getenv('DB_PATH', '')
+
 # REDIS_PASSWORD = os.getenv('REDIS_PASSWORD', '')
 
 # URL_PARSER = 'https://www.interpol.int/How-we-work/Notices/View-Red-Notices'
