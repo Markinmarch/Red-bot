@@ -1,6 +1,5 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
-import aiogram.utils.markdown as md
 
 
 from red_bot.settings.setting import dp, bot
