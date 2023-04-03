@@ -1,7 +1,6 @@
 import os
 import logging
 import sqlite3
-import asyncio
 from red_bot.settings import config
 
 
@@ -75,6 +74,12 @@ class SQLDatabase:
             WHERE id = {user_id};
             '''
         )
+        self.conn.commit()
+
+    async def check_ids_users(
+        self
+    ):
+        self.cur.execute(f'''SELECT id FROM users;''')
         self.conn.commit()
 
     async def delete_users(
