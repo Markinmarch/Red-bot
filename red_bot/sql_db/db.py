@@ -19,7 +19,6 @@ class SQLDatabase:
 
     def create_db(self):
         self.conn
-        logging.info("Database created")
         self.cur.execute(
             '''
             CREATE TABLE if NOT EXISTS users(
@@ -32,8 +31,6 @@ class SQLDatabase:
             '''
         )
         self.conn.commit()     
-        logging.info('Table created')
-
 
     def insert_users(
         self,
@@ -65,7 +62,7 @@ class SQLDatabase:
         self.conn.commit()
         logging.info(f'New user -- id: {user_id} -- name: {user_name} -- has been added')
 
-    async def select_users(
+    def select_users(
         self,
         user_id: int
     ):
@@ -74,15 +71,13 @@ class SQLDatabase:
             WHERE id = {user_id};
             '''
         )
-        self.conn.commit()
+        return self.cur.fetchall()
 
-    async def check_ids_users(
-        self
-    ):
+    def ids_users(self):
         self.cur.execute(f'''SELECT id FROM users;''')
-        self.conn.commit()
+        return self.cur.fetchone()
 
-    async def delete_users(
+    def delete_users(
         self,
         user_id: int
     ):
@@ -99,3 +94,4 @@ class SQLDatabase:
 database = SQLDatabase(config.DB_NAME, config.DB_PATH)
 if config.DB_NAME not in os.listdir(config.DB_PATH):
     database.create_db()
+    logging.info(f'Database {config.DB_NAME} created')
