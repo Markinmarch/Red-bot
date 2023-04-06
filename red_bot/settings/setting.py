@@ -31,7 +31,7 @@ dp = Dispatcher(
 
 
 def main():
-    from red_bot import validate_users
+    from red_bot import authorization, register_handlers
 
     executor.start_polling(
         dp,
