@@ -88,7 +88,7 @@ class SQLDatabase:
             '''
         )
         self.conn.commit()
-        logging.info(f"User {user_id} deleted")
+        logging.info(f'User {user_id} deleted')
 
 
 database = SQLDatabase(config.DB_NAME, config.DB_PATH)
