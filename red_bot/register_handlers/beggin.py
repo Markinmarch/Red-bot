@@ -4,7 +4,7 @@ from aiogram import types
 from red_bot.settings.setting import dp
 
 
-@dp.message_handler(content_types = ['text'])
+@dp.message_handler(commands = ['registration'])
 async def condition_of_agree(message: types.Message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard = True)
     registration_btn = types.KeyboardButton(text = '📝 Регистрация')
