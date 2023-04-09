@@ -5,9 +5,9 @@ from red_bot.settings.setting import dp
 
 
 @dp.callback_query_handler(text = 'registration')
-async def condition_of_agree(callback: types.CallbackQuery):
-    markup = types.ReplyKeyboardMarkup(resize_keyboard = True)
-    registration_btn = types.KeyboardButton(text = '📝 Продолжить')
+async def condition_to_agree(callback: types.CallbackQuery):
+    markup = types.InlineKeyboardMarkup(resize_keyboard = True)
+    registration_btn = types.InlineKeyboardButton(text = '📝 Продолжить', callback_data = 'agree')
     markup.add(registration_btn)
     await callback.message.answer(
         text = 'Привет! Я бот, который поможет Вам найти быструю работу или разместить своё объявление с предложением.\n'
