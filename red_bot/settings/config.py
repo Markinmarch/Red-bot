@@ -25,6 +25,8 @@ DB_NAME = os.getenv('DB_NAME', '')
 
 DB_PATH = os.getenv('DB_PATH', '')
 
+CHANNEL_ID = os.getenv('CHANNEL_ID', '')
+
 # REDIS_PASSWORD = os.getenv('REDIS_PASSWORD', '')
 
 # URL_PARSER = 'https://www.interpol.int/How-we-work/Notices/View-Red-Notices'
