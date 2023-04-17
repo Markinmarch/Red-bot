@@ -7,10 +7,22 @@ from red_bot.settings.setting import dp
 @dp.callback_query_handler(text = 'authorization')
 async def authorization_old_user(callback: types.CallbackQuery):
     inline_markup = types.InlineKeyboardMarkup()
-    jobs_btn = types.InlineKeyboardButton(text = 'Работа', callback_data = 'jobs')
-    services_btn = types.InlineKeyboardButton(text = 'Услуги', callback_data = 'services')
-    offers_btn = types.InlineKeyboardButton(text = 'Предложения', callback_data = 'offers')
-    exchanges_btn = types.InlineKeyboardButton(text = 'Биржа', callback_data = 'exchanges')
+    jobs_btn = types.InlineKeyboardButton(
+        text = 'Работа',
+        callback_data = 'jobs'
+    )
+    services_btn = types.InlineKeyboardButton(
+        text = 'Услуги',
+        callback_data = 'services'
+    )
+    offers_btn = types.InlineKeyboardButton(
+        text = 'Предложения',
+        callback_data = 'offers'
+        )
+    exchanges_btn = types.InlineKeyboardButton(
+        text = 'Биржа',
+        callback_data = 'exchanges'
+        )
     inline_markup.add(
         jobs_btn,
         services_btn,

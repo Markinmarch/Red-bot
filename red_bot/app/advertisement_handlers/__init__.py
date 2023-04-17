@@ -1,1 +1,0 @@
-from . import choise_advertisement
