@@ -1,3 +1,4 @@
+import logging
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
@@ -9,6 +10,8 @@ from red_bot.sql_db import db
 
 @dp.message_handler(state = AddUser.phone)
 async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
+    auth_markup = types.InlineKeyboardMarkup(resize_keyboard = True, selective = True)
+    auth_btn = types.InlineKeyboardButton(text = 'Авторизация', callback_data = 'authorization')
     # записываем возраст пользователя
     if message.text.isdigit():
         await state.update_data(phone = int(message.text))
@@ -35,3 +38,9 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
         text = f'Привет, {user_name}, {user_age}, {user_phone}, {user_gender}'
         )
     await state.finish()
+    await message.bot.send_message(
+        chat_id = CHANNEL_ID,
+        text = 'Теперь Вы можете авторизоваться',
+        reply_markup = auth_markup.row(auth_btn)
+    )
+    logging.info(f'User {message.from_user.id} authorization')

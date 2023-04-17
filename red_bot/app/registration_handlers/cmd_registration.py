@@ -11,6 +11,5 @@ async def cmd_registration(callback: types.CallbackQuery):
     await AddUser.name.set()
     # и спрашивем имя нового пользователя
     await callback.message.answer(
-        'Введите Ваше имя',
-        reply_markup = types.ReplyKeyboardRemove()
+        text ='Введите Ваше имя'
     )    
