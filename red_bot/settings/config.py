@@ -29,6 +29,8 @@ CHANNEL_ID = os.getenv('CHANNEL_ID', '')
 
 BOT_ID = os.getenv('BOT_ID', '')
 
+CHANNEL_URL = os.getenv('CHANNEL_URL', '')
+
 # REDIS_PASSWORD = os.getenv('REDIS_PASSWORD', '')
 
 # URL_PARSER = 'https://www.interpol.int/How-we-work/Notices/View-Red-Notices'
