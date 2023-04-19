@@ -10,7 +10,7 @@ async def authorization(message: types.Message):
     inline_markup = types.InlineKeyboardMarkup()
     registration_button = types.InlineKeyboardButton(
         text = 'Регистрация',
-        callback_data = 'create_account'
+        callback_data = 'registration'
     )
     authorization_button = types.InlineKeyboardButton(
         text = 'Авторизация',
