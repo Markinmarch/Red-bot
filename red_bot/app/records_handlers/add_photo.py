@@ -1,0 +1,17 @@
+from aiogram import types
+from aiogram.dispatcher import FSMContext
+
+
+from red_bot.settings.setting import dp
+from red_bot.utils.state import AddRecord
+
+
+@dp.message_handler(state = AddRecord.photo)
+async def add_photo__cmd_price(message: types.Message, state: FSMContext):
+    # записываем имя пользователя
+    async with state.proxy() as user_data:
+        user_data['photo'] = message.photo[0].file_id
+        
+    # переходим к следуюшему стейту и спрашиваем про возраст
+    await AddRecord.next()
+    await message.reply('Укажите цену за работу/услугу/товар/сырьё')
