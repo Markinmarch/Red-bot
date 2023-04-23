@@ -29,26 +29,23 @@ authorization_button = InlineKeyboardMarkup(inline_keyboard = [
     ]
 ])
 
-choosing_directions_button = InlineKeyboardMarkup(inline_keyboard = [
+choosing_direction_buttons = InlineKeyboardMarkup(inline_keyboard = [
     [
         InlineKeyboardButton(
             text = 'Предложения',
             callback_data = 'offers',
-            url = CHANNEL_URL
         )
     ],
     [
         InlineKeyboardButton(
             text = 'Услуги',
             callback_data = 'services',
-            url = CHANNEL_URL
         )
     ],
     [
         InlineKeyboardButton(
             text = 'Биржа',
             callback_data = 'exchange',
-            url = CHANNEL_URL
         )
     ]
 ])

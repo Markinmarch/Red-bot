@@ -3,7 +3,7 @@ from aiogram.dispatcher import FSMContext
 
 
 from red_bot.settings.setting import dp
-from red_bot.settings.state import AddUser
+from red_bot.utils.state import AddUser
 
 
 @dp.message_handler(state = AddUser.name)
@@ -14,4 +14,4 @@ async def add_name__cmd_age(message: types.Message, state: FSMContext):
         
     # переходим к следуюшему стейту и спрашиваем про возраст
     await AddUser.next()
-    await message.reply('Укажите Ваш возраст (только цифрами)')
+    await message.answer('Укажите Ваш возраст (только цифрами)')

@@ -3,8 +3,8 @@ from aiogram import types
 
 from red_bot.settings.setting import dp
 from red_bot.sql_db import db
-from red_bot.app.content.text_message import WELCOME, IF_USER_HAVE_ACCOUNT
-from red_bot.app.keyboards.inline_keyboards import agree_button
+from red_bot.utils.content import WELCOME, IF_USER_HAVE_ACCOUNT
+from red_bot.utils.keyboards.inline_keyboard import agree_button
 
 
 @dp.callback_query_handler(text = 'create_account')

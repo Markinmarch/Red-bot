@@ -1,10 +1,12 @@
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 
-class AddAds(StatesGroup):
+class AddRecord(StatesGroup):
+    direction = State()
     title = State()
     text = State()
     conditions = State()
+    photo = State()
     price = State()
 
 class AddUser(StatesGroup):

@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 
 
 from red_bot.settings.setting import dp, bot
-from red_bot.settings.state import AddUser
+from red_bot.utils.state import AddUser
 from red_bot.sql_db import db
 
 
@@ -16,7 +16,7 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
     if message.text.isdigit():
         await state.update_data(phone = int(message.text))
     else:
-        await message.reply('Необходимы только цифры! Введите Ваш рабочий номер телефона')
+        await message.answer('Необходимы только цифры! Введите Ваш рабочий номер телефона')
         
     # переходим к следуюшему стейту и спрашиваем про пол
     user_data = await state.get_data()
@@ -38,9 +38,4 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
         text = f'Привет, {user_name}, {user_age}, {user_phone}, {user_gender}'
         )
     await state.finish()
-    await message.bot.send_message(
-        chat_id = CHANNEL_ID,
-        text = 'Теперь Вы можете авторизоваться',
-        reply_markup = auth_markup.row(auth_btn)
-    )
     logging.info(f'User {message.from_user.id} authorization')

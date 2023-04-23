@@ -1,3 +1,3 @@
-from . import verification
-from . import registration_handlers
+from . import account_handlers
 from . import directions_handlers
+from . import records_handlers
