@@ -5,7 +5,7 @@ from red_bot.settings.setting import dp
 from red_bot.utils.state import AddUser
 
 
-@dp.callback_query_handler(text = 'agree')
+@dp.callback_query_handler(text = 'user_agree')
 async def cmd_start_registration(callback: types.CallbackQuery):
     # инициализируем State()
     await AddUser.name.set()

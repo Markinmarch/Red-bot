@@ -6,7 +6,25 @@ agree_button = InlineKeyboardMarkup(inline_keyboard = [
     [
         InlineKeyboardButton(
             text = '📝 Продолжить',
-            callback_data = 'agree'
+            callback_data = 'user_agree'
+        )
+    ]
+])
+
+continue_filling_button = InlineKeyboardMarkup(inline_keyboard = [
+    [
+        InlineKeyboardButton(
+            text = '📝 Продолжить',
+            callback_data = 'user_informed'
+        )
+    ]
+])
+
+publish_button = InlineKeyboardMarkup(inline_keyboard = [
+    [
+        InlineKeyboardButton(
+            text = 'Опубликовать',
+            callback_data = 'publish'
         )
     ]
 ])

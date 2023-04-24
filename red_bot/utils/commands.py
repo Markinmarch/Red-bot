@@ -13,11 +13,11 @@ async def set_commands(bot: Bot):
             description = 'Удалить учётную запись'
         ),
         BotCommand(
-            command = 'create_record',
+            command = 'create_post',
             description = 'Создать запись на канале'
         ),
         BotCommand(
-            command = 'my_records',
+            command = 'my_posts',
             description = 'Список моих записей'
         ),
         BotCommand(
