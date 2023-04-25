@@ -6,11 +6,11 @@ from red_bot.settings.setting import dp
 from red_bot.utils.state import AddRecord
 
 
-@dp.message_handler(state = AddRecord.photo, content_types = [types.ContentType.PHOTO, types.ContentType.TEXT])
+@dp.message_handler(state = AddRecord.photo, content_types = types.ContentType.PHOTO)
 async def add_photo__cmd_price(message: types.Message, state: FSMContext):
     # записываем имя пользователя
     async with state.proxy() as user_data:
-        user_data['photo'] = message.text
+        user_data['photo'] = message.photo[0].file_id
         
     # переходим к следуюшему стейту и спрашиваем про возраст
     await AddRecord.next()
