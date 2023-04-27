@@ -4,6 +4,7 @@ from aiogram.dispatcher import FSMContext
 
 from red_bot.settings.setting import dp
 from red_bot.utils.state import AddRecord
+from red_bot.utils.keyboards.inline_keyboard import publish_button
 
 
 @dp.message_handler(state = AddRecord.photo, content_types = types.ContentType.PHOTO)
@@ -12,6 +13,7 @@ async def add_photo__cmd_price(message: types.Message, state: FSMContext):
     async with state.proxy() as user_data:
         user_data['photo'] = message.photo[0].file_id
         
-    # переходим к следуюшему стейту и спрашиваем про возраст
-    await AddRecord.next()
-    await message.answer('Укажите цену за работу/услугу/товар/сырьё')
+    await message.answer(
+        text = 'Готово! Теперь Вы можете опубликовать свой пост на канале',
+        reply_markup = publish_button
+    )

@@ -13,12 +13,8 @@ async def user_publish_post(callback: types.CallbackQuery, state: FSMContext):
     await callback.bot.send_photo(
         chat_id = CHANNEL_ID,
         photo = post_data.get("photo"),
-        caption = (f'{post_data.get("title")} \n {post_data.get("text")}')
+        caption = (f'<b>{post_data.get("title")}</b> \n {post_data.get("text")} \n {post_data.get("conditions")}'),
+        parse_mode = 'HTML'
     )
-    # await callback.bot.send_message(
-    #     chat_id = CHANNEL_ID,
-    #     text = (
-    #         f'{post_data.get("title")} \n {post_data.get("text")} \n {post_data.get("conditions")} \n {post_data.get("price")}'
-    #     )
-    # )
     await state.finish()
+    

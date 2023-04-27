@@ -7,7 +7,6 @@ class AddRecord(StatesGroup):
     text = State()
     conditions = State()
     photo = State()
-    price = State()
 
 class AddUser(StatesGroup):
     name = State()
