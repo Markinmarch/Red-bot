@@ -6,7 +6,9 @@ class AddRecord(StatesGroup):
     title = State()
     text = State()
     conditions = State()
-    photo = State()
+    first_photo = State()
+    second_photo = State()
+    third_photo = State()
 
 class AddUser(StatesGroup):
     name = State()

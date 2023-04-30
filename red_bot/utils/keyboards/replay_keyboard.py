@@ -5,12 +5,12 @@ direction_detection_buttons = ReplyKeyboardMarkup(
     keyboard = [
     [
         KeyboardButton(
-            text = 'Предложения',
+            text = 'Предложениe'
         )
     ],
     [
         KeyboardButton(
-            text = 'Услуги'
+            text = 'Услуга'
         )
     ],
     [
@@ -23,4 +23,22 @@ direction_detection_buttons = ReplyKeyboardMarkup(
     one_time_keyboard = True,
     input_field_placeholder = 'Тема для публикации записи',
     selective = True
+)
+
+continue_add_photo_button = ReplyKeyboardMarkup(
+    keyboard = [
+        [
+            KeyboardButton(
+                text = 'Продолжить'
+            )
+        ],
+        [
+            KeyboardButton(
+                text = 'Добавить фото'
+            )
+        ]
+    ],
+    resize_keyboard = True,
+    one_time_keyboard = True,
+    selective = True 
 )
