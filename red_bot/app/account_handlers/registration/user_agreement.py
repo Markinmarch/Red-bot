@@ -3,7 +3,7 @@ from aiogram import types
 
 from red_bot.settings.setting import dp
 from red_bot.sql_db import db
-from red_bot.utils.content import WELCOME, IF_USER_HAVE_ACCOUNT
+from red_bot.utils.content.text_content import WELCOME, IF_USER_HAVE_ACCOUNT
 from red_bot.utils.keyboards.inline_keyboard import agree_button
 
 

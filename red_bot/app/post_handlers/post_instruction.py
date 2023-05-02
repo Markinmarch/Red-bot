@@ -2,7 +2,7 @@ from aiogram import types
 
 
 from red_bot.settings.setting import dp
-from red_bot.utils.content import POST_INSTRUCTION
+from red_bot.utils.content.text_content import POST_INSTRUCTION
 from red_bot.utils.keyboards.inline_keyboard import continue_filling_button
 
 

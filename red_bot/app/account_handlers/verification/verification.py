@@ -3,7 +3,7 @@ import logging
 
 from red_bot.settings.setting import dp
 from red_bot.utils.keyboards.inline_keyboard import authorization_button, start_registration_button
-from red_bot.utils.content import UNREGISTRED_USER, IF_USER_HAVE_ACCOUNT
+from red_bot.utils.content.text_content import UNREGISTRED_USER, IF_USER_HAVE_ACCOUNT
 from red_bot.sql_db import db
 from red_bot.utils.commands import set_commands
 

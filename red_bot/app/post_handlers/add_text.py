@@ -9,8 +9,8 @@ from red_bot.utils.state import AddRecord
 @dp.message_handler(state = AddRecord.text)
 async def add_text__cmd_conditions(message: types.Message, state: FSMContext):
     # записываем имя пользователя
-    async with state.proxy() as user_data:
-        user_data['text'] = message.text
+    async with state.proxy() as from_user_data:
+        from_user_data['text'] = message.text
         
     # переходим к следуюшему стейту и спрашиваем про возраст
     await AddRecord.next()

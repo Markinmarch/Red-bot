@@ -10,8 +10,8 @@ from red_bot.utils.keyboards.replay_keyboard import continue_publishing
 @dp.message_handler(state = AddRecord.conditions)
 async def add_conditions__cmd_photo(message: types.Message, state: FSMContext):
     # записываем имя пользователя
-    async with state.proxy() as user_data:
-        user_data['conditions'] = message.text
+    async with state.proxy() as from_user_data:
+        from_user_data['conditions'] = message.text
 
     # переходим к следуюшему стейту и спрашиваем про возраст
     await AddRecord.next()

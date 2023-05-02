@@ -98,3 +98,13 @@ under_post_buttons = InlineKeyboardMarkup(
     ]
 )
 
+# continue_publishing = InlineKeyboardMarkup(
+#     inline_keyboard = [
+#         [
+#             InlineKeyboardButton(
+#                 text = 'Продолжить публикацию',
+#                 callback_data = 'continue_publish'
+#             )
+#         ]
+#     ] 
+# )
