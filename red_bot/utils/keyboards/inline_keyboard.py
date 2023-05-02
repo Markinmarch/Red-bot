@@ -84,13 +84,15 @@ under_post_buttons = InlineKeyboardMarkup(
     inline_keyboard = [
         [
             InlineKeyboardButton(
-                text = 'Отозваться'
+                text = 'Отозваться',
+                callback_data = 'respond_to_ad',
             )
         ],
         [
             InlineKeyboardButton(
                 text = 'Бот',
-                url = BOT_URL
+                url = BOT_URL,
+                callback_data = 'join_bot'
             )
         ]
     ]
