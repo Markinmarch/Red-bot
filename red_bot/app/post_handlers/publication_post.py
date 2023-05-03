@@ -11,15 +11,28 @@ from red_bot.utils.keyboards.inline_keyboard import under_post_buttons
 @dp.callback_query_handler(text = 'publish', state = AddRecord)
 async def user_publish_post(callback: types.CallbackQuery, state: FSMContext):
     from_user_data = await state.get_data()
-    await callback.bot.send_photo(
-        chat_id = CHANNEL_ID,
-        photo = from_user_data.get('photo'),
-        caption = (
-            f'<b>{from_user_data.get("direction")}: <u>{from_user_data.get("title")}</u></b>\n'
-            f'→ {from_user_data.get("text")}\n'
-            f'→ <i>{from_user_data.get("conditions")}</i>'
-        ),
-        parse_mode = 'HTML',
-        reply_markup = under_post_buttons
-    )
+    if from_user_data.get('photo') != None:
+        await callback.bot.send_photo(
+            chat_id = CHANNEL_ID,
+            photo = from_user_data.get('photo'),
+            caption = (
+                f'<b>{from_user_data.get("direction")}: <u>{from_user_data.get("title")}</u></b>\n'
+                f'→ {from_user_data.get("text")}\n'
+                f'→ <i>{from_user_data.get("conditions")}</i>'
+            ),
+            parse_mode = 'HTML',
+            reply_markup = under_post_buttons
+        )
+    else:
+        await callback.bot.send_animation(
+            chat_id = CHANNEL_ID,
+            animation = types.InputFile('red_bot/utils/content/media_content/standart.gif'),
+            caption = (
+                f'<b>{from_user_data.get("direction")}: <u>{from_user_data.get("title")}</u></b>\n'
+                f'→ {from_user_data.get("text")}\n'
+                f'→ <i>{from_user_data.get("conditions")}</i>'
+            ),
+            parse_mode = 'HTML',
+            reply_markup = under_post_buttons
+        )
     await state.finish()
