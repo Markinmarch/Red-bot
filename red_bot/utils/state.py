@@ -1,7 +1,7 @@
 from aiogram.dispatcher.filters.state import State, StatesGroup
+from aiogram import types
 
-
-class AddRecord(StatesGroup):
+class AddPost(StatesGroup):
     direction = State()
     title = State()
     text = State()
