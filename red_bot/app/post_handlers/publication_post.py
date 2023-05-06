@@ -24,6 +24,7 @@ async def user_publish_post(callback: types.CallbackQuery, state: FSMContext):
             caption = caption,
             parse_mode = 'HTML',
             reply_markup = under_post_buttons
+
         )
     else:
         await callback.bot.send_photo(
