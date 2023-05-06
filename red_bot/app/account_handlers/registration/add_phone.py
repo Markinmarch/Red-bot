@@ -6,6 +6,7 @@ from aiogram.dispatcher import FSMContext
 from red_bot.settings.setting import dp, bot
 from red_bot.utils.state import AddUser
 from red_bot.sql_db import db
+from red_bot.utils.commands import set_commands_for_users
 
 
 @dp.message_handler(state = AddUser.phone)
@@ -39,3 +40,4 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
         )
     await state.finish()
     logging.info(f'User {message.from_user.id} authorization')
+    await set_commands_for_users(bot = message.bot)

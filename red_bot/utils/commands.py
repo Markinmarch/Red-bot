@@ -1,13 +1,31 @@
 from aiogram import Bot
 from aiogram.types import BotCommand, BotCommandScopeDefault
 
+from red_bot.settings.config import CHANNEL_ID
 
-async def set_commands(bot: Bot):
+async def set_commands_for_new_user(bot: Bot):
     menu_commands = [
         BotCommand(
             command = 'create_account',
             description = 'Создать учётную запись'
         ),
+        BotCommand(
+            command = 'rules',
+            description = 'Правила пользования телеграм-каналом'
+        ),
+        BotCommand(
+            command = 'contact',
+            description = 'Связь с администрацией канала'
+        )         
+    ]
+
+    await bot.set_my_commands(
+        commands = menu_commands,
+        scope = BotCommandScopeDefault()
+    )
+
+async def set_commands_for_users(bot: Bot):
+    menu_commands = [
         BotCommand(
             command = 'delete_account',
             description = 'Удалить учётную запись'
