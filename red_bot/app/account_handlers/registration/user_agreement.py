@@ -17,14 +17,21 @@ async def user_agreement_via_query(callback: types.CallbackQuery):
 
 @dp.message_handler(commands=['create_account'])
 async def user_agreement_via_command(message: types.Message):
-    if message.from_user.id in db.database.ids_users():
-        await message.answer(
-            text = IF_USER_HAVE_ACCOUNT,
-            parse_mode = 'HTML'
-        )
-    else:
+    try:
+        if message.from_user.id not in db.database.ids_users():
+            await message.answer(
+                text = WELCOME,
+                parse_mode = 'HTML',
+                reply_markup = agree_button
+                )      
+    except TypeError:
         await message.answer(
             text = WELCOME,
             parse_mode = 'HTML',
             reply_markup = agree_button
+            )        
+    else:
+        await message.answer(
+            text = IF_USER_HAVE_ACCOUNT,
+            parse_mode = 'HTML'
         )
