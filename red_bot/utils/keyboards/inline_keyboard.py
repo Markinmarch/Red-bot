@@ -85,7 +85,7 @@ under_post_buttons = InlineKeyboardMarkup(
         [
             InlineKeyboardButton(
                 text = 'Отозваться',
-                callback_data = 'respond_to_ad',
+                callback_data = 'respond_to_ad'
             )
         ],
         [
@@ -93,6 +93,17 @@ under_post_buttons = InlineKeyboardMarkup(
                 text = 'Бот',
                 url = BOT_URL,
                 callback_data = 'join_bot'
+            )
+        ]
+    ]
+)
+
+clearing_chat_bot = InlineKeyboardMarkup(
+    inline_keyboard = [
+        [
+            InlineKeyboardButton(
+                text = 'Очистить диалог',
+                callback_data = 'clearing_chat_bot'
             )
         ]
     ]

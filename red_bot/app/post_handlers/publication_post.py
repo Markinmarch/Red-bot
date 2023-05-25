@@ -1,5 +1,6 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+from asyncio import sleep
 
 
 from red_bot.settings.setting import dp
@@ -19,12 +20,11 @@ async def user_publish_post(callback: types.CallbackQuery, state: FSMContext):
     )
     if from_user_data.get('photo') == None:
         await callback.bot.send_animation(
-            chat_id = CHANNEL_ID,
+            chat_id = CHANNEL_ID,   
             animation = types.InputFile('red_bot/utils/content/media_content/standart.gif'),
             caption = caption,
             parse_mode = 'HTML',
             reply_markup = under_post_buttons
-
         )
     else:
         await callback.bot.send_photo(
@@ -35,3 +35,5 @@ async def user_publish_post(callback: types.CallbackQuery, state: FSMContext):
             reply_markup = under_post_buttons
         )
     await state.finish()
+    
+
