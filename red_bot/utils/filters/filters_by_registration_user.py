@@ -20,7 +20,7 @@ async def check_age(message: types.Message):
     await message.answer(text = 'Пожалуйста, укажите возраст только цифрами.')
 
 @dp.message_handler(
-    lambda message: message.text != any(['Мужской', 'Женский']),
+    lambda message: message.text not in ['Мужской', 'Женский'],
     state = AddUser.gender
 )
 async def check_gender(message: types.Message):
