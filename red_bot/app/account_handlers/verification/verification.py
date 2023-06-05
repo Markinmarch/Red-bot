@@ -12,7 +12,7 @@ from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_u
 async def user_verification(message: types.Message):
     set_commands_for_new_user(bot = message.bot)
     try:
-        if message.from_user.id not in db.database.ids_users():
+        if message.from_user.id not in db.users_database.ids_users():
             await message.answer(
                 text = UNREGISTRED_USER.format(message.from_user.first_name),
                 reply_markup = start_registration_button

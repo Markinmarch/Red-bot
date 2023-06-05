@@ -5,15 +5,6 @@ from red_bot.settings.setting import dp
 from red_bot.utils.keyboards.replay_keyboard import direction_detection_buttons
 from red_bot.utils.state import AddPost
 
-
-@dp.message_handler(
-    lambda message: message.text not in direction_detection_buttons.__str__,
-    state = AddPost.direction
-)
-async def repeat_enter_direction(message: types.Message):
-    await message.answer(
-        text = 'Пожалуйста, выберите вариант из представленных.'
-    )
     
 @dp.message_handler(
     lambda message: len(message.text) > 20,
