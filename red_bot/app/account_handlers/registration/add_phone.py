@@ -18,15 +18,14 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
         await state.update_data(phone = int(message.text))
     else:
         await message.answer('Необходимы только цифры! Введите Ваш рабочий номер телефона')
-        
-    # переходим к следуюшему стейту и спрашиваем про пол
+
     user_data = await state.get_data()
     user_name, user_age, user_phone = user_data.get('name'), user_data.get('age'), user_data.get('phone')
     if user_data.get('gender') == 'Мужской':
         user_gender = 1
     if user_data.get('gender') == 'Женский':
         user_gender = 0
-    db.database.insert_users(
+    db.users_database.insert_users(
         message.from_user.id,
         user_name,
         user_age,
