@@ -45,7 +45,11 @@ async def set_commands_for_users(bot: Bot):
         BotCommand(
             command = 'contact',
             description = 'Связь с администрацией канала'
-        )     
+        ),
+        BotCommand(
+            command = 'test',
+            description = 'Команда для тестирования'
+        )
     ]
 
     await bot.set_my_commands(

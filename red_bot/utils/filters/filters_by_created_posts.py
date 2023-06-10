@@ -23,3 +23,12 @@ async def repeat_enter_text(message: types.Message):
     await message.answer(
         text = 'Пожалуйста, опишите деятельность подробнее.'
     )
+
+@dp.message_handler(
+    lambda message: message.text not in [key[0]['text'] for key in direction_detection_buttons['keyboard']],
+    state = AddPost.direction
+)
+async def repeat_enter_direction(message: types.Message):
+    await message.answer(
+        text = 'Пожалуйста, выберите направление из предложенных: Услуга, Предложение или Биржа'
+    )

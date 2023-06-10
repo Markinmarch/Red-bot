@@ -1,5 +1,5 @@
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram import types
+
 
 class AddPost(StatesGroup):
     direction = State()

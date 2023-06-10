@@ -10,7 +10,7 @@ from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_u
 
 @dp.message_handler(commands = ['start', 'create_account'])
 async def user_verification(message: types.Message):
-    set_commands_for_new_user(bot = message.bot)
+    await set_commands_for_new_user(bot = message.bot)
     try:
         if message.from_user.id not in db.users_database.ids_users():
             await message.answer(
@@ -25,7 +25,7 @@ async def user_verification(message: types.Message):
         )
 
     else:
-        set_commands_for_users(bot = message.bot)
+        await set_commands_for_users(bot = message.bot)
         await message.answer(
             text = IF_USER_HAVE_ACCOUNT,
             reply_markup = authorization_button

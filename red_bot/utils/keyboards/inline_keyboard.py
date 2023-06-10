@@ -97,25 +97,3 @@ under_post_buttons = InlineKeyboardMarkup(
         ]
     ]
 )
-
-clearing_chat_bot = InlineKeyboardMarkup(
-    inline_keyboard = [
-        [
-            InlineKeyboardButton(
-                text = 'Очистить диалог',
-                callback_data = 'clearing_chat_bot'
-            )
-        ]
-    ]
-)
-
-# continue_publishing = InlineKeyboardMarkup(
-#     inline_keyboard = [
-#         [
-#             InlineKeyboardButton(
-#                 text = 'Продолжить публикацию',
-#                 callback_data = 'continue_publish'
-#             )
-#         ]
-#     ] 
-# )

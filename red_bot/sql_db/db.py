@@ -56,7 +56,7 @@ class Users:
                 user_name,
                 user_age,
                 user_gender,
-                user_phone
+                user_phone,
             )
         )
         self.conn.commit()
