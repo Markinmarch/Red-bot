@@ -3,22 +3,50 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 
 
-from red_bot.settings.setting import dp, bot
+from red_bot.settings.setting import dp
 from red_bot.utils.state import AddUser
 from red_bot.sql_db import db
+from red_bot.settings.config import CHANNEL_ID
 from red_bot.utils.commands import set_commands_for_users
 
 
-@dp.message_handler(state = AddUser.phone)
+@dp.message_handler(state = AddUser.phone, content_types = types.ContentType.CONTACT)
 async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
-    auth_markup = types.InlineKeyboardMarkup(resize_keyboard = True, selective = True)
-    auth_btn = types.InlineKeyboardButton(text = 'Авторизация', callback_data = 'authorization')
-    # записываем возраст пользователя
-    if message.text.isdigit():
-        await state.update_data(phone = int(message.text))
+    '''
+    Данный объект реализует получение действительного номера телефона.
+    Если код страны не российсикй (не начинается на "+7"), то пользователь
+    автоматически блокируется, но всё равно записывается в SQL
+    -------------------------------------------------------------------------------------
+    parametrs:
+        :state: параметр состояния конечного автомата (FSMContext) телефона пользователя
+        url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
+        :content_types: параметр формата получаемых данных. -> str
+        :message: тип объкета представления.
+    '''
+    # записываем телефон пользователя
+    if message.contact.phone_number[0:1] == '+7':
+        user_phone_str = message.contact.phone_number.replace('+7', '8')
+        await state.update_data(phone = int(user_phone_str))
+        await message.answer(
+            text = 'Обновите чат-бот, чтобы обновилось меню',
+            reply_markup = types.ReplyKeyboardRemove()
+        )
+        await set_commands_for_users(bot = message.bot)
+        logging.info(f'User {message.from_user.id} authorization')
     else:
-        await message.answer('Необходимы только цифры! Введите Ваш рабочий номер телефона')
+        #автоматический бан, если код телефона не российский
+        await state.update_data(phone = int(message.contact.phone_number[1:]))
+        await message.answer(
+            text = 'К сожалению, мы не можем предоставить Вам право пользоваться телеграм-каналом',
+            reply_markup = types.ReplyKeyboardRemove()
+        )
+        await message.bot.ban_chat_member(
+            chat_id = CHANNEL_ID,
+            user_id = message.from_user.id
+        )
+        logging.info(f'User {message.from_user.id} blocked')
 
+    #запись данных в SQL
     user_data = await state.get_data()
     user_name, user_age, user_phone = user_data.get('name'), user_data.get('age'), user_data.get('phone')
     if user_data.get('gender') == 'Мужской':
@@ -32,11 +60,4 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
         user_gender,
         user_phone
     )
-
-    await bot.send_message(
-        message.chat.id,
-        text = f'Привет, {user_name}, {user_age}, {user_phone}, {user_gender}'
-        )
     await state.finish()
-    logging.info(f'User {message.from_user.id} authorization')
-    await set_commands_for_users(bot = message.bot)
