@@ -8,26 +8,37 @@ from red_bot.utils.keyboards.inline_keyboard import agree_button
 
 
 @dp.callback_query_handler(text = 'create_account')
-async def user_agreement_via_query(callback: types.CallbackQuery):
+async def user_agreement_via_query(callback: types.CallbackQuery) -> None:
+    '''
+    Данный объект реализует получение согласия от пользователя
+    на дальнейшую регистрацию через запрос (нажатие кнопки)
+    ----------------------------------------------------------
+    parametrs:
+        :text: фильтр обратного вызова обработчика
+        :callback: тип объекта представления
+    '''
     await callback.message.answer(
         text = WELCOME,
         parse_mode = 'HTML',
         reply_markup = agree_button
     )
 
-@dp.message_handler(commands=['create_account'])
-async def user_agreement_via_command(message: types.Message):
+@dp.message_handler(commands = ['create_account'])
+async def user_agreement_via_command(message: types.Message) -> None:
+    '''
+    Данный объект реализует получение согласия от пользователя
+    на дальнейшую регистрацию через команду
+    ----------------------------------------------------------
+    parametrs:
+        :commands: команда, закреплённая за обработчиком
+        :message: тип объекта представления
+    '''
+    welcome_message = await message.answer(
+        text = WELCOME,
+        parse_mode = 'HTML',
+        reply_markup = agree_button
+    )
     try:
-        if message.from_user.id not in db.users_database.ids_users():
-            await message.answer(
-                text = WELCOME,
-                parse_mode = 'HTML',
-                reply_markup = agree_button
-                )      
+        welcome_message
     except TypeError:
-        await message.answer(
-            text = WELCOME,
-            parse_mode = 'HTML',
-            reply_markup = agree_button
-            )
-        
+        welcome_message

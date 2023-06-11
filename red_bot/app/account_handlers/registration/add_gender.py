@@ -9,6 +9,17 @@ from red_bot.utils.keyboards.replay_keyboard import get_phone_user
 
 @dp.message_handler(state = AddUser.gender)
 async def add_gender__cmd_phone(message: types.Message, state: FSMContext):
+    '''
+    Данный объект записывает в состояние State()
+    пол нового пользователя и переходит к следующему
+    состоянию, запрашивающему разрешение на получение
+    контактных данных пользователя (телефон аккаунта)
+    -----------------------------------------------
+    parametrs:
+        :state: (str) параметр состояния конечного автомата (FSMContext) телефона пользователя
+        url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
+        :message: тип объкета представления.
+    '''    
     # записываем пол пользователя
     await state.update_data(gender = message.text)
     

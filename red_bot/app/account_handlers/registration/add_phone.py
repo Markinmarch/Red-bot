@@ -11,16 +11,16 @@ from red_bot.utils.commands import set_commands_for_users
 
 
 @dp.message_handler(state = AddUser.phone, content_types = types.ContentType.CONTACT)
-async def add_phone__cmd_finish(message: types.Message, state: FSMContext):
+async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект реализует получение действительного номера телефона.
-    Если код страны не российсикй (не начинается на "+7"), то пользователь
+    Если код страны не российский (не начинается на "+7"), то пользователь
     автоматически блокируется, но всё равно записывается в SQL
     -------------------------------------------------------------------------------------
     parametrs:
-        :state: параметр состояния конечного автомата (FSMContext) телефона пользователя
+        :state: (str) параметр состояния конечного автомата (FSMContext) телефона пользователя
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
-        :content_types: параметр формата получаемых данных. -> str
+        :content_types: параметр формата получаемых данных.
         :message: тип объкета представления.
     '''
     # записываем телефон пользователя
