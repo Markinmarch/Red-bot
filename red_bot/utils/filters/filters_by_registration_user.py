@@ -27,10 +27,3 @@ async def check_age(message: types.Message):
 )
 async def check_gender(message: types.Message):
     await message.answer(text = REGISTRATION_FILTER['gender_filter'])
-
-# @dp.message_handler(
-#     lambda message: message.text.isdigit() is False and len(message.text) != 11,
-#     state = AddUser.phone
-# )
-# async def check_phone(message: types.Message):
-#     await message.answer(text = REGISTRATION_FILTER['phone_filter'])
