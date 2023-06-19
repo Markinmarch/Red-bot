@@ -24,8 +24,8 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         :message: тип объкета представления.
     '''
     # записываем телефон пользователя
-    if message.contact.phone_number[0:1] == '+7':
-        user_phone_str = message.contact.phone_number.replace('+7', '8')
+    if message.contact.phone_number[0] == '7':
+        user_phone_str = message.contact.phone_number.replace('7', '8')
         await state.update_data(phone = int(user_phone_str))
         await message.answer(
             text = 'Обновите чат-бот, чтобы обновилось меню',
@@ -33,9 +33,9 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         )
         await set_commands_for_users(bot = message.bot)
         logging.info(f'User {message.from_user.id} authorization')
+    #автоматический бан, если код телефона не российский
     else:
-        #автоматический бан, если код телефона не российский
-        await state.update_data(phone = int(message.contact.phone_number[1:]))
+        await state.update_data(phone = int(message.contact.phone_number))
         await message.answer(
             text = 'К сожалению, мы не можем предоставить Вам право пользоваться телеграм-каналом',
             reply_markup = types.ReplyKeyboardRemove()
