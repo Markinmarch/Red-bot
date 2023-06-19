@@ -15,7 +15,7 @@ async def add_age__cmd_gender(message: types.Message, state: FSMContext):
     состоянию, запрашивающему пол пользователя
     -----------------------------------------------
     parametrs:
-        :state: (str) параметр состояния конечного автомата (FSMContext) телефона пользователя
+        :state: (str) параметр состояния конечного автомата (FSMContext) возраста пользователя
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''    
