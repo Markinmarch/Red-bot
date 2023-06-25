@@ -70,3 +70,17 @@ continue_publishing = ReplyKeyboardMarkup(
     one_time_keyboard = True,
     selective = True    
 )
+
+by_agreement = ReplyKeyboardMarkup(
+    keyboard = [
+        [
+            KeyboardButton(
+                text = 'По договорённости'
+            )
+        ]
+    ],
+    resize_keyboard = True,
+    one_time_keyboard = True,
+    selective = False,
+    input_field_placeholder = 'Введите стоимость либо нажмите кнопку'
+)
