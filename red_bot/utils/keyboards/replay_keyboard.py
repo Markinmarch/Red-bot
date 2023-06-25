@@ -68,20 +68,5 @@ continue_publishing = ReplyKeyboardMarkup(
     ],
     resize_keyboard = True,
     one_time_keyboard = True,
-    selective = True,
-    is_persistent = True
-)
-
-by_agreement = ReplyKeyboardMarkup(
-    keyboard = [
-        [
-            KeyboardButton(
-                text = 'По договорённости'
-            )
-        ]
-    ],
-    resize_keyboard = True,
-    one_time_keyboard = True,
-    selective = False,
-    input_field_placeholder = 'Введите стоимость либо нажмите кнопку'
+    selective = True    
 )
