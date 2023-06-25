@@ -57,31 +57,28 @@ authorization_button = InlineKeyboardMarkup(
     ]
 )
 
-# choosing_direction_buttons = InlineKeyboardMarkup(
-#     inline_keyboard = [
-#         [
-#             InlineKeyboardButton(
-#                 text = 'Работа',
-#                 callback_data = 'jobs',
-#                 url = CHANNEL_URL
-#             )
-#         ],
-#         [
-#             InlineKeyboardButton(
-#                 text = 'Услуги',
-#                 callback_data = 'services',
-#                 url = CHANNEL_URL
-#             )
-#         ],
-#         [
-#             InlineKeyboardButton(
-#                 text = 'Биржа',
-#                 callback_data = 'exchange',
-#                 url = CHANNEL_URL
-#             )
-#         ]
-#     ]
-# )
+choosing_direction_buttons = InlineKeyboardMarkup(
+    inline_keyboard = [
+        [
+            InlineKeyboardButton(
+                text = 'Предложения',
+                callback_data = 'offers',
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text = 'Услуги',
+                callback_data = 'services',
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text = 'Биржа',
+                callback_data = 'exchange',
+            )
+        ]
+    ]
+)
 
 under_post_buttons = InlineKeyboardMarkup(
     inline_keyboard = [
