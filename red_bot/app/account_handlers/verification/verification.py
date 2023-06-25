@@ -8,7 +8,7 @@ from red_bot.sql_db import db
 from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_users
 
 
-@dp.message_handler(commands = ['start', 'create_account'])
+@dp.message_handler(commands = ['start'])
 async def user_verification(message: types.Message):
     await set_commands_for_new_user(bot = message.bot)
     try:
