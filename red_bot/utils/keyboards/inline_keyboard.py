@@ -57,28 +57,28 @@ authorization_button = InlineKeyboardMarkup(
     ]
 )
 
-choosing_direction_buttons = InlineKeyboardMarkup(
-    inline_keyboard = [
-        [
-            InlineKeyboardButton(
-                text = 'Предложения',
-                callback_data = 'offers',
-            )
-        ],
-        [
-            InlineKeyboardButton(
-                text = 'Услуги',
-                callback_data = 'services',
-            )
-        ],
-        [
-            InlineKeyboardButton(
-                text = 'Биржа',
-                callback_data = 'exchange',
-            )
-        ]
-    ]
-)
+# choosing_direction_buttons = InlineKeyboardMarkup(
+#     inline_keyboard = [
+#         [
+#             InlineKeyboardButton(
+#                 text = 'Предложения',
+#                 callback_data = 'offers',
+#             )
+#         ],
+#         [
+#             InlineKeyboardButton(
+#                 text = 'Услуги',
+#                 callback_data = 'services',
+#             )
+#         ],
+#         [
+#             InlineKeyboardButton(
+#                 text = 'Биржа',
+#                 callback_data = 'exchange',
+#             )
+#         ]
+#     ]
+# )
 
 under_post_buttons = InlineKeyboardMarkup(
     inline_keyboard = [
@@ -93,6 +93,17 @@ under_post_buttons = InlineKeyboardMarkup(
                 text = 'Бот',
                 url = BOT_URL,
                 callback_data = 'join_bot'
+            )
+        ]
+    ]
+)
+
+delete_acc_button = InlineKeyboardMarkup(
+    inline_keyboard = [
+        [
+            InlineKeyboardButton(
+                text = 'Удалить',
+                callback_data = 'delete_account'
             )
         ]
     ]

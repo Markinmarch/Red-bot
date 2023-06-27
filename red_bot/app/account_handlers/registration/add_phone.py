@@ -25,8 +25,7 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
     '''
     # записываем телефон пользователя
     if message.contact.phone_number[0] == '7':
-        user_phone_str = message.contact.phone_number.replace('7', '8')
-        await state.update_data(phone = int(user_phone_str))
+        await state.update_data(phone = int(message.contact.phone_number))
         await message.answer(
             text = 'Обновите чат-бот, чтобы обновилось меню',
             reply_markup = types.ReplyKeyboardRemove()

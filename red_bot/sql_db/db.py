@@ -92,7 +92,7 @@ class Users:
 
 
 users_database = Users('users_data', config.DB_PATH)
-if config.DB_NAME not in os.listdir(config.DB_PATH):
+if 'users_data' not in os.listdir(config.DB_PATH):
     users_database.create_db()
     logging.info(f'Database "USERS" created')
 
