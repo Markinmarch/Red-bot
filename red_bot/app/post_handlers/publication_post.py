@@ -7,7 +7,7 @@ from red_bot.utils.state import AddPost
 from red_bot.settings.config import CHANNEL_ID
 from red_bot.utils.keyboards.inline_keyboard import under_post_buttons
 from red_bot.utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNCEMENT
-from red_bot.sql_db import db
+from red_bot.sql_db import posts_db
 
 
 @dp.callback_query_handler(text = 'publish', state = AddPost)
@@ -37,7 +37,7 @@ async def user_publish_post(callback: types.CallbackQuery, state: FSMContext):
         )
         channel_msg_id = msg['message_id']
 
-    db.posts_database.insert_post(
+    posts_db.posts_database.insert_post(
         post_id = channel_msg_id,
         user_id = callback.from_user.id
     )

@@ -1,6 +1,8 @@
 import os
 import logging
 import sqlite3
+
+
 from red_bot.settings import config
 
 
@@ -166,6 +168,7 @@ class Users_posts(Users):
         )
         self.conn.commit()
         logging.info(f'User {post_id} deleted')
+
 
 posts_database = Users_posts('posts_data', config.DB_PATH)
 if config.DB_NAME not in os.listdir(config.DB_PATH):

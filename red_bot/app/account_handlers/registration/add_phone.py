@@ -5,9 +5,10 @@ from aiogram.dispatcher import FSMContext
 
 from red_bot.settings.setting import dp
 from red_bot.utils.state import AddUser
-from red_bot.sql_db import db
+from red_bot.sql_db import users_db
 from red_bot.settings.config import CHANNEL_ID
 from red_bot.utils.commands import set_commands_for_users
+from red_bot.utils.content.text_content import UDPATE_MESSAGE, OUTSIDER_MESSAGE
 
 
 @dp.message_handler(state = AddUser.phone, content_types = types.ContentType.CONTACT)
@@ -27,7 +28,7 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
     if message.contact.phone_number[0] == '7':
         await state.update_data(phone = int(message.contact.phone_number))
         await message.answer(
-            text = 'Обновите чат-бот, чтобы обновилось меню',
+            text = UDPATE_MESSAGE,
             reply_markup = types.ReplyKeyboardRemove()
         )
         await set_commands_for_users(bot = message.bot)
@@ -36,7 +37,7 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
     else:
         await state.update_data(phone = int(message.contact.phone_number))
         await message.answer(
-            text = 'К сожалению, мы не можем предоставить Вам право пользоваться телеграм-каналом',
+            text = OUTSIDER_MESSAGE,
             reply_markup = types.ReplyKeyboardRemove()
         )
         await message.bot.ban_chat_member(
@@ -52,7 +53,7 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         user_gender = 1
     if user_data.get('gender') == 'Женский':
         user_gender = 0
-    db.users_database.insert_users(
+    users_db.users_database.insert_users(
         message.from_user.id,
         user_name,
         user_age,
