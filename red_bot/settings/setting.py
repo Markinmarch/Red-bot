@@ -33,6 +33,7 @@ dp = Dispatcher(
 def main():
     from red_bot import app, test
 
+
     executor.start_polling(
         dp,
         skip_updates = True

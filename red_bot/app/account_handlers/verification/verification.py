@@ -5,14 +5,14 @@ import logging
 from red_bot.settings.setting import dp
 from red_bot.utils.keyboards.inline_keyboard import start_registration_button
 from red_bot.utils.content.text_content import UNREGISTRED_USER, IF_USER_HAVE_ACCOUNT
-from red_bot.sql_db import users_db
+from red_bot.sql_db.users import Users
 from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_users
 
 
 @dp.message_handler(commands = ['start'])
 async def user_verification(message: types.Message):
     try:
-        if message.from_user.id not in users_db.users_database.ids_users():
+        if message.from_user.id not in Users.ids_users():
             pass
     except TypeError:
         await set_commands_for_new_user(bot = message.bot)

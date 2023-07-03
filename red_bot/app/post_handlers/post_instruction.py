@@ -3,7 +3,7 @@ from aiogram.utils.exceptions import Throttled
 
 
 from red_bot.settings.setting import dp
-from red_bot.sql_db import users_db
+from red_bot.sql_db import bot_tables
 from red_bot.utils.content.text_content import POST_INSTRUCTION, WAITING_MESSAGE, UNREGISTRED_USER
 from red_bot.utils.keyboards.inline_keyboard import continue_filling_button, start_registration_button
 
@@ -11,7 +11,7 @@ from red_bot.utils.keyboards.inline_keyboard import continue_filling_button, sta
 @dp.message_handler(commands=['create_post'])
 async def user_rules_reminder(message: types.Message):
     try:
-        if message.from_user.id not in users_db.users_database.ids_users():
+        if message.from_user.id not in bot_tables.users_database.ids_users():
             pass
         await dp.throttle('create_post', rate = 300)
     except Throttled:

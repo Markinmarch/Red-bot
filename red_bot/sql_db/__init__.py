@@ -1,3 +1,4 @@
-from . import users_db
-from . import posts_db
-from . import responders_db
+from . import bot_tables
+from . import posts
+from . import responders
+from . import users
