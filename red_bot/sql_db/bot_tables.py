@@ -6,21 +6,24 @@ import sqlite3
 from red_bot.settings import config
 
 
-class Bot_main_DB():
-
+class Bot_tables_DB:
+    '''
+    Класс реализует создание связанных между собой таблиц базы данных.
+        :name: параметр наименования базы данных
+        :path: параметр маршрута до папки с базой данных
+        :conn: параметр реализует подключение к сессии БД
+        :cur: параметр указателя БД
+    '''
     def __init__(
         self,
         name: str,
-        path: str,
+        path: str
     ):
         self.name = name
         self.path = path
         self.conn = sqlite3.connect(f'{self.path}/{self.name}.db')
         self.cur = self.conn.cursor()
-    '''
-    Объект реализует создание связанных между собой таблиц базы данных.
-        :name: параметр 
-    '''
+
     def create_users_tables(self):
         self.conn
         self.cur.execute(
@@ -68,7 +71,7 @@ class Bot_main_DB():
 
 def create_table() -> None:
     if config.DB_NAME not in os.listdir(config.DB_PATH):
-        DB_tables = Bot_main_DB(config.DB_NAME, config.DB_PATH)
+        DB_tables = Bot_tables_DB(config.DB_NAME, config.DB_PATH)
         DB_tables.create_users_tables()
         DB_tables.create_posts_tables()
         DB_tables.create_responders_tables()

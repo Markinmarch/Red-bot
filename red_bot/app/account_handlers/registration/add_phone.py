@@ -4,9 +4,9 @@ from aiogram.dispatcher import FSMContext
 
 
 from red_bot.settings.setting import dp
-from red_bot.utils.state import AddUser
-from red_bot.sql_db.users import Users
 from red_bot.settings.config import CHANNEL_ID
+from red_bot.sql_db.users import users_db
+from red_bot.utils.state import AddUser
 from red_bot.utils.commands import set_commands_for_users
 from red_bot.utils.content.text_content import UDPATE_MESSAGE, OUTSIDER_MESSAGE
 
@@ -53,11 +53,11 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         user_gender = 1
     if user_data.get('gender') == 'Женский':
         user_gender = 0
-    Users.insert_users(
-        message.from_user.id,
-        user_name,
-        user_age,
-        user_gender,
-        user_phone
+    users_db.insert_users(
+        user_id = message.from_user.id,
+        user_name = user_name,
+        user_age = user_age,
+        user_gender = user_gender,
+        user_phone = user_phone
     )
     await state.finish()

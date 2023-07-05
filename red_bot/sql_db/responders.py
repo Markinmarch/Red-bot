@@ -1,10 +1,9 @@
 import logging
 
+from red_bot.sql_db.bot_tables import Bot_tables_DB
+from red_bot.settings import config
 
-from red_bot.sql_db.bot_tables import Bot_main_DB
-
-
-class Posts(Bot_main_DB):
+class Responders(Bot_tables_DB):
 
     def __init__(
         self,
@@ -15,7 +14,7 @@ class Posts(Bot_main_DB):
             name,
             path
         )
-   
+
     def insert_post(
         self,
         responder_id: int,
@@ -47,3 +46,8 @@ class Posts(Bot_main_DB):
             '''
         )
         return self.cur.fetchone()
+
+responders_db = Responders(
+    name = config.DB_NAME, 
+    path = config.DB_PATH
+)

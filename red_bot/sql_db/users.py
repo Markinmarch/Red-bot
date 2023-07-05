@@ -1,10 +1,11 @@
 import logging
 
 
-from red_bot.sql_db.bot_tables import Bot_main_DB
+from red_bot.sql_db.bot_tables import Bot_tables_DB
+from red_bot.settings import config
 
 
-class Users(Bot_main_DB):
+class Users(Bot_tables_DB):
 
     def __init__(
             self,
@@ -15,6 +16,7 @@ class Users(Bot_main_DB):
             name,
             path
         )
+
 
     def insert_users(
         self,
@@ -55,7 +57,7 @@ class Users(Bot_main_DB):
             WHERE id = {user_id};
             '''
         )
-        return self.cur.fetchall()
+        return self.cur.fetchone()
 
     def ids_users(self):
         self.cur.execute(f'''SELECT id FROM users;''')
@@ -73,3 +75,8 @@ class Users(Bot_main_DB):
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
+
+users_db = Users(
+    name = config.DB_NAME,
+    path = config.DB_PATH
+)
