@@ -53,14 +53,20 @@ class Users(Bot_tables_DB):
         user_id: int
     ):
         self.cur.execute(
-            f'''SELECT * FROM users
-            WHERE id = {user_id};
             '''
+            SELECT * FROM users
+            WHERE id = (?);
+            ''',
+            (user_id)
         )
         return self.cur.fetchone()
 
     def ids_users(self):
-        self.cur.execute(f'''SELECT id FROM users;''')
+        self.cur.execute(
+            '''
+            SELECT id FROM users;
+            '''
+        )
         return self.cur.fetchall()
 
     def delete_users(
@@ -68,10 +74,11 @@ class Users(Bot_tables_DB):
         user_id: int
     ):
         self.cur.execute(
-            f'''
-            DELETE FROM users 
-            WHERE id = {user_id};
             '''
+            DELETE FROM users 
+            WHERE id = (?);
+            ''',
+            (user_id)
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')

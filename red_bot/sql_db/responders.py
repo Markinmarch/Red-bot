@@ -41,9 +41,11 @@ class Responders(Bot_tables_DB):
         post_id: int
     ):
         self.cur.execute(
-            f'''SELECT id FROM responders
-            WHERE post_id = {post_id};
             '''
+            SELECT id FROM responders
+            WHERE post_id = (?);
+            ''',
+            (post_id)
         )
         return self.cur.fetchone()
 

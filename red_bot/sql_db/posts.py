@@ -42,9 +42,11 @@ class Posts(Bot_tables_DB):
         post_id: int
     ):
         self.cur.execute(
-            f'''SELECT user_id FROM posts
-            WHERE id = {post_id};
             '''
+            SELECT user_id FROM posts
+            WHERE id = (?);
+            ''',
+            (post_id)
         )
         return self.cur.fetchone()
     
@@ -53,11 +55,25 @@ class Posts(Bot_tables_DB):
         user_id: int
     ):
         self.cur.execute(
-            f'''SELECT id FROM posts
-            WHERE user_id = {user_id};
             '''
+            SELECT id FROM posts
+            WHERE user_id = (?);
+            ''',
+            (user_id)
         )
         return self.cur.fetchall()
+    
+    def select_quantity_posts(
+            self,
+            user_id: int
+    ):
+        self.cur.execute(
+            '''
+            SELECT id, COUNT(*) FROM posts
+            WHERE user_id = (?);
+            ''',
+            (user_id)
+        )
         
 posts_db = Posts(
     name = config.DB_NAME,
