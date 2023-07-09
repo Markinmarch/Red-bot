@@ -11,8 +11,8 @@ class Responders(Bot_tables_DB):
         path
     ):
         super().__init__(
-            name,
-            path
+            name = config.DB_NAME,
+            path = config.DB_PATH
         )
 
     def insert_post(
@@ -48,8 +48,3 @@ class Responders(Bot_tables_DB):
             (post_id)
         )
         return self.cur.fetchone()
-
-responders_db = Responders(
-    name = config.DB_NAME, 
-    path = config.DB_PATH
-)

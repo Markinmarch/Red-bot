@@ -12,8 +12,8 @@ class Posts(Bot_tables_DB):
         path
     ):
         super().__init__(
-            name,
-            path
+            name = config.DB_NAME,
+            path = config.DB_PATH
         )
 
     def insert_post(
@@ -74,8 +74,3 @@ class Posts(Bot_tables_DB):
             ''',
             (user_id)
         )
-        
-posts_db = Posts(
-    name = config.DB_NAME,
-    path = config.DB_PATH
-)

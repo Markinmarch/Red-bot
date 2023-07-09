@@ -24,7 +24,7 @@ class Bot_tables_DB:
         self.conn = sqlite3.connect(f'{self.path}/{self.name}.db')
         self.cur = self.conn.cursor()
 
-    def create_users_tables(self):
+    def create_users_tables(self) -> None:
         self.conn
         self.cur.execute(
             '''
@@ -40,7 +40,7 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "USERS" connection established ---')
 
-    def create_posts_tables(self):
+    def create_posts_tables(self) -> None:
         self.conn
         self.cur.execute(
             '''
@@ -54,7 +54,7 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "USERS_POSTS" connection established ---')
 
-    def create_responders_tables(self):
+    def create_responders_tables(self) -> None:
         self.conn
         self.cur.execute(
             '''
@@ -70,11 +70,16 @@ class Bot_tables_DB:
 
 
 def create_table() -> None:
-    if config.DB_NAME not in os.listdir(config.DB_PATH):
-        DB_tables = Bot_tables_DB(config.DB_NAME, config.DB_PATH)
+    if config.DB_NAME + '.db' not in os.listdir(config.DB_PATH):
+        DB_tables = Bot_tables_DB(
+            name = config.DB_NAME,
+            path = config.DB_PATH
+        )
         DB_tables.create_users_tables()
         DB_tables.create_posts_tables()
         DB_tables.create_responders_tables()
         logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" has been created ---')
+    else:
+        logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" has been started ---')
 
 create_table()
