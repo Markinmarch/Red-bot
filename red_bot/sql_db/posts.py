@@ -74,3 +74,8 @@ class Posts(Bot_tables_DB):
             ''',
             (user_id)
         )
+
+posts = Posts(
+    name = config.DB_NAME,
+    path = config.DB_PATH
+)

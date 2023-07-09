@@ -82,3 +82,8 @@ class Users(Bot_tables_DB):
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
+
+users = Users(
+    name = config.DB_NAME,
+    path = config.DB_PATH
+)
