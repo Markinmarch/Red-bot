@@ -13,8 +13,8 @@ class Users(Bot_tables_DB):
             path
         ):
         super().__init__(
-            name = config.DB_NAME,
-            path = config.DB_PATH
+            name,
+            path
         )
 
 
@@ -55,19 +55,24 @@ class Users(Bot_tables_DB):
         self.cur.execute(
             '''
             SELECT * FROM users
-            WHERE id = (?);
+            WHERE id = ?
             ''',
-            (user_id)
+            (user_id,)
         )
         return self.cur.fetchone()
 
-    def ids_users(self):
+    def checking_users(
+        self,
+        user_id
+    ):
         self.cur.execute(
             '''
-            SELECT id FROM users;
-            '''
+            SELECT COUNT(*) FROM users
+            WHERE id = ?
+            ''',
+            (user_id,)
         )
-        return self.cur.fetchall()
+        return self.cur.fetchall()[0]
 
     def delete_users(
         self,
@@ -75,10 +80,10 @@ class Users(Bot_tables_DB):
     ):
         self.cur.execute(
             '''
-            DELETE FROM users 
-            WHERE id = (?);
+            DELETE FROM users
+            WHERE id = ?
             ''',
-            (user_id)
+            (user_id,)
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')

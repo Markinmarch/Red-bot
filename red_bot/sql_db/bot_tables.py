@@ -38,7 +38,7 @@ class Bot_tables_DB:
             '''
         )
         self.conn.commit()
-        logging.info('--- Table "USERS" connection established ---')
+        logging.info('--- Table "USERS" has been created ---')
 
     def create_posts_tables(self) -> None:
         self.conn
@@ -52,34 +52,36 @@ class Bot_tables_DB:
             '''
         )
         self.conn.commit()
-        logging.info('--- Table "USERS_POSTS" connection established ---')
+        logging.info('--- Table "POSTS" has been created ---')
 
     def create_responders_tables(self) -> None:
         self.conn
         self.cur.execute(
             '''
             CREATE TABLE if NOT EXISTS responders(
-                id INTEGER PRIMARY KEY,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                responder_id INTEGER NOT NULL,
                 post_id INTEGER NOT NULL,
                 FOREIGN KEY (post_id) REFERENCES posts(id)
             );            
             '''
         )
         self.conn.commit()
-        logging.info('--- Table "RESPONDERS" connection established ---')
+        logging.info('--- Table "RESPONDERS" has been created ---')
 
 
 def create_table() -> None:
-    if config.DB_NAME + '.db' not in os.listdir(config.DB_PATH):
-        DB_tables = Bot_tables_DB(
-            name = config.DB_NAME,
-            path = config.DB_PATH
-        )
-        DB_tables.create_users_tables()
-        DB_tables.create_posts_tables()
-        DB_tables.create_responders_tables()
-        logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" has been created ---')
-    else:
-        logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" has been started ---')
+    DB_tables = Bot_tables_DB(
+        name = config.DB_NAME,
+        path = config.DB_PATH
+    )
+    DB_tables.create_users_tables()
+    DB_tables.create_posts_tables()
+    DB_tables.create_responders_tables()
+    logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" has been created ---')
 
-create_table()
+
+if config.DB_NAME + '.db' not in os.listdir(config.DB_PATH):
+    create_table()
+else:
+    logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" connection established ---')

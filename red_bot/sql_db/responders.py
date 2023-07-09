@@ -11,8 +11,8 @@ class Responders(Bot_tables_DB):
         path
     ):
         super().__init__(
-            name = config.DB_NAME,
-            path = config.DB_PATH
+            name,
+            path
         )
 
     def insert_post(
@@ -23,31 +23,32 @@ class Responders(Bot_tables_DB):
         self.cur.execute(
             '''
             INSERT INTO responders (
-                id,
+                responder_id,
                 post_id
             )
             VALUES (?, ?);            
             ''',
             (
                 responder_id,
-                post_id,
+                post_id
             )
         )
         self.conn.commit()
         logging.info(f'User -- id: {responder_id} -- respond a post: {post_id}')
 
-    def select_post(
+    def checking_responses(
         self,
+        responder_id: int,
         post_id: int
     ):
         self.cur.execute(
             '''
-            SELECT id FROM responders
-            WHERE post_id = (?);
+            SELECT COUNT(*) FROM responders
+            WHERE responder_id = ? AND post_id = ?
             ''',
-            (post_id)
+            (responder_id, post_id)
         )
-        return self.cur.fetchone()
+        return self.cur.fetchone()[0]
 
 responders = Responders(
     name = config.DB_NAME,
