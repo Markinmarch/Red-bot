@@ -11,8 +11,10 @@ from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_u
 
 @dp.message_handler(commands = ['start'])
 async def user_verification(message: types.Message):
-
-    if users.checking_users(message.from_user.id) == False:
+    try:
+        if message.from_user.id not in users.ids_users():
+            pass
+    except TypeError:
         await set_commands_for_new_user(bot = message.bot)
         await message.answer(
             text = UNREGISTRED_USER.format(message.from_user.first_name),
