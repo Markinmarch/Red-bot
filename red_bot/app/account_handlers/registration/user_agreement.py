@@ -1,9 +1,11 @@
 from aiogram import types
+import logging
 
 
 from red_bot.settings.setting import dp
-from red_bot.utils.content.text_content import WELCOME
+from red_bot.utils.content.text_content import WELCOME, IF_USER_HAVE_ACCOUNT, UPDATE_MESSAGE
 from red_bot.utils.keyboards.inline_keyboard import agree_button
+from red_bot.sql_db.users import users
 
 
 @dp.callback_query_handler(text = 'create_account')
@@ -32,8 +34,14 @@ async def user_agreement_via_command(message: types.Message) -> None:
         :commands: команда, закреплённая за обработчиком
         :message: тип объекта представления
     '''
-    welcome_message = await message.answer(
-        text = WELCOME,
-        parse_mode = 'HTML',
-        reply_markup = agree_button
-    )
+    if users.checking_users(message.from_user.id) == False:
+        welcome_message = await message.answer(
+            text = WELCOME,
+            parse_mode = 'HTML',
+            reply_markup = agree_button
+        )
+    else:
+        await message.answer(
+            text = IF_USER_HAVE_ACCOUNT +'\n'+ UPDATE_MESSAGE
+        )
+        logging.info(f'User {message.from_user.id} authorization')

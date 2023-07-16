@@ -8,7 +8,7 @@ from red_bot.settings.config import CHANNEL_ID
 from red_bot.sql_db.users import users
 from red_bot.utils.state import AddUser
 from red_bot.utils.commands import set_commands_for_users
-from red_bot.utils.content.text_content import UDPATE_MESSAGE, OUTSIDER_MESSAGE
+from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
 
 
 @dp.message_handler(state = AddUser.phone, content_types = types.ContentType.CONTACT)
@@ -25,13 +25,14 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         :message: тип объкета представления.
     '''
     # записываем телефон пользователя
+    print(message.contact.phone_number[0])
     if message.contact.phone_number[0] == '7':
         await state.update_data(phone = int(message.contact.phone_number))
+        await set_commands_for_users(bot = message.bot)
         await message.answer(
-            text = UDPATE_MESSAGE,
+            text = UPDATE_MESSAGE,
             reply_markup = types.ReplyKeyboardRemove()
         )
-        await set_commands_for_users(bot = message.bot)
         logging.info(f'User {message.from_user.id} authorization')
     #автоматический бан, если код телефона не российский
     else:
