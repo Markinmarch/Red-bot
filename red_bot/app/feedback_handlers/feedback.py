@@ -15,7 +15,7 @@ async def feedback_user(callback: types.CallbackQuery):
     пользователя (на нажатие кнопки "Отозваться") с ссылкой на его страницу.
     """
     responders.insert_post(
-        id = callback.from_user.id,
+        responder_id = callback.from_user.id,
         post_id = callback.message.message_id
     )
     await callback.answer(

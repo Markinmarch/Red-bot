@@ -37,7 +37,3 @@ async def user_agreement_via_command(message: types.Message) -> None:
         parse_mode = 'HTML',
         reply_markup = agree_button
     )
-    try:
-        welcome_message
-    except TypeError:
-        welcome_message
