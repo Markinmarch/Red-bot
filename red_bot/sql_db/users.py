@@ -51,7 +51,7 @@ class Users(Bot_tables_DB):
     def select_user(
         self,
         user_id: int
-    ):
+    ) -> tuple:
         self.cur.execute(
             '''
             SELECT * FROM users
@@ -64,7 +64,7 @@ class Users(Bot_tables_DB):
     def checking_users(
         self,
         user_id
-    ):
+    ) -> bool:
         self.cur.execute(
             '''
             SELECT COUNT(*) FROM users
@@ -72,12 +72,12 @@ class Users(Bot_tables_DB):
             ''',
             (user_id,)
         )
-        return self.cur.fetchall()[0]
+        return self.cur.fetchone()[0]
 
     def delete_users(
         self,
         user_id: int
-    ):
+    ) -> None:
         self.cur.execute(
             '''
             DELETE FROM users

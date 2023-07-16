@@ -13,6 +13,7 @@ from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_u
 async def user_verification(message: types.Message):
 
     if users.checking_users(message.from_user.id) == False:
+        print(users.checking_users(message.from_user.id))
         await set_commands_for_new_user(bot = message.bot)
         await message.answer(
             text = UNREGISTRED_USER.format(message.from_user.first_name),
