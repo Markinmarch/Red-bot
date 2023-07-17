@@ -25,8 +25,9 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         :message: тип объкета представления.
     '''
     # записываем телефон пользователя
-    print(message.contact.phone_number[0])
-    if message.contact.phone_number[0] == '7':
+    # при регистрации с компа при вызове телефона пользователя - выдаёт "+7"
+    # а при регистрации с телефона, телефон возвращается без "+"
+    if message.contact.phone_number[0] == '7' or message.contact.phone_number[0:2] == '+7':
         await state.update_data(phone = int(message.contact.phone_number))
         await set_commands_for_users(bot = message.bot)
         await message.answer(

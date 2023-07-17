@@ -20,10 +20,7 @@ async def add_age__cmd_gender(message: types.Message, state: FSMContext):
         :message: тип объкета представления.
     '''    
     # записываем возраст пользователя
-    if message.text.isdigit():
-        await state.update_data(age = int(message.text))
-    else:
-        await message.answer('Необходимы только цифры! Введите Ваш возраст')
+    await state.update_data(age = int(message.text))
         
     # переходим к следуюшему стейту и спрашиваем про пол
     await AddUser.next()
