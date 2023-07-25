@@ -1,9 +1,11 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+import asyncio
 
 
 from red_bot.settings.setting import dp
 from red_bot.utils.state import AddUser
+from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATION_MESSAGE
 
 
 @dp.message_handler(state = AddUser.name)
@@ -18,10 +20,17 @@ async def add_name__cmd_age(message: types.Message, state: FSMContext) -> None:
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''
-    # записываем имя пользователя
     async with state.proxy() as user_data:
         user_data['name'] = message.text
-        
-    # переходим к следуюшему стейту и спрашиваем про возраст
     await AddUser.next()
-    await message.answer('Укажите Ваш возраст (только цифрами)')
+    await message.answer(text = REGISTRATION_MESSAGE['add_age'])
+    # конструкция для определения времени ожидания ответа от пользователя
+    # благодаря осуществляемому способу защищаем сервер от перегрузок
+    await asyncio.sleep(12)
+    try:
+        data = await state.get_data()
+        if data['age'] != None:
+            pass
+    except KeyError:
+        await message.answer(text = INTERRUPTION_MESSAGE)
+        await state.finish()
