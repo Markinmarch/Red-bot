@@ -73,4 +73,4 @@ ALREADY_RESPONDED_MESSAGE = 'Вы уже отзывались на этот по
 
 LIMIT_WARNING_PUBLICATION_MESSAGE = 'Ваш лимит подаваемых объявлений на сегодня закончился.'
 
-INTERRUPTION_MESSAGE = 'Регистрация прервана из-за долгого ожидания ответа.'
+INTERRUPTION_MESSAGE = 'Процесс прерван из-за долгого ожидания ответа.'
