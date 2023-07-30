@@ -31,9 +31,9 @@ async def add_age__cmd_gender(message: types.Message, state: FSMContext):
     # благодаря осуществляемому способу защищаем сервер от перегрузок
     await asyncio.sleep(12)
     try:
-        data = await state.get_data()
-        if data['gender'] != None:
-            pass
+        check_data = await state.get_data()
+        if check_data['age'] != None:
+            None
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
         await state.finish()

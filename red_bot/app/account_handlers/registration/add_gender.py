@@ -21,7 +21,7 @@ async def add_gender__cmd_phone(message: types.Message, state: FSMContext):
         :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
-    '''    
+    '''
     await state.update_data(gender = message.text)
     await AddUser.next()
     await message.answer(
@@ -32,9 +32,9 @@ async def add_gender__cmd_phone(message: types.Message, state: FSMContext):
     # благодаря осуществляемому способу защищаем сервер от перегрузок
     await asyncio.sleep(12)
     try:
-        data = await state.get_data()
-        if data['gender'] != None:
-            pass
+        check_data = await state.get_data()
+        if check_data['gender'] != None:
+            None
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
         await state.finish()

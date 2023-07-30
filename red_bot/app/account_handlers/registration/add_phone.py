@@ -1,6 +1,7 @@
 import logging
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+import asyncio
 
 
 from red_bot.settings.setting import dp
@@ -8,7 +9,7 @@ from red_bot.settings.config import CHANNEL_ID
 from red_bot.sql_db.users import users
 from red_bot.utils.state import AddUser
 from red_bot.utils.commands import set_commands_for_users
-from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
+from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE, INTERRUPTION_MESSAGE
 
 
 @dp.message_handler(state = AddUser.phone, content_types = types.ContentType.CONTACT)
@@ -26,7 +27,7 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
     '''
     # записываем телефон пользователя
     # при регистрации с компа при вызове телефона пользователя - выдаёт "+7"
-    # а при регистрации с телефона, телефон возвращается без "+"
+    # а при регистрации с телефона, телефон возвращает без "+"
     if message.contact.phone_number[0] == '7' or message.contact.phone_number[0:2] == '+7':
         await state.update_data(phone = int(message.contact.phone_number))
         await set_commands_for_users(bot = message.bot)
@@ -47,6 +48,17 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
             user_id = message.from_user.id
         )
         logging.info(f'User {message.from_user.id} blocked')
+
+    # конструкция для определения времени ожидания ответа от пользователя
+    # благодаря осуществляемому способу защищаем сервер от перегрузок
+    await asyncio.sleep(12)
+    try:
+        check_data = await state.get_data()
+        if check_data['phone'] != None:
+            None
+    except KeyError:
+        await message.answer(text = INTERRUPTION_MESSAGE)
+        await state.finish()
 
     #запись данных в SQL
     user_data = await state.get_data()
