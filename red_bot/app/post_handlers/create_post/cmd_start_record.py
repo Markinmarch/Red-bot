@@ -16,13 +16,3 @@ async def cmd_start_record(callback: types.CallbackQuery, state = FSMContext):
         text = 'Пожалуйста, определите тему для Вашей записи',
         reply_markup = direction_detection_buttons
     )
-    # конструкция для определения времени ожидания ответа от пользователя
-    # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(10)
-    try:
-        data = await state.get_data()
-        if data['direction'] != None:
-            pass
-    except KeyError:
-        await callback.message.answer(text = INTERRUPTION_MESSAGE)
-        await state.finish()

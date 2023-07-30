@@ -18,24 +18,18 @@ async def user_publish_post(callback: types.CallbackQuery, state: FSMContext):
         from_user_data.get('text'),
         from_user_data.get('conditions')
     )
-    if from_user_data.get('photo') == None:
-        msg = await callback.bot.send_animation(
-            chat_id = CHANNEL_ID,   
-            animation = types.InputFile('red_bot/utils/content/media_content/standart.gif'),
-            caption = caption,
-            parse_mode = 'HTML',
-            reply_markup = under_post_buttons
-        )
-        channel_msg_id = msg['message_id']
+    if from_user_data.get('photo') == 'standart_photo':
+        photo = types.InputFile(path_or_bytesio = 'red_bot/utils/content/media_content/botik.jpg')
     else:
-        msg = await callback.bot.send_photo(
-            chat_id = CHANNEL_ID,
-            photo = from_user_data.get('photo'),
-            caption = caption,
-            parse_mode = 'HTML',
-            reply_markup = under_post_buttons
-        )
-        channel_msg_id = msg['message_id']
+        photo = from_user_data.get('photo')
+    msg = await callback.bot.send_photo(
+        chat_id = CHANNEL_ID,
+        photo = photo,
+        caption = caption,
+        parse_mode = 'HTML',
+        reply_markup = under_post_buttons
+    )
+    channel_msg_id = msg['message_id']
 
     posts.insert_post(
         post_id = channel_msg_id,
