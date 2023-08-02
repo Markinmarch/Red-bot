@@ -11,20 +11,17 @@ from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE
 
 @dp.message_handler(state = AddPost.text)
 async def add_text__cmd_conditions(message: types.Message, state: FSMContext):
-    async with state.proxy() as post_data:
-        post_data['text'] = message.text
+    await state.update_data(text = message.text)
     await AddPost.next()
     await message.answer(
         text = 'Опишите условия работы - зарплату/цену за заказ',
         reply_markup = by_agreement
     )
-    # конструкция для определения времени ожидания ответа от пользователя
-    # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(120)
+    await asyncio.sleep(10)
     try:
-        check_data = await state.get_data()
-        if check_data['text'] != None:
-            pass
+        current_state = await state.get_state()
+        if current_state == 'AddPost:conditions':
+            raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
         await state.finish()

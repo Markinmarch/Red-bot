@@ -10,18 +10,16 @@ from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE
 
 @dp.message_handler(state = AddPost.title)
 async def add_title__cmd_text(message: types.Message, state: FSMContext):
-    # записываем имя пользователя
-    async with state.proxy() as post_data:
-        post_data['title'] = message.text
+    await state.update_data(title = message.text)
     await AddPost.next()
     await message.answer(text = 'Напишите содержание записи с подробностями')
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(30)
+    await asyncio.sleep(10)
     try:
-        check_data = await state.get_data()
-        if check_data['title'] != None:
-            None
+        current_state = await state.get_state()
+        if current_state == 'AddPost:text':
+            raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
         await state.finish()

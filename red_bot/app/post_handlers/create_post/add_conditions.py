@@ -11,8 +11,7 @@ from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE
 
 @dp.message_handler(state = AddPost.conditions)
 async def add_conditions__cmd_photo(message: types.Message, state: FSMContext):
-    async with state.proxy() as post_data:
-        post_data['conditions'] = message.text
+    await state.update_data(conditions = message.text)
     await AddPost.next()
     await message.answer(
         text = 'Можете прикрепить одну фотографию к записи по желанию либо опубликовать свою запись сразу',
@@ -20,11 +19,11 @@ async def add_conditions__cmd_photo(message: types.Message, state: FSMContext):
     )
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(30)
+    await asyncio.sleep(10)
     try:
-        check_data = await state.get_data()
-        if check_data['direction'] != None:
-            pass
+        current_state = await state.get_state()
+        if current_state == 'AddPost:photo':
+            raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
         await state.finish()

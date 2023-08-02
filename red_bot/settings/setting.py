@@ -29,7 +29,6 @@ dp = Dispatcher(
     storage = storage
 )
 
-
 def main():
     from red_bot import app, test
 

@@ -12,16 +12,16 @@ from red_bot.sql_db.posts import posts
 
 @dp.callback_query_handler(text = 'publish', state = AddPost)
 async def user_publish_post(callback: types.CallbackQuery, state: FSMContext):
-    from_user_data = await state.get_data()
+    for_post_data = await state.get_data()
     caption = POST_CONTENT.format(
-        from_user_data.get('title'),
-        from_user_data.get('text'),
-        from_user_data.get('conditions')
+        for_post_data.get('title'),
+        for_post_data.get('text'),
+        for_post_data.get('conditions')
     )
-    if from_user_data.get('photo') == 'standart_photo':
+    if for_post_data.get('photo') == 'standart_photo':
         photo = types.InputFile(path_or_bytesio = 'red_bot/utils/content/media_content/botik.jpg')
     else:
-        photo = from_user_data.get('photo')
+        photo = for_post_data.get('photo')
     msg = await callback.bot.send_photo(
         chat_id = CHANNEL_ID,
         photo = photo,
