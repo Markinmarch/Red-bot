@@ -1,11 +1,11 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
-import asyncio
+import asyncio 
 
 
 from red_bot.settings.setting import dp
 from red_bot.utils.state import AddUser
-from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATION_MESSAGE
+from red_bot.utils.content.text_content import REGISTRATION_MESSAGE, INTERRUPTION_MESSAGE
 
 
 @dp.callback_query_handler(text = 'user_agree')
@@ -20,3 +20,13 @@ async def cmd_start_registration(callback: types.CallbackQuery, state: FSMContex
     '''
     await AddUser.name.set()
     await callback.message.answer(text = REGISTRATION_MESSAGE['add_name'])    
+    # конструкция для определения времени ожидания ответа от пользователя
+    # благодаря осуществляемому способу защищаем сервер от перегрузок
+    await asyncio.sleep(12)
+    try:
+        current_state = await state.get_state()
+        if current_state == 'AddUser:name':
+            raise KeyError
+    except KeyError:
+        await callback.message.answer(text = INTERRUPTION_MESSAGE)
+        await state.finish()

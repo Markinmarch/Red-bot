@@ -28,9 +28,9 @@ async def add_name__cmd_age(message: types.Message, state: FSMContext) -> None:
     # благодаря осуществляемому способу защищаем сервер от перегрузок
     await asyncio.sleep(12)
     try:
-        check_data = await state.get_data()
-        if check_data['name'] != None:
-            None
+        current_state = await state.get_state()
+        if current_state == 'AddUser:age':
+            raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
         await state.finish()

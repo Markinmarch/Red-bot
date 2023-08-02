@@ -49,23 +49,12 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         )
         logging.info(f'User {message.from_user.id} blocked')
 
-    # конструкция для определения времени ожидания ответа от пользователя
-    # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(12)
-    try:
-        check_data = await state.get_data()
-        if check_data['phone'] != None:
-            None
-    except KeyError:
-        await message.answer(text = INTERRUPTION_MESSAGE)
-        await state.finish()
-
     #запись данных в SQL
     user_data = await state.get_data()
-    user_name, user_age, user_phone = user_data.get('name'), user_data.get('age'), user_data.get('phone')
-    if user_data.get('gender') == 'Мужской':
+    user_name, user_age, user_phone = user_data['name'], user_data['age'], user_data['phone']
+    if user_data['gender'] == 'Мужской':
         user_gender = 1
-    if user_data.get('gender') == 'Женский':
+    if user_data['gender'] == 'Женский':
         user_gender = 0
     users.insert_users(
         user_id = message.from_user.id,

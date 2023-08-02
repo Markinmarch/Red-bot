@@ -10,7 +10,7 @@ from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATIO
 
 
 @dp.message_handler(state = AddUser.age)
-async def add_age__cmd_gender(message: types.Message, state: FSMContext):
+async def add_age__cmd_gender(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
     возраст нового пользователя и переходит к следующему
@@ -31,9 +31,9 @@ async def add_age__cmd_gender(message: types.Message, state: FSMContext):
     # благодаря осуществляемому способу защищаем сервер от перегрузок
     await asyncio.sleep(12)
     try:
-        check_data = await state.get_data()
-        if check_data['age'] != None:
-            None
+        current_state = await state.get_state()
+        if current_state == 'AddUser:gender':
+            raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
         await state.finish()
