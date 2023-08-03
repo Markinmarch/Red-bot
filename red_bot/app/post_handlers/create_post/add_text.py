@@ -4,20 +4,33 @@ import asyncio
 
 
 from red_bot.settings.setting import dp
+from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddPost
 from red_bot.utils.keyboards.replay_keyboard import by_agreement
-from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE
+from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
 @dp.message_handler(state = AddPost.text)
 async def add_text__cmd_conditions(message: types.Message, state: FSMContext):
+    '''
+    Данный объект записывает в состояние State()
+    полно описание объявления, затем запрашивает
+    условия. Если пользователь не может/не знает
+    на данный момент условий - может нажать на
+    кнопку "По договорённости"
+    -----------------------------------------------
+    parametrs:
+        :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
+        url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
+        :message: тип объкета представления.
+    '''
     await state.update_data(text = message.text)
     await AddPost.next()
     await message.answer(
-        text = 'Опишите условия работы - зарплату/цену за заказ',
+        text = CREATE_POST_MESSAGE['conditions'],
         reply_markup = by_agreement
     )
-    await asyncio.sleep(10)
+    await asyncio.sleep(TIMEOUT_MESSAGES['create_post']['conditions'])
     try:
         current_state = await state.get_state()
         if current_state == 'AddPost:conditions':

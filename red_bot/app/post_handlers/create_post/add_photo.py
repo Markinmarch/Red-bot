@@ -12,6 +12,18 @@ from red_bot.utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNC
 
 @dp.message_handler(state = AddPost.photo, content_types = types.ContentType.ANY)
 async def add_photo__cmd_publish(message: types.Message, state: FSMContext):
+    '''
+    Данный объект записывает в состояние State()
+    фотографию объявления, формирует данные,
+    публикует на канале и записывает id автора поста
+    с id поста в БД
+    -----------------------------------------------
+    parametrs:
+        :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
+        url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
+        :message: тип объкета представления
+        :content_types: тип данных
+    '''
     if message.text == 'Продолжить публикацию':
         await state.update_data(photo = 'standart_photo')
     else:
@@ -36,9 +48,7 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext):
         reply_markup = under_post_buttons
     )
     channel_msg_id = msg['message_id']
-
-    await types.ReplyKeyboardRemove()
-
+    # записываем id поста и id пользователя в БД
     posts.insert_post(
         post_id = channel_msg_id,
         user_id = message.from_user.id

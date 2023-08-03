@@ -9,7 +9,7 @@ from red_bot.settings.config import CHANNEL_ID
 from red_bot.sql_db.users import users
 from red_bot.utils.state import AddUser
 from red_bot.utils.commands import set_commands_for_users
-from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE, INTERRUPTION_MESSAGE
+from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
 
 
 @dp.message_handler(state = AddUser.phone, content_types = types.ContentType.CONTACT)

@@ -4,6 +4,7 @@ import asyncio
 
 
 from red_bot.settings.setting import dp
+from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddUser
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATION_MESSAGE
 
@@ -26,7 +27,7 @@ async def add_name__cmd_age(message: types.Message, state: FSMContext) -> None:
     await message.answer(text = REGISTRATION_MESSAGE['add_age'])
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(12)
+    await asyncio.sleep(TIMEOUT_MESSAGES['registration']['age'])
     try:
         current_state = await state.get_state()
         if current_state == 'AddUser:age':

@@ -4,18 +4,29 @@ import asyncio
 
 
 from red_bot.settings.setting import dp
+from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddPost
-from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE
+from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
 @dp.message_handler(state = AddPost.title)
 async def add_title__cmd_text(message: types.Message, state: FSMContext):
+    '''
+    Данный объект записывает в состояние State()
+    короткое описание темы, затем запрашивает
+    полное описание объявления
+    -----------------------------------------------
+    parametrs:
+        :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
+        url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
+        :message: тип объкета представления.
+    '''
     await state.update_data(title = message.text)
     await AddPost.next()
-    await message.answer(text = 'Напишите содержание записи с подробностями')
+    await message.answer(text = CREATE_POST_MESSAGE['text'])
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(10)
+    await asyncio.sleep(TIMEOUT_MESSAGES['create_post']['text'])
     try:
         current_state = await state.get_state()
         if current_state == 'AddPost:text':

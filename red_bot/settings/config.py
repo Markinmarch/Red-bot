@@ -1,5 +1,5 @@
 '''
-Файл содержит основные данные для стабильной работы приложения.
+Файл содержит основные настроечные данные приложения.
 '''
 
 
@@ -32,3 +32,23 @@ BOT_ID = os.getenv('BOT_ID', '')
 CHANNEL_URL = os.getenv('CHANNEL_URL', '')
 
 BOT_URL = os.getenv('BOT_URL', '')
+
+TIMEOUT_MESSAGES = {
+    'registration': {
+        'name': 20,
+        'age': 20,
+        'gender': 10,
+        'phone': 10
+    },
+    'create_post': {
+        'direction': 15,
+        'title': 30,
+        'text': 120,
+        'conditions': 40,
+        'photo': 30
+    }
+}
+
+COUNT_LIMIT_POSTS = 3
+
+PAUSE_CREATE_POSTS = 300 #пауза между созданием постов

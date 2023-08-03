@@ -4,6 +4,7 @@ import asyncio
 
 
 from red_bot.settings.setting import dp
+from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddUser
 from red_bot.utils.keyboards.replay_keyboard import choose_gender
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATION_MESSAGE
@@ -29,7 +30,7 @@ async def add_age__cmd_gender(message: types.Message, state: FSMContext) -> None
     )
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(12)
+    await asyncio.sleep(TIMEOUT_MESSAGES['registration']['gender'])
     try:
         current_state = await state.get_state()
         if current_state == 'AddUser:gender':
