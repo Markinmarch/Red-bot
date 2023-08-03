@@ -13,25 +13,23 @@ BOT_TOKEN = os.getenv('BOT_TOKEN', '')
 
 ADMIN_ID = os.getenv('ADMIN_ID', '')
 
-SQL_DB_NAME = os.getenv('DB_NAME', '')
-
 REDIS_HOST = os.getenv('REDIS_HOST', '')
 
 REDIS_PORT = os.getenv('REDIS_PORT', '')
 
 REDIS_BD = os.getenv('REDIS_DB', '')
 
-DB_NAME = os.getenv('DB_NAME', '')
+DB_PATH = 'red_bot/sql_db'
 
-DB_PATH = os.getenv('DB_PATH', '')
+DB_NAME = 'main_database'
 
-CHANNEL_ID = os.getenv('CHANNEL_ID', '')
+CHANNEL_ID = -1001916083546
 
-BOT_ID = os.getenv('BOT_ID', '')
+BOT_ID = 6026823407
 
-CHANNEL_URL = os.getenv('CHANNEL_URL', '')
+CHANNEL_URL = 'https://t.me/sevastopol_adjutor'
 
-BOT_URL = os.getenv('BOT_URL', '')
+BOT_URL = 'https://t.me/street_assistant_bot'
 
 TIMEOUT_MESSAGES = {
     'registration': {
