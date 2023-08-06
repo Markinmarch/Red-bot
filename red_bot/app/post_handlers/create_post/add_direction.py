@@ -1,6 +1,6 @@
+import asyncio
 from aiogram import types
 from aiogram.dispatcher import FSMContext
-import asyncio
 
 
 from red_bot.settings.setting import dp

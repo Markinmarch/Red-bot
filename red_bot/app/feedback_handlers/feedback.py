@@ -4,8 +4,8 @@ from aiogram import types
 from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_URL
 from red_bot.utils.content.text_content import FEEDBACK
-from red_bot.sql_db.posts import posts
-from red_bot.sql_db.responders import responders
+from red_bot.sql_db.posts_db import posts
+from red_bot.sql_db.responders_db import responders
 
 
 @dp.callback_query_handler(text = 'respond_to_ad')
