@@ -63,6 +63,20 @@ class Posts(Bot_tables_DB):
         )
         return self.cur.fetchall()
     
+    def delete_posts(
+        self,
+        post_id: int
+    ):
+        self.cur.execute(
+            '''
+            DELETE FROM posts
+            WHERE id = (?)
+            ''',
+            (post_id,)
+        )
+        self.conn.commit()
+        logging.info(f'Posts {post_id} has been deleted')
+    
     def check_quantity_posts(
             self,
             user_id: int
