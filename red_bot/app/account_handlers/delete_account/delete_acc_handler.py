@@ -43,7 +43,7 @@ async def erase_user_data(callback: types.CallbackQuery):
                 chat_id = CHANNEL_ID,
                 message_id = num_post
             )
-            posts_db.posts.delete_posts(num_post)
+            posts_db.posts.delete_post(num_post)
         logging.info(f'User {callback.from_user.id} has been deleted')
     else:
         await callback.answer(

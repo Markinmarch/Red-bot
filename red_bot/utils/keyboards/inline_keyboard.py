@@ -74,3 +74,14 @@ delete_acc_button = InlineKeyboardMarkup(
         ]
     ]
 )
+
+delete_post_button = InlineKeyboardMarkup(
+    inline_keyboard = [
+        [
+            InlineKeyboardButton(
+                text = 'Удалить',
+                callback_data = 'delete_post'
+            )
+        ]
+    ]
+)

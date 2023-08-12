@@ -6,7 +6,7 @@ import asyncio
 from red_bot.settings.setting import dp
 from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddUser
-from red_bot.utils.keyboards.replay_keyboard import get_phone_user
+from red_bot.utils.keyboards.reply_keyboard import get_phone_user
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATION_MESSAGE
 
 
