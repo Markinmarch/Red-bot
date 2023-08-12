@@ -2,7 +2,7 @@ from aiogram import types
 
 
 from red_bot.settings.setting import dp
-from red_bot.utils.keyboards.replay_keyboard import direction_detection_buttons
+from red_bot.utils.keyboards.reply_keyboard import direction_detection_buttons
 from red_bot.utils.state import AddPost
 
     
