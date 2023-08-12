@@ -13,3 +13,6 @@ class AddUser(StatesGroup):
     age = State()
     gender = State()
     phone = State()
+
+class DeletePost(StatesGroup):
+    num_post = State()

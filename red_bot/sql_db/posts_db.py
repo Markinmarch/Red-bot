@@ -63,7 +63,7 @@ class Posts(Bot_tables_DB):
         )
         return self.cur.fetchall()
     
-    def delete_posts(
+    def delete_post(
         self,
         post_id: int
     ):

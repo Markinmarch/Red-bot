@@ -82,3 +82,9 @@ ALREADY_RESPONDED_MESSAGE = 'Вы уже отзывались на этот по
 LIMIT_WARNING_PUBLICATION_MESSAGE = 'Ваш лимит подаваемых объявлений на сегодня закончился.'
 
 INTERRUPTION_MESSAGE = 'Процесс прерван из-за долгого ожидания ответа.'
+
+CHECK_POSTS = 'Выберите пост из предложенного списка:'
+
+NONE_POSTS = 'У Вас не имеется постов на канале.'
+
+DELETE_POST_MESSAGE = 'Ваш пост удалён.'

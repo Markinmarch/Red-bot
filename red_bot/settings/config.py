@@ -44,7 +44,8 @@ TIMEOUT_MESSAGES = {
         'text': 120,
         'conditions': 40,
         'photo': 30
-    }
+    },
+    'delete_post': 60
 }
 
 COUNT_LIMIT_POSTS = 3
