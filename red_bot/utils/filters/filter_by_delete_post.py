@@ -12,4 +12,3 @@ from red_bot.utils.content.text_content import FILTERS_MESSAGE
 )
 async def check_age(message: types.Message):
     await message.answer(text = FILTERS_MESSAGE['delete_post'])
-    
