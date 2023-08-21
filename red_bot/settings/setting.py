@@ -24,6 +24,7 @@ storage = RedisStorage2(
     port = config.REDIS_PORT,
     db = config.REDIS_BD
 )
+
 dp = Dispatcher(
     bot,
     storage = storage

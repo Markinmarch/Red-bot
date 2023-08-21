@@ -3,7 +3,7 @@ import logging
 import sqlite3
 
 
-from red_bot.settings import config
+from red_bot.settings.config import DB_NAME, DB_PATH
 
 
 class Bot_tables_DB:
@@ -14,17 +14,13 @@ class Bot_tables_DB:
         :conn: параметр реализует подключение к сессии БД
         :cur: параметр указателя БД
     '''
-    def __init__(
-        self,
-        name: str,
-        path: str
-    ):
-        self.name = name
-        self.path = path
+    def __init__(self):
+        self.name = DB_NAME
+        self.path = DB_PATH
         self.conn = sqlite3.connect(f'{self.path}/{self.name}.db')
         self.cur = self.conn.cursor()
 
-    def create_users_tables(self) -> None:
+    def create_users_table(self) -> None:
         self.conn
         self.cur.execute(
             '''
@@ -40,7 +36,7 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "USERS" has been created ---')
 
-    def create_posts_tables(self) -> None:
+    def create_posts_table(self) -> None:
         self.conn
         self.cur.execute(
             '''
@@ -54,7 +50,15 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "POSTS" has been created ---')
 
-    def create_responders_tables(self) -> None:
+    def drop_posts_table(self) -> None:
+        self.cur.execute(
+            '''
+            DROP TABLE posts;
+            '''
+        )
+        self.conn.commit()
+
+    def create_responders_table(self) -> None:
         self.conn
         self.cur.execute(
             '''
@@ -69,19 +73,24 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "RESPONDERS" has been created ---')
 
+    def drop_responders_table(self) -> None:
+        self.cur.execute(
+            '''
+            DROP TABLE responders;
+            '''
+        )
+        self.conn.commit()
+
 
 def create_table() -> None:
-    DB_tables = Bot_tables_DB(
-        name = config.DB_NAME,
-        path = config.DB_PATH
-    )
-    DB_tables.create_users_tables()
-    DB_tables.create_posts_tables()
-    DB_tables.create_responders_tables()
+    DB_tables = Bot_tables_DB()
+    DB_tables.create_users_table()
+    DB_tables.create_posts_table()
+    DB_tables.create_responders_table()
     logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" has been created ---')
 
 
-if config.DB_NAME + '.db' not in os.listdir(config.DB_PATH):
+if DB_NAME + '.db' not in os.listdir(DB_PATH):
     create_table()
 else:
     logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" connection established ---')
