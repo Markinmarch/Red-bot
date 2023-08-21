@@ -28,7 +28,10 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext):
         await state.update_data(photo = 'standart_photo')
     else:
         await state.update_data(photo = message.photo[0].file_id)
-    await message.answer(text = PUBLICATION_ACCOUNCEMENT)
+    await message.answer(
+        text = PUBLICATION_ACCOUNCEMENT,
+        reply_markup = types.ReplyKeyboardRemove()
+        )
 
     for_post_data = await state.get_data()
     caption = POST_CONTENT.format(

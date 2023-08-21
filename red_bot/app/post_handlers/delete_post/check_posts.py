@@ -34,6 +34,11 @@ async def check_posts(message: types.Message, state: FSMContext) -> None:
                     text = num_post,
                 )                
             )
+        buttons.append(
+            types.KeyboardButton(
+                text = 'Отменить ❌'
+            )
+        )
         keyboard = types.ReplyKeyboardMarkup(row_width = 3, resize_keyboard = True)
         await DeletePost.num_post.set()
         await message.answer(

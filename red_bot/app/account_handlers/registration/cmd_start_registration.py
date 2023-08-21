@@ -6,6 +6,7 @@ import asyncio
 from red_bot.settings.setting import dp
 from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddUser
+from red_bot.utils.keyboards.reply_keyboard import canseled
 from red_bot.utils.content.text_content import REGISTRATION_MESSAGE, INTERRUPTION_MESSAGE
 
 
@@ -20,7 +21,10 @@ async def cmd_start_registration(callback: types.CallbackQuery, state: FSMContex
         :callback: тип объекта представления
     '''
     await AddUser.name.set()
-    await callback.message.answer(text = REGISTRATION_MESSAGE['add_name'])    
+    await callback.message.answer(
+        text = REGISTRATION_MESSAGE['add_name'],
+        reply_markup = canseled
+    )    
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
     await asyncio.sleep(TIMEOUT_MESSAGES['registration']['name'])

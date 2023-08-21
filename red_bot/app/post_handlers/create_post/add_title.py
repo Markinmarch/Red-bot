@@ -6,6 +6,7 @@ import asyncio
 from red_bot.settings.setting import dp
 from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddPost
+from red_bot.utils.keyboards.reply_keyboard import canseled
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
@@ -23,7 +24,10 @@ async def add_title__cmd_text(message: types.Message, state: FSMContext):
     '''
     await state.update_data(title = message.text)
     await AddPost.next()
-    await message.answer(text = CREATE_POST_MESSAGE['text'])
+    await message.answer(
+        text = CREATE_POST_MESSAGE['text'],
+        reply_markup = canseled
+        )
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
     await asyncio.sleep(TIMEOUT_MESSAGES['create_post']['text'])

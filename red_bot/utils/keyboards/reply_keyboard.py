@@ -11,11 +11,14 @@ direction_detection_buttons = ReplyKeyboardMarkup(
         [
             KeyboardButton(
                 text = 'Услуга'
+            ),
+            KeyboardButton(
+                text = 'Биржа'
             )
         ],
         [
             KeyboardButton(
-                text = 'Биржа'
+                text = 'Отменить ❌'
             )
         ]
     ],
@@ -30,11 +33,14 @@ choose_gender = ReplyKeyboardMarkup(
         [
             KeyboardButton(
                 text = 'Мужской'
+            ),
+            KeyboardButton(
+                text = 'Женский'
             )
         ],
         [
             KeyboardButton(
-                text = 'Женский'
+                text = 'Отменить ❌'
             )
         ]
     ],
@@ -51,6 +57,11 @@ get_phone_user = ReplyKeyboardMarkup(
                 text = 'Да! Отправить телефон',
                 request_contact = True
             )
+        ],
+        [
+            KeyboardButton(
+                text = 'Отменить ❌'
+            )
         ]
     ],
     resize_keyboard = True,
@@ -63,6 +74,11 @@ continue_publishing = ReplyKeyboardMarkup(
         [
             KeyboardButton(
                 text = 'Продолжить публикацию'
+            )
+        ],
+        [
+            KeyboardButton(
+                text = 'Отменить ❌'
             )
         ]
     ],
@@ -77,10 +93,28 @@ by_agreement = ReplyKeyboardMarkup(
             KeyboardButton(
                 text = 'По договорённости'
             )
+        ],
+        [
+            KeyboardButton(
+                text = 'Отменить ❌'
+            )
         ]
     ],
     resize_keyboard = True,
     one_time_keyboard = True,
     selective = False,
     input_field_placeholder = 'Введите стоимость либо нажмите кнопку'
+)
+
+canseled = ReplyKeyboardMarkup(
+    keyboard = [
+        [
+            KeyboardButton(
+                text = 'Отменить ❌'
+            )
+        ]
+    ],
+    resize_keyboard = True,
+    one_time_keyboard = True,
+    selective = False,
 )

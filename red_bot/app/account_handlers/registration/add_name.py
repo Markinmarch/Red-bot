@@ -6,6 +6,7 @@ import asyncio
 from red_bot.settings.setting import dp
 from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddUser
+from red_bot.utils.keyboards.reply_keyboard import canseled
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATION_MESSAGE
 
 
@@ -24,7 +25,10 @@ async def add_name__cmd_age(message: types.Message, state: FSMContext) -> None:
     async with state.proxy() as user_data:
         user_data['name'] = message.text
     await AddUser.next()
-    await message.answer(text = REGISTRATION_MESSAGE['add_age'])
+    await message.answer(
+        text = REGISTRATION_MESSAGE['add_age'],
+        reply_markup = canseled
+    )
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
     await asyncio.sleep(TIMEOUT_MESSAGES['registration']['age'])
