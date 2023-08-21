@@ -11,7 +11,7 @@ from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST
 
 
 @dp.callback_query_handler(text = 'user_informed')
-async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContext):
+async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContext) -> None:
     '''
     Данный объект инициализирует состояние State()
     и предлагает выбрать тему объявления

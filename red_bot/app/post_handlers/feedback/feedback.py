@@ -9,11 +9,16 @@ from red_bot.sql_db.responders_db import responders
 
 
 @dp.callback_query_handler(text = 'respond_to_ad')
-async def feedback_user(callback: types.CallbackQuery):
-    """
-    Этот объект отправляет автору статьи (поста) уведомление на действие
-    пользователя (на нажатие кнопки "Отозваться") с ссылкой на его страницу.
-    """
+async def feedback_user(callback: types.CallbackQuery) -> None:
+    '''
+    Данный объект отправяет автору записи (поста)
+    уведомление на действие пользователя (на нажатие
+    кнопки "Отозваться") с сылкой на его страницу
+    -----------------------------------------------
+    parametrs:
+        :text: вызов callback_query по ключевому слову.
+        :callback: тип объекта представления.
+    '''
     responders.insert_post(
         responder_id = callback.from_user.id,
         post_id = callback.message.message_id

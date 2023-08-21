@@ -11,7 +11,7 @@ from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST
 
 
 @dp.message_handler(state = AddPost.conditions)
-async def add_conditions__cmd_photo(message: types.Message, state: FSMContext):
+async def add_conditions__cmd_photo(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
     условия, затем запрашивает фоторафию к объявлению.

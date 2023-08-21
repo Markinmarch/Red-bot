@@ -19,7 +19,7 @@ async def add_gender__cmd_phone(message: types.Message, state: FSMContext) -> No
     контактных данных пользователя (телефон аккаунта)
     -----------------------------------------------
     parametrs:
-        :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
+        :state: параметр состояния конечного автомата (FSMContext) пола пользователя
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''

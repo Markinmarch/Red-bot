@@ -11,7 +11,7 @@ from red_bot.utils.keyboards.inline_keyboard import continue_filling_button, sta
 
 
 @dp.message_handler(commands=['create_post'])
-async def user_rules_reminder(message: types.Message):
+async def user_rules_reminder(message: types.Message) -> None:
     '''
     Данный объект реализует получение согласия от пользователя
     на дальнейшее создание поста через запрос (нажатие кнопки).

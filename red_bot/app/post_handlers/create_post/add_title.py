@@ -11,7 +11,7 @@ from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST
 
 
 @dp.message_handler(state = AddPost.title)
-async def add_title__cmd_text(message: types.Message, state: FSMContext):
+async def add_title__cmd_text(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
     короткое описание темы, затем запрашивает

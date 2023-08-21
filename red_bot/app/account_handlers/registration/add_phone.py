@@ -20,7 +20,7 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
     автоматически блокируется, но всё равно записывается в SQL
     -------------------------------------------------------------------------------------
     parametrs:
-        :state: (str) параметр состояния конечного автомата (FSMContext) телефона пользователя
+        :state: параметр состояния конечного автомата (FSMContext) телефона пользователя
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :content_types: параметр формата получаемых данных.
         :message: тип объкета представления.

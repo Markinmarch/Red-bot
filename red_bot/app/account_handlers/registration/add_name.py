@@ -18,7 +18,7 @@ async def add_name__cmd_age(message: types.Message, state: FSMContext) -> None:
     состоянию, запрашивающему возраст пользователя
     -----------------------------------------------
     parametrs:
-        :state: (str) параметр состояния конечного автомата (FSMContext) имени пользователя
+        :state: параметр состояния конечного автомата (FSMContext) имени пользователя
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''

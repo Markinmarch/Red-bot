@@ -11,7 +11,7 @@ from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST
 
 
 @dp.message_handler(state = AddPost.text)
-async def add_text__cmd_conditions(message: types.Message, state: FSMContext):
+async def add_text__cmd_conditions(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
     полно описание объявления, затем запрашивает

@@ -10,8 +10,16 @@ from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_u
 
 
 @dp.message_handler(commands = ['start'])
-async def user_verification(message: types.Message):
-
+async def user_verification(message: types.Message) -> None:
+    '''
+    Данный объект проверяет пользователя на наличие
+    его учётной запси по его id при первичном запросе
+    к телеграм-боту
+    -----------------------------------------------
+    parametrs:
+        :commands: команда вызова обработчика
+        :message: тип объкета представления.
+    '''
     if users.checking_users(message.from_user.id) == False:
         await set_commands_for_new_user(bot = message.bot)
         await message.answer(

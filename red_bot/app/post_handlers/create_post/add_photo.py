@@ -11,7 +11,7 @@ from red_bot.utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNC
 
 
 @dp.message_handler(state = AddPost.photo, content_types = types.ContentType.ANY)
-async def add_photo__cmd_publish(message: types.Message, state: FSMContext):
+async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
     фотографию объявления, формирует данные,

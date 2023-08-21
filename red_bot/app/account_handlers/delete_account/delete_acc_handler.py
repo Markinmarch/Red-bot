@@ -11,7 +11,7 @@ from red_bot.utils.content.text_content import DELETE_ACCOUNT_MESSAGE, BEFORE_DE
 
 
 @dp.message_handler(commands = ['delete_account'])
-async def delete_account(message: types.Message):
+async def delete_account(message: types.Message) -> None:
     '''
     Данный метод отправляет пользователю предупреждение
     о удалении аккаунта и кнопку подтверждения удаления
