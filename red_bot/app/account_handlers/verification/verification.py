@@ -5,7 +5,7 @@ import logging
 from red_bot.settings.setting import dp
 from red_bot.utils.keyboards.inline_keyboard import start_registration_button
 from red_bot.utils.content.text_content import UNREGISTRED_USER, IF_USER_HAVE_ACCOUNT, UPDATE_MESSAGE
-from red_bot.sql_db.users_db import users
+from red_bot.sql_db.users_db import Users
 from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_users
 
 
@@ -20,7 +20,7 @@ async def user_verification(message: types.Message) -> None:
         :commands: команда вызова обработчика
         :message: тип объкета представления.
     '''
-    if users.checking_users(message.from_user.id) == False:
+    if Users.checking_users(message.from_user.id) == False:
         await set_commands_for_new_user(bot = message.bot)
         await message.answer(
             text = UNREGISTRED_USER.format(message.from_user.first_name),

@@ -4,8 +4,8 @@ from aiogram.utils.exceptions import Throttled
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import COUNT_LIMIT_POSTS, PAUSE_CREATE_POSTS
-from red_bot.sql_db.users_db import users
-from red_bot.sql_db.posts_db import posts
+from red_bot.sql_db.users_db import Users
+from red_bot.sql_db.posts_db import Posts
 from red_bot.utils.content.text_content import POST_INSTRUCTION, WAITING_MESSAGE, UNREGISTRED_USER, LIMIT_WARNING_PUBLICATION_MESSAGE
 from red_bot.utils.keyboards.inline_keyboard import continue_filling_button, start_registration_button
 
@@ -24,13 +24,13 @@ async def user_rules_reminder(message: types.Message) -> None:
         :callback: тип объекта представления
     '''
     try:
-        if users.checking_users(message.from_user.id) == False:
+        if Users.checking_users(message.from_user.id) == False:
             await message.answer(
                 text = UNREGISTRED_USER.format(message.from_user.first_name),
                 reply_markup = start_registration_button
             )
         else:
-            if posts.check_quantity_posts(message.from_user.id) > COUNT_LIMIT_POSTS:
+            if Posts.check_quantity_posts(message.from_user.id) > COUNT_LIMIT_POSTS:
                 await message.answer(
                     text = LIMIT_WARNING_PUBLICATION_MESSAGE
                 )

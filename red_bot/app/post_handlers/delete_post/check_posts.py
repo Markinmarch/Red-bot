@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 
 
 from red_bot.settings.setting import dp
-from red_bot.sql_db.posts_db import posts
+from red_bot.sql_db.posts_db import Posts
 from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.content.text_content import CHECK_POSTS, NONE_POSTS, INTERRUPTION_MESSAGE
 from red_bot.utils.state import DeletePost
@@ -20,7 +20,7 @@ async def check_posts(message: types.Message, state: FSMContext) -> None:
         :commands: команда, по которой декоратор вызывается
         :message: тип представления данных
     '''
-    request_posts_list = posts.select_posts(message.from_user.id)
+    request_posts_list = Posts.select_posts(message.from_user.id)
     ready_posts_list = [num_posts[0] for num_posts in request_posts_list]
     if len(ready_posts_list) == 0:
         await message.answer(
