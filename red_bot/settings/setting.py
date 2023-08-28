@@ -31,7 +31,7 @@ dp = Dispatcher(
 )
 
 def main():
-    from red_bot import app, test
+    from red_bot import app
 
 
     executor.start_polling(
