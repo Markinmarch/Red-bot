@@ -7,16 +7,8 @@ from red_bot.settings import config
 
 class Users(Bot_tables_DB):
 
-    def __init__(
-            self,
-            name,
-            path
-        ):
-        super().__init__(
-            name,
-            path
-        )
-
+    def __init__(self):
+        super().__init__()
 
     def insert_users(
         self,
@@ -87,8 +79,3 @@ class Users(Bot_tables_DB):
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
-
-users = Users(
-    name = config.DB_NAME,
-    path = config.DB_PATH
-)

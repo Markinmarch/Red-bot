@@ -5,15 +5,8 @@ from red_bot.settings import config
 
 class Responders(Bot_tables_DB):
 
-    def __init__(
-        self,
-        name,
-        path
-    ):
-        super().__init__(
-            name,
-            path
-        )
+    def __init__(self):
+        super().__init__()
 
     def insert_post(
         self,
@@ -49,8 +42,3 @@ class Responders(Bot_tables_DB):
             (responder_id, post_id)
         )
         return self.cur.fetchone()[0]
-
-responders = Responders(
-    name = config.DB_NAME,
-    path = config.DB_PATH
-)
