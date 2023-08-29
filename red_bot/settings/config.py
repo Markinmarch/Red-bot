@@ -41,9 +41,9 @@ TIMEOUT_MESSAGES = {
     'create_post': {
         'direction': 40,
         'title': 60,
-        'text': 120,
-        'conditions': 60,
-        'photo': 30
+        'text': 600,
+        'conditions': 300,
+        'photo': 120
     },
     'delete_post': 60
 }

@@ -35,7 +35,9 @@ choose_gender = ReplyKeyboardMarkup(
         [
             KeyboardButton(
                 text = 'Мужской'
-            ),
+            )
+        ],
+        [
             KeyboardButton(
                 text = 'Женский'
             )

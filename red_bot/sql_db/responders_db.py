@@ -46,7 +46,10 @@ class Responders(Bot_tables_DB):
             SELECT COUNT(*) FROM responders
             WHERE responder_id = ? AND post_id = ?
             ''',
-            (responder_id, post_id)
+            (
+                responder_id,
+                post_id
+            )
         )
         return self.cur.fetchone()[0]
 

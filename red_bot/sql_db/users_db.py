@@ -7,6 +7,12 @@ from red_bot.settings import config
 
 class Users(Bot_tables_DB):
 
+    '''
+    Класс наследует основной класс :Bot_tables_DB:
+    для реализации БД. Данный класс реализован с
+    целью управления таблицей :users: по методу CRUD
+    '''
+
     def __init__(
             self,
             name,
@@ -25,7 +31,7 @@ class Users(Bot_tables_DB):
         user_age: int,
         user_gender: int,
         user_phone: int
-    ):
+    ) -> None:
         self.cur.execute(
             '''
             INSERT INTO users (
@@ -63,7 +69,7 @@ class Users(Bot_tables_DB):
 
     def checking_users(
         self,
-        user_id
+        user_id: int
     ) -> bool:
         self.cur.execute(
             '''
