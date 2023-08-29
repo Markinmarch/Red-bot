@@ -3,7 +3,7 @@ from aiogram import types
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_URL
-from red_bot.utils.content.text_content import FEEDBACK, ALREADY_RESPONDED_MESSAGE
+from red_bot.utils.content.text_content import FEEDBACK, ALREADY_RESPONDED_MESSAGE, FEEDBACK_SEND
 from red_bot.sql_db.posts_db import posts
 from red_bot.sql_db.responders_db import responders
 
@@ -33,7 +33,7 @@ async def feedback_user(callback: types.CallbackQuery) -> None:
             post_id = callback.message.message_id
         )
         await callback.answer(
-            text = 'Отзыв отправлен',
+            text = FEEDBACK_SEND,
             show_alert = True
         )
         creator_id = posts.select_user(callback.message.message_id)

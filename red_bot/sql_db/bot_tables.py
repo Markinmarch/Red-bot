@@ -54,6 +54,14 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "POSTS" has been created ---')
 
+    def drop_posts_table(self) -> None:
+        self.cur.execute(
+            '''
+            DROP TABLE posts;
+            '''
+        )
+        self.conn.commit()
+
     def create_responders_tables(self) -> None:
         self.conn
         self.cur.execute(
@@ -68,6 +76,14 @@ class Bot_tables_DB:
         )
         self.conn.commit()
         logging.info('--- Table "RESPONDERS" has been created ---')
+
+    def drop_responders_table(self) -> None:
+        self.cur.execute(
+            '''
+            DROP TABLE responders;
+            '''
+        )
+        self.conn.commit()
 
 
 def create_table() -> None:
