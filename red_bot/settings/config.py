@@ -33,16 +33,16 @@ BOT_URL = 'https://t.me/street_assistant_bot'
 
 TIMEOUT_MESSAGES = {
     'registration': {
-        'name': 20,
+        'name': 40,
         'age': 20,
         'gender': 10,
         'phone': 10
     },
     'create_post': {
-        'direction': 15,
-        'title': 30,
+        'direction': 40,
+        'title': 60,
         'text': 120,
-        'conditions': 40,
+        'conditions': 60,
         'photo': 30
     },
     'delete_post': 60
