@@ -1,14 +1,14 @@
 import logging
 import redis
-import threading
 
 
-from red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT, DROP_TIME
-from red_bot.sql_db.bot_tables import Bot_tables_DB
+from red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT
+from red_bot.sql_db.posts_db import posts
+from red_bot.sql_db.responders_db import responders
 
 
 
-def erase_databases(self):
+def erase_databases() -> None:
     # очищаем redis
     redis_db = redis.Redis(
         host = REDIS_HOST,
@@ -17,12 +17,8 @@ def erase_databases(self):
     )
     redis_db.flushdb(asynchronous = True)
     # очищаем SQL
-    Bot_tables_DB.drop_responders_table()
-    Bot_tables_DB.drop_posts_table()
+    responders.drop_responders_table()
+    posts.drop_posts_table()
+    
+    logging.info('--- Databases erased ---')
 
-def timer_to_erase():
-    timer = threading.Timer(
-        interval = DROP_TIME,
-        function = EraseDataBases.erase_databases()
-    )
-    timer.start()
