@@ -2,7 +2,9 @@ import logging
 
 
 from red_bot.sql_db.bot_tables import Bot_tables_DB
-from red_bot.settings import config
+from red_bot.settings.config import DATA_PATH
+from red_bot.settings.config import DB_NAME
+
 
 class Posts(Bot_tables_DB):
 
@@ -63,6 +65,14 @@ class Posts(Bot_tables_DB):
         )
         return self.cur.fetchall()
     
+    def select_all_data(self):
+        self.cur.execute(
+            '''
+            SELECT * FROM posts
+            '''
+        )
+        return self.cur.fetchall()
+    
     def delete_post(
         self,
         post_id: int
@@ -90,7 +100,15 @@ class Posts(Bot_tables_DB):
         )
         return self.cur.fetchone()[0]
 
+    def drop_posts_table(self) -> None:
+        self.cur.execute(
+            '''
+            DROP TABLE posts;
+            '''
+        )
+        self.conn.commit()
+
 posts = Posts(
-    name = config.DB_NAME,
-    path = config.DB_PATH
+    name = DB_NAME,
+    path = DATA_PATH
 )

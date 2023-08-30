@@ -19,7 +19,7 @@ REDIS_PORT = os.getenv('REDIS_PORT', '')
 
 REDIS_BD = os.getenv('REDIS_DB', '')
 
-DB_PATH = 'red_bot/sql_db'
+DATA_PATH = 'red_bot/datas'
 
 DB_NAME = 'main_database'
 

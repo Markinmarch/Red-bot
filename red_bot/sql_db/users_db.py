@@ -2,7 +2,8 @@ import logging
 
 
 from red_bot.sql_db.bot_tables import Bot_tables_DB
-from red_bot.settings import config
+from red_bot.settings.config import DATA_PATH
+from red_bot.settings.config import DB_NAME
 
 
 class Users(Bot_tables_DB):
@@ -79,6 +80,14 @@ class Users(Bot_tables_DB):
             (user_id,)
         )
         return self.cur.fetchone()[0]
+    
+    def select_all_data(self):
+        self.cur.execute(
+            '''
+            SELECT * FROM users
+            '''
+        )
+        return self.cur.fetchall()
 
     def delete_users(
         self,
@@ -95,6 +104,6 @@ class Users(Bot_tables_DB):
         logging.info(f'User {user_id} deleted')
 
 users = Users(
-    name = config.DB_NAME,
-    path = config.DB_PATH
+    name = DB_NAME,
+    path = DATA_PATH
 )
