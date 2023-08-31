@@ -5,7 +5,7 @@ from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_URL
 from red_bot.utils.content.text_content import FEEDBACK, ALREADY_RESPONDED_MESSAGE, FEEDBACK_SEND
 from red_bot.sql_db.posts_db import posts
-from red_bot.sql_db.responders_db import Responders
+from red_bot.sql_db.responders_db import responders
 
 
 @dp.callback_query_handler(text = 'respond_to_ad')
@@ -19,7 +19,7 @@ async def feedback_user(callback: types.CallbackQuery) -> None:
         :text: вызов callback_query по ключевому слову.
         :callback: тип объекта представления.
     '''
-    if Responders.checking_responses(
+    if responders.checking_responses(
         responder_id = callback.from_user.id,
         post_id = callback.message.message_id
     ) != 0:
@@ -28,7 +28,7 @@ async def feedback_user(callback: types.CallbackQuery) -> None:
             show_alert = True
         )
     else:
-        Responders.insert_post(
+        responders.respond_post(
             responder_id = callback.from_user.id,
             post_id = callback.message.message_id
         )

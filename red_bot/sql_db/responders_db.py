@@ -5,7 +5,7 @@ from red_bot.sql_db.bot_tables import Bot_tables_DB
 
 class Responders(Bot_tables_DB):
 
-    def insert_post(
+    def respond_post(
         self,
         responder_id: int,
         post_id: int
