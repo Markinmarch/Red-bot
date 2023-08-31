@@ -3,7 +3,8 @@ import logging
 import sqlite3
 
 
-from red_bot.settings.config import DB_NAME, DB_PATH
+from red_bot.settings.config import DATA_PATH
+from red_bot.settings.config import DB_NAME
 
 
 class Bot_tables_DB:
@@ -16,7 +17,7 @@ class Bot_tables_DB:
     '''
     def __init__(self):
         self.name = DB_NAME
-        self.path = DB_PATH
+        self.path = DATA_PATH
         self.conn = sqlite3.connect(f'{self.path}/{self.name}.db')
         self.cur = self.conn.cursor()
 
@@ -73,24 +74,18 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "RESPONDERS" has been created ---')
 
-    def drop_responders_table(self) -> None:
-        self.cur.execute(
-            '''
-            DROP TABLE responders;
-            '''
-        )
-        self.conn.commit()
-
-
 def create_table() -> None:
-    DB_tables = Bot_tables_DB()
+    DB_tables = Bot_tables_DB(
+        name = DB_NAME,
+        path = DATA_PATH
+    )
     DB_tables.create_users_table()
     DB_tables.create_posts_table()
     DB_tables.create_responders_table()
     logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" has been created ---')
 
 
-if DB_NAME + '.db' not in os.listdir(DB_PATH):
+if DB_NAME + '.db' not in os.listdir(DATA_PATH):
     create_table()
 else:
     logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" connection established ---')

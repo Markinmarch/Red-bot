@@ -2,13 +2,28 @@ import logging
 
 
 from red_bot.sql_db.bot_tables import Bot_tables_DB
-from red_bot.settings import config
+from red_bot.settings.config import DATA_PATH
+from red_bot.settings.config import DB_NAME
 
 
 class Users(Bot_tables_DB):
 
-    def __init__(self):
-        super().__init__()
+    '''
+    Класс наследует основной класс :Bot_tables_DB:
+    для реализации БД. Данный класс реализован с
+    целью управления таблицей :users: по методу CRUD
+    '''
+
+    def __init__(
+            self,
+            name,
+            path
+        ):
+        super().__init__(
+            name,
+            path
+        )
+
 
     def insert_users(
         self,
@@ -17,7 +32,7 @@ class Users(Bot_tables_DB):
         user_age: int,
         user_gender: int,
         user_phone: int
-    ):
+    ) -> None:
         self.cur.execute(
             '''
             INSERT INTO users (
@@ -55,7 +70,7 @@ class Users(Bot_tables_DB):
 
     def checking_users(
         self,
-        user_id
+        user_id: int
     ) -> bool:
         self.cur.execute(
             '''
@@ -65,6 +80,14 @@ class Users(Bot_tables_DB):
             (user_id,)
         )
         return self.cur.fetchone()[0]
+    
+    def select_all_data(self):
+        self.cur.execute(
+            '''
+            SELECT * FROM users
+            '''
+        )
+        return self.cur.fetchall()
 
     def delete_users(
         self,
@@ -79,3 +102,8 @@ class Users(Bot_tables_DB):
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
+
+users = Users(
+    name = DB_NAME,
+    path = DATA_PATH
+)

@@ -1,7 +1,9 @@
 import logging
 
 from red_bot.sql_db.bot_tables import Bot_tables_DB
-from red_bot.settings import config
+from red_bot.settings.config import DB_NAME
+from red_bot.settings.config import DATA_PATH
+
 
 class Responders(Bot_tables_DB):
 
@@ -39,6 +41,22 @@ class Responders(Bot_tables_DB):
             SELECT COUNT(*) FROM responders
             WHERE responder_id = ? AND post_id = ?
             ''',
-            (responder_id, post_id)
+            (
+                responder_id,
+                post_id
+            )
         )
         return self.cur.fetchone()[0]
+    
+    def drop_responders_table(self) -> None:
+        self.cur.execute(
+            '''
+            DROP TABLE responders;
+            '''
+        )
+        self.conn.commit()
+
+responders = Responders(
+    name = DB_NAME,
+    path = DATA_PATH
+)

@@ -11,7 +11,9 @@ direction_detection_buttons = ReplyKeyboardMarkup(
         [
             KeyboardButton(
                 text = 'Услуга'
-            ),
+            )
+        ],
+        [
             KeyboardButton(
                 text = 'Биржа'
             )
@@ -33,7 +35,9 @@ choose_gender = ReplyKeyboardMarkup(
         [
             KeyboardButton(
                 text = 'Мужской'
-            ),
+            )
+        ],
+        [
             KeyboardButton(
                 text = 'Женский'
             )
