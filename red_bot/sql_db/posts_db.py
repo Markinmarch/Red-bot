@@ -2,12 +2,10 @@ import logging
 
 
 from red_bot.sql_db.bot_tables import Bot_tables_DB
-from red_bot.settings.config import DATA_PATH
-from red_bot.settings.config import DB_NAME
 
 
 class Posts(Bot_tables_DB):
-
+   
     def __init__(self):
         super().__init__()
 
@@ -93,15 +91,12 @@ class Posts(Bot_tables_DB):
         )
         return self.cur.fetchone()[0]
 
-    def drop_posts_table(self) -> None:
+    def delete_posts_table(self) -> None:
         self.cur.execute(
             '''
-            DROP TABLE posts;
+            DELETE TABLE posts;
             '''
         )
         self.conn.commit()
 
-posts = Posts(
-    name = DB_NAME,
-    path = DATA_PATH
-)
+posts = Posts

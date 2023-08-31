@@ -1,12 +1,11 @@
 import logging
 from aiogram import types
 from aiogram.dispatcher import FSMContext
-import asyncio
 
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_ID
-from red_bot.sql_db.users_db import Users
+from red_bot.sql_db.users_db import users
 from red_bot.utils.state import AddUser
 from red_bot.utils.commands import set_commands_for_users
 from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
@@ -56,7 +55,7 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         user_gender = 1
     if user_data['gender'] == 'Женский':
         user_gender = 0
-    Users.insert_users(
+    users.insert_users(
         user_id = message.from_user.id,
         user_name = user_name,
         user_age = user_age,

@@ -2,8 +2,6 @@ import logging
 
 
 from red_bot.sql_db.bot_tables import Bot_tables_DB
-from red_bot.settings.config import DATA_PATH
-from red_bot.settings.config import DB_NAME
 
 
 class Users(Bot_tables_DB):
@@ -14,16 +12,8 @@ class Users(Bot_tables_DB):
     целью управления таблицей :users: по методу CRUD
     '''
 
-    def __init__(
-            self,
-            name,
-            path
-        ):
-        super().__init__(
-            name,
-            path
-        )
-
+    def __init__():
+        super().__init__()
 
     def insert_users(
         self,
@@ -103,7 +93,4 @@ class Users(Bot_tables_DB):
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
 
-users = Users(
-    name = DB_NAME,
-    path = DATA_PATH
-)
+users = Users

@@ -1,9 +1,7 @@
 import logging
 
-from red_bot.sql_db.bot_tables import Bot_tables_DB
-from red_bot.settings.config import DB_NAME
-from red_bot.settings.config import DATA_PATH
 
+from red_bot.sql_db.bot_tables import Bot_tables_DB
 
 class Responders(Bot_tables_DB):
 
@@ -48,15 +46,12 @@ class Responders(Bot_tables_DB):
         )
         return self.cur.fetchone()[0]
     
-    def drop_responders_table(self) -> None:
+    def delete_responders_table(self) -> None:
         self.cur.execute(
             '''
-            DROP TABLE responders;
+            DELETE TABLE responders;
             '''
         )
         self.conn.commit()
 
-responders = Responders(
-    name = DB_NAME,
-    path = DATA_PATH
-)
+responders = Responders

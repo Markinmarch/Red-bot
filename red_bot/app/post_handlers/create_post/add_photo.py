@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_ID
-from red_bot.sql_db.posts_db import Posts
+from red_bot.sql_db.posts_db import posts
 from red_bot.utils.state import AddPost
 from red_bot.utils.keyboards.inline_keyboard import under_post_buttons
 from red_bot.utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNCEMENT
@@ -52,7 +52,7 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
     )
     channel_msg_id = msg['message_id']
     # записываем id поста и id пользователя в БД
-    Posts.insert_post(
+    posts.insert_post(
         post_id = channel_msg_id,
         user_id = message.from_user.id
     )

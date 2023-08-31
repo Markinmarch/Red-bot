@@ -5,7 +5,7 @@ import logging
 from red_bot.settings.setting import dp
 from red_bot.utils.content.text_content import WELCOME, IF_USER_HAVE_ACCOUNT, UPDATE_MESSAGE
 from red_bot.utils.keyboards.inline_keyboard import agree_button
-from red_bot.sql_db.users_db import Users
+from red_bot.sql_db.users_db import users
 
 
 @dp.callback_query_handler(text = 'create_account')
@@ -34,7 +34,7 @@ async def user_agreement_via_command(message: types.Message) -> None:
         :commands: команда вызова обработчика
         :message: тип объекта представления
     '''
-    if Users.checking_users(message.from_user.id) == False:
+    if users.checking_users(message.from_user.id) == False:
         await message.answer(
             text = WELCOME,
             parse_mode = 'HTML',

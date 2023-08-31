@@ -75,10 +75,7 @@ class Bot_tables_DB:
         logging.info('--- Table "RESPONDERS" has been created ---')
 
 def create_table() -> None:
-    DB_tables = Bot_tables_DB(
-        name = DB_NAME,
-        path = DATA_PATH
-    )
+    DB_tables = Bot_tables_DB()
     DB_tables.create_users_table()
     DB_tables.create_posts_table()
     DB_tables.create_responders_table()

@@ -4,7 +4,7 @@ from aiogram.dispatcher import FSMContext
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_ID
-from red_bot.sql_db.posts_db import Posts
+from red_bot.sql_db.posts_db import posts
 from red_bot.utils.state import DeletePost
 from red_bot.utils.content.text_content import DELETE_POST_MESSAGE
 
@@ -27,7 +27,7 @@ async def delete_post(callback: types.CallbackQuery, state: FSMContext) -> None:
         chat_id = CHANNEL_ID,
         message_id = num_post,
     )
-    Posts.delete_post(num_post)
+    posts.delete_post(num_post)
     await callback.message.answer(
         text = DELETE_POST_MESSAGE,
         reply_markup = types.ReplyKeyboardRemove()
