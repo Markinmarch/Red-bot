@@ -12,9 +12,6 @@ class Users(Bot_tables_DB):
     целью управления таблицей :users: по методу CRUD
     '''
 
-    def __init__():
-        super().__init__()
-
     def insert_users(
         self,
         user_id: int,
@@ -93,4 +90,4 @@ class Users(Bot_tables_DB):
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
 
-users = Users
+users = Users()
