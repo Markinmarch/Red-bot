@@ -3,3 +3,4 @@ __pycache__*
 /venv
 *.db
 red_bot/test
+test
