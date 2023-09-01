@@ -46,7 +46,7 @@ class Responders(Bot_tables_DB):
     def delete_responders_table(self) -> None:
         self.cur.execute(
             '''
-            DELETE TABLE responders;
+            DELETE FROM responders;
             '''
         )
         self.conn.commit()

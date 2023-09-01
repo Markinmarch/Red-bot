@@ -31,8 +31,9 @@ dp = Dispatcher(
 )
 
 def main():
-    from red_bot import test
+    from red_bot import app, erase_DB
 
+    erase_DB.timer.erase_databases()
     executor.start_polling(
         dp,
         skip_updates = True

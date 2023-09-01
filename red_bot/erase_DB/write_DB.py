@@ -36,12 +36,14 @@ def write_data_to_json():
 
     with open(
         file = f'{DATA_PATH}/user_data.json',
-        mode = 'w'
+        mode = 'w',
+        buffering = 0
     ) as user_json:
         json.dump(forming_dicts()[0], user_json)
     with open(
         file = f'{DATA_PATH}/post_data.json',
-        mode = 'w'
+        mode = 'w',
+        buffering = 0
     ) as post_json:
         json.dump(forming_dicts()[1], post_json)
     
