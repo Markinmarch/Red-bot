@@ -2,5 +2,3 @@ __pycache__*
 *.env
 /venv
 *.db
-red_bot/test
-test
