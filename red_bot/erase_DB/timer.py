@@ -23,5 +23,3 @@ def timer_to_erase():
     erase_timer.start()
 
     logging.info('!!! TIMER START !!!')
-
-timer_to_erase()

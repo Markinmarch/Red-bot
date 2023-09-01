@@ -39,6 +39,6 @@ async def feedback_user(callback: types.CallbackQuery) -> None:
         creator_id = posts.select_user(callback.message.message_id)
         await callback.bot.send_message(
             chat_id = creator_id[0],
-            text = FEEDBACK.format(callback.from_user.url, callback.from_user.first_name, CHANNEL_URL, callback.message.message_id),
+            text = FEEDBACK.format(callback.from_user.url, callback.from_user.id, CHANNEL_URL, callback.message.message_id),
             parse_mode = 'HTML'
         )
