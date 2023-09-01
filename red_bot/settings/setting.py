@@ -1,7 +1,7 @@
 import logging
 
 
-from aiogram import Bot, Dispatcher, types, executor
+from aiogram import Bot, Dispatcher, executor
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 
 
@@ -31,7 +31,7 @@ dp = Dispatcher(
 )
 
 def main():
-    from red_bot import app
+    from red_bot import test
 
     executor.start_polling(
         dp,
