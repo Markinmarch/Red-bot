@@ -53,3 +53,5 @@ COUNT_LIMIT_POSTS = 3
 PAUSE_CREATE_POSTS = 300 #пауза между созданием постов
 
 DROP_TIME = '04:00'
+
+HOUR = 3600

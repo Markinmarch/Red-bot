@@ -1,4 +1,3 @@
-import schedule
 import logging
 from aiogram import types
 
