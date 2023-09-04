@@ -28,10 +28,7 @@ storage = RedisStorage(
     )
 )
 
-dp = Dispatcher(
-    bot,
-    storage = storage
-)
+dp = Dispatcher()
 
 async def main() -> None:
     from red_bot import app

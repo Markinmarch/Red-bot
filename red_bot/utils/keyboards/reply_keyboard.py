@@ -5,11 +5,6 @@ direction_detection_buttons = ReplyKeyboardMarkup(
     keyboard = [
         [
             KeyboardButton(
-                text = 'Предложениe'
-            )
-        ],
-        [
-            KeyboardButton(
                 text = 'Услуга'
             )
         ],
