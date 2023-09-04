@@ -91,7 +91,7 @@ class Posts(Bot_tables_DB):
     def delete_posts_table(self) -> None:
         self.cur.execute(
             '''
-            DELETE TABLE posts;
+            DELETE FROM posts;
             '''
         )
         self.conn.commit()

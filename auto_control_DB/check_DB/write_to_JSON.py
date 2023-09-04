@@ -38,11 +38,21 @@ def write_data_to_json():
         file = f'{DATA_PATH}/user_data.json',
         mode = 'w'
     ) as user_json:
-        json.dump(forming_dicts()[0], user_json)
+        json.dump(
+            forming_dicts()[0],
+            user_json,
+            sort_keys = True,
+            indent = 4
+        )
     with open(
         file = f'{DATA_PATH}/post_data.json',
         mode = 'w'
     ) as post_json:
-        json.dump(forming_dicts()[1], post_json)
+        json.dump(
+            forming_dicts()[1],
+            post_json,
+            sort_keys = True,
+            indent = 4
+        )
     
     logging.info('--- Data has been writen to JSON ---')
