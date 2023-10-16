@@ -1,6 +1,6 @@
 import logging
 from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
@@ -11,7 +11,7 @@ from red_bot.utils.commands import set_commands_for_users
 from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
 
 
-@dp.message_handler(state = AddUser.phone, content_types = types.ContentType.CONTACT)
+@dp.message(AddUser.phone)
 async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект реализует получение действительного номера телефона.
@@ -62,4 +62,4 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
         user_gender = user_gender,
         user_phone = user_phone
     )
-    await state.finish()
+    await state.clear()

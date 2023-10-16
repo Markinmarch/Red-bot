@@ -11,13 +11,13 @@ load_dotenv(dotenv_path = 'red_bot/settings/config.env')
 
 BOT_TOKEN = os.getenv('BOT_TOKEN', '')
 
-ADMIN_ID = os.getenv('ADMIN_ID', '')
+ADMIN_ID = 805875522
 
-REDIS_HOST = os.getenv('REDIS_HOST', '')
+REDIS_HOST = 'localhost'
 
-REDIS_PORT = os.getenv('REDIS_PORT', '')
+REDIS_PORT = 6379
 
-REDIS_BD = os.getenv('REDIS_DB', '')
+REDIS_BD = 1
 
 DATA_PATH = 'red_bot/datas'
 

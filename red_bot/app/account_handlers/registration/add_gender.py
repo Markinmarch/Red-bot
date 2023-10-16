@@ -1,5 +1,5 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 import asyncio
 
 
@@ -10,7 +10,7 @@ from red_bot.utils.keyboards.reply_keyboard import get_phone_user
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATION_MESSAGE
 
 
-@dp.message_handler(state = AddUser.gender)
+@dp.message(AddUser.gender)
 async def add_gender__cmd_phone(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
@@ -24,7 +24,7 @@ async def add_gender__cmd_phone(message: types.Message, state: FSMContext) -> No
         :message: тип объкета представления.
     '''
     await state.update_data(gender = message.text)
-    await AddUser.next()
+    await state.set_state(phone = types.Contact)
     await message.answer(
         text = REGISTRATION_MESSAGE['add_phone'],
         reply_markup = get_phone_user
@@ -38,4 +38,4 @@ async def add_gender__cmd_phone(message: types.Message, state: FSMContext) -> No
             raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
-        await state.finish()
+        await state.clear()

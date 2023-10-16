@@ -1,5 +1,5 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 import asyncio
 
 
@@ -10,7 +10,7 @@ from red_bot.utils.keyboards.reply_keyboard import canseled
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, REGISTRATION_MESSAGE
 
 
-@dp.message_handler(state = AddUser.name)
+@dp.message(AddUser.name)
 async def add_name__cmd_age(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
@@ -22,9 +22,8 @@ async def add_name__cmd_age(message: types.Message, state: FSMContext) -> None:
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''
-    async with state.proxy() as user_data:
-        user_data['name'] = message.text
-    await AddUser.next()
+    await state.update_data(name = message.text)
+    await state.set_state(AddUser.age)
     await message.answer(
         text = REGISTRATION_MESSAGE['add_age'],
         reply_markup = canseled
@@ -38,4 +37,4 @@ async def add_name__cmd_age(message: types.Message, state: FSMContext) -> None:
             raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
-        await state.finish()
+        await state.clear()

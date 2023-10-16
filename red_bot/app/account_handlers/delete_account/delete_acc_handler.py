@@ -1,4 +1,5 @@
-from aiogram import types
+from aiogram import types, F
+from aiogram.filters import Command
 import logging
 
 
@@ -11,7 +12,7 @@ from red_bot.sql_db.users_db import users
 from red_bot.utils.content.text_content import DELETE_ACCOUNT_MESSAGE, BEFORE_DEL_ACC_MESSAGE
 
 
-@dp.message_handler(commands = ['delete_account'])
+@dp.message_handler(Command('delete_account'))
 async def delete_account(message: types.Message) -> None:
     '''
     Данный метод отправляет пользователю предупреждение
@@ -28,7 +29,7 @@ async def delete_account(message: types.Message) -> None:
         reply_markup = delete_acc_button
     )
 
-@dp.callback_query_handler(text = 'delete_account')
+@dp.callback_query(F.data == 'delete_account')
 async def erase_user_data(callback: types.CallbackQuery):
     if users.checking_users(callback.from_user.id) == True:
         users.delete_users(user_id = callback.from_user.id)

@@ -1,11 +1,12 @@
 import logging
+from redis import Redis
 
 
-from aiogram import Bot, Dispatcher, executor
-from aiogram.contrib.fsm_storage.redis import RedisStorage2
+from aiogram import Bot, Dispatcher
+from aiogram.fsm.storage.redis import RedisStorage
 
 
-from red_bot.settings import config
+from red_bot.settings.config import BOT_TOKEN, REDIS_HOST, REDIS_PORT, REDIS_BD
 
 
 logging.basicConfig(
@@ -15,14 +16,16 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 bot = Bot(
-    token = config.BOT_TOKEN,
+    token = BOT_TOKEN,
     parse_mode = 'HTML'
 )
 
-storage = RedisStorage2(
-    host = config.REDIS_HOST,
-    port = config.REDIS_PORT,
-    db = config.REDIS_BD
+storage = RedisStorage(
+    redis = Redis(
+        host = REDIS_HOST,
+        port = REDIS_PORT,
+        db = REDIS_BD
+    )
 )
 
 dp = Dispatcher(
@@ -30,10 +33,6 @@ dp = Dispatcher(
     storage = storage
 )
 
-def main():
-    from red_bot import app, test
-
-    executor.start_polling(
-        dp,
-        skip_updates = True
-    )
+async def main() -> None:
+    from red_bot import app
+    await dp.start_polling(bot)
