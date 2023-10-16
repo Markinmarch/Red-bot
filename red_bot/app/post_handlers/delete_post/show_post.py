@@ -1,6 +1,5 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
-from aiogram.utils.exceptions import MessageToDeleteNotFound
+from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
@@ -11,7 +10,7 @@ from red_bot.utils.keyboards.inline_keyboard import delete_post_button
 from red_bot.utils.state import DeletePost
 
 
-@dp.message_handler(state = DeletePost.num_post)
+@dp.message(DeletePost.num_post)
 async def show_post(message: types.Message, state: FSMContext) -> None:
     '''
     Метод отображает список номеров id записей пользователя.
@@ -24,8 +23,7 @@ async def show_post(message: types.Message, state: FSMContext) -> None:
     request_posts_list = posts.select_posts(message.from_user.id)
     ready_posts_list = [num_posts[0] for num_posts in request_posts_list]
     if int(message.text) in ready_posts_list:
-        async with state.proxy() as num_post:
-            num_post['num_post'] = message.text
+        await state.update_data(num_post = message.text)
         get_num_post = await state.get_data()
         num_post = get_num_post['num_post']
         await message.answer(
@@ -35,4 +33,4 @@ async def show_post(message: types.Message, state: FSMContext) -> None:
         )
     else:
         await message.answer(text = FILTERS_MESSAGE['none_this_post'])
-        await state.finish()            
+        await state.clear()         

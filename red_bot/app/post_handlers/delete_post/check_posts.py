@@ -1,6 +1,7 @@
 import asyncio
 from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
@@ -10,7 +11,7 @@ from red_bot.utils.content.text_content import CHECK_POSTS, NONE_POSTS, INTERRUP
 from red_bot.utils.state import DeletePost
 
 
-@dp.message_handler(commands = ['my_posts'])
+@dp.message(Command('my_posts'))
 async def check_posts(message: types.Message, state: FSMContext) -> None:
     '''
     Метод вызывает по команде пользователя список его записей,
@@ -57,4 +58,4 @@ async def check_posts(message: types.Message, state: FSMContext) -> None:
                 text = INTERRUPTION_MESSAGE,
                 reply_markup = types.ReplyKeyboardRemove()
                 )
-            await state.finish()
+            await state.clear()

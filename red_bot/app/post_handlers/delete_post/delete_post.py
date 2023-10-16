@@ -1,5 +1,5 @@
-from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram import types, F
+from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
@@ -9,7 +9,7 @@ from red_bot.utils.state import DeletePost
 from red_bot.utils.content.text_content import DELETE_POST_MESSAGE
 
 
-@dp.callback_query_handler(text = 'delete_post', state = DeletePost.num_post)
+@dp.callback_query(F.data == 'delete_post', F.state == DeletePost.num_post)
 async def delete_post(callback: types.CallbackQuery, state: FSMContext) -> None:
     '''
     Метод отображает ссылку с виджетом выбраной записи по её
@@ -32,4 +32,4 @@ async def delete_post(callback: types.CallbackQuery, state: FSMContext) -> None:
         text = DELETE_POST_MESSAGE,
         reply_markup = types.ReplyKeyboardRemove()
     )
-    await state.finish()
+    await state.clear()

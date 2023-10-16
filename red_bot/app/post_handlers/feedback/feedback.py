@@ -1,4 +1,4 @@
-from aiogram import types
+from aiogram import types, F
 
 
 from red_bot.settings.setting import dp
@@ -8,7 +8,7 @@ from red_bot.sql_db.posts_db import posts
 from red_bot.sql_db.responders_db import responders
 
 
-@dp.callback_query_handler(text = 'respond_to_ad')
+@dp.callback_query(F.data == 'respond_to_ad')
 async def feedback_user(callback: types.CallbackQuery) -> None:
     '''
     Данный объект отправяет автору записи (поста)
