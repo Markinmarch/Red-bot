@@ -1,6 +1,6 @@
-from aiogram import types
+from aiogram import types, F
 import asyncio
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
@@ -10,7 +10,7 @@ from red_bot.utils.keyboards.reply_keyboard import direction_detection_buttons
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
-@dp.callback_query_handler(text = 'user_informed')
+@dp.callback_query(F.data == 'user_informed')
 async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContext) -> None:
     '''
     Данный объект инициализирует состояние State()
@@ -22,7 +22,7 @@ async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContex
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''
-    await AddPost.direction.set()
+    await state.set_state(AddPost.direction)
     await callback.message.answer(
         text = CREATE_POST_MESSAGE['direction'],
         reply_markup = direction_detection_buttons
@@ -36,4 +36,4 @@ async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContex
             raise KeyError
     except KeyError:
         await callback.message.answer(text = INTERRUPTION_MESSAGE)
-        await state.finish()
+        await state.clear()

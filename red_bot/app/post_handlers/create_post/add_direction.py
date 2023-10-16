@@ -1,6 +1,6 @@
 import asyncio
 from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
@@ -10,7 +10,7 @@ from red_bot.utils.keyboards.reply_keyboard import canseled
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
-@dp.message_handler(state = AddPost.direction)
+@dp.message(AddPost.direction)
 async def add_direction__cmd_title(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
@@ -22,9 +22,8 @@ async def add_direction__cmd_title(message: types.Message, state: FSMContext) ->
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''
-    async with state.proxy() as post_data:
-        post_data['direction'] = message.text
-    await AddPost.next()
+    await state.update_data(direction = message.text)
+    await state.set_state(AddPost.title)
     await message.answer(
         text = CREATE_POST_MESSAGE['title'],
         reply_markup = canseled
@@ -38,4 +37,4 @@ async def add_direction__cmd_title(message: types.Message, state: FSMContext) ->
             raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
-        await state.finish()
+        await state.clear()

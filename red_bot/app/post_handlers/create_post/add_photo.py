@@ -1,5 +1,5 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
@@ -10,7 +10,7 @@ from red_bot.utils.keyboards.inline_keyboard import under_post_buttons
 from red_bot.utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNCEMENT
 
 
-@dp.message_handler(state = AddPost.photo, content_types = types.ContentType.ANY)
+@dp.message(AddPost.photo)
 async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
@@ -25,24 +25,16 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         :content_types: тип данных
     '''
     if message.text == 'Продолжить публикацию':
-        await state.update_data(photo = 'standart_photo')
+        await state.update_data(photo = types.InputFile(path_or_bytesio = 'red_bot/utils/content/media_content/botik.jpg'))
     else:
         await state.update_data(photo = message.photo[0].file_id)
-    await message.answer(
-        text = PUBLICATION_ACCOUNCEMENT,
-        reply_markup = types.ReplyKeyboardRemove()
-        )
-
     for_post_data = await state.get_data()
     caption = POST_CONTENT.format(
         for_post_data.get('title'),
         for_post_data.get('text'),
         for_post_data.get('conditions')
     )
-    if for_post_data.get('photo') == 'standart_photo':
-        photo = types.InputFile(path_or_bytesio = 'red_bot/utils/content/media_content/botik.jpg')
-    else:
-        photo = for_post_data.get('photo')
+    photo = for_post_data.get('photo')
     msg = await message.bot.send_photo(
         chat_id = CHANNEL_ID,
         photo = photo,
@@ -50,10 +42,14 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         parse_mode = 'HTML',
         reply_markup = under_post_buttons
     )
+    await message.answer(
+        text = PUBLICATION_ACCOUNCEMENT,
+        reply_markup = types.ReplyKeyboardRemove()
+        )
     channel_msg_id = msg['message_id']
     # записываем id поста и id пользователя в БД
     posts.insert_post(
         post_id = channel_msg_id,
         user_id = message.from_user.id
     )
-    await state.finish()
+    await state.clear()

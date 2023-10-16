@@ -1,5 +1,5 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 import asyncio
 
 
@@ -10,7 +10,7 @@ from red_bot.utils.keyboards.reply_keyboard import continue_publishing
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
-@dp.message_handler(state = AddPost.conditions)
+@dp.message(AddPost.conditions)
 async def add_conditions__cmd_photo(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
@@ -22,7 +22,7 @@ async def add_conditions__cmd_photo(message: types.Message, state: FSMContext) -
         :message: тип объкета представления.
     '''
     await state.update_data(conditions = message.text)
-    await AddPost.next()
+    await state.set_state(AddPost.photo)
     await message.answer(
         text = CREATE_POST_MESSAGE['photo'],
         reply_markup = continue_publishing
@@ -36,4 +36,4 @@ async def add_conditions__cmd_photo(message: types.Message, state: FSMContext) -
             raise KeyError
     except KeyError:
         await message.answer(text = INTERRUPTION_MESSAGE)
-        await state.finish()
+        await state.clear()
