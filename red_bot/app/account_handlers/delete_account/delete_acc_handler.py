@@ -12,7 +12,11 @@ from red_bot.sql_db.users_db import users
 from red_bot.utils.content.text_content import DELETE_ACCOUNT_MESSAGE, BEFORE_DEL_ACC_MESSAGE
 
 
+<<<<<<< HEAD
 @dp.message(Command('delete_account'))
+=======
+@dp.message_handler(Command('delete_account'))
+>>>>>>> 9a43b38 (update to aiogram 3)
 async def delete_account(message: types.Message) -> None:
     '''
     Данный метод отправляет пользователю предупреждение
