@@ -10,7 +10,7 @@ from red_bot.sql_db.users_db import users
 from red_bot.utils.commands import set_commands_for_new_user, set_commands_for_users
 
 
-@dp.message_handler(CommandStart())
+@dp.message(CommandStart())
 async def user_verification(message: types.Message) -> None:
     '''
     Данный объект проверяет пользователя на наличие

@@ -24,7 +24,7 @@ async def add_gender__cmd_phone(message: types.Message, state: FSMContext) -> No
         :message: тип объкета представления.
     '''
     await state.update_data(gender = message.text)
-    await state.set_state(phone = types.Contact)
+    await state.set_state(AddUser.phone)
     await message.answer(
         text = REGISTRATION_MESSAGE['add_phone'],
         reply_markup = get_phone_user
