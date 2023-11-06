@@ -9,7 +9,7 @@ from red_bot.utils.state import DeletePost
 from red_bot.utils.content.text_content import DELETE_POST_MESSAGE
 
 
-@dp.callback_query(DeletePost.num_post, F.data == 'delete_post')
+@dp.callback_query(F.data == 'delete_post', F.state == DeletePost.num_post)
 async def delete_post(callback: types.CallbackQuery, state: FSMContext) -> None:
     '''
     Метод отображает ссылку с виджетом выбраной записи по её

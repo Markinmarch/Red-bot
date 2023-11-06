@@ -25,35 +25,28 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         :content_types: тип данных
     '''
     if message.text == 'Продолжить публикацию':
-        await state.update_data(photo = types.FSInputFile(path = 'red_bot/utils/content/media_content/botik.jpg'))
+        await state.update_data(photo = types.InputFile(path_or_bytesio = 'red_bot/utils/content/media_content/botik.jpg'))
     else:
         await state.update_data(photo = message.photo[0].file_id)
     for_post_data = await state.get_data()
-    print(for_post_data.keys())
     caption = POST_CONTENT.format(
         for_post_data.get('title'),
         for_post_data.get('text'),
         for_post_data.get('conditions')
     )
     photo = for_post_data.get('photo')
-    if for_post_data.get('direction') == 'Услуга':
-        chat_id = CHANNEL_ID['service']
-    else:
-        chat_id = CHANNEL_ID['market']
     msg = await message.bot.send_photo(
-        chat_id = chat_id,
+        chat_id = CHANNEL_ID,
         photo = photo,
         caption = caption,
         parse_mode = 'HTML',
         reply_markup = under_post_buttons
     )
-
     await message.answer(
         text = PUBLICATION_ACCOUNCEMENT,
         reply_markup = types.ReplyKeyboardRemove()
         )
-    
-    channel_msg_id = msg.message_id
+    channel_msg_id = msg['message_id']
     # записываем id поста и id пользователя в БД
     posts.insert_post(
         post_id = channel_msg_id,

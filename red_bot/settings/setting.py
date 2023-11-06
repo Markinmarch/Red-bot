@@ -28,14 +28,10 @@ storage = RedisStorage(
     )
 )
 
-<<<<<<< HEAD
-dp = Dispatcher()
-=======
 dp = Dispatcher(
     bot,
     storage = storage
 )
->>>>>>> 9a43b38 (update to aiogram 3)
 
 async def main() -> None:
     from red_bot import app

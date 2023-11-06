@@ -28,20 +28,23 @@ async def check_posts(message: types.Message, state: FSMContext) -> None:
             text = NONE_POSTS
         )
     else:
-        keyboard_post_num = []
+        buttons = []
         for num_post in ready_posts_list:
-            num_post_button = types.KeyboardButton(text = str(num_post))
-            keyboard_post_num.append(num_post_button)           
-
-        keyboard = types.ReplyKeyboardMarkup(
-            keyboard = [keyboard_post_num, [types.KeyboardButton(text = 'Отменить ❌')]],
-            resize_keyboard = True
+            buttons.append(
+                types.KeyboardButton(
+                    text = num_post,
+                )                
+            )
+        buttons.append(
+            types.KeyboardButton(
+                text = 'Отменить ❌'
+            )
         )
-
-        await state.set_state(DeletePost.num_post)
+        keyboard = types.ReplyKeyboardMarkup(row_width = 3, resize_keyboard = True)
+        await DeletePost.num_post.set()
         await message.answer(
             text = CHECK_POSTS,
-            reply_markup = keyboard
+            reply_markup = keyboard.add(*buttons)
         )
         # конструкция для определения времени ожидания ответа от пользователя
         # благодаря осуществляемому способу защищаем сервер от перегрузок

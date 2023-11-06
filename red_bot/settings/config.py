@@ -23,10 +23,7 @@ DATA_PATH = 'red_bot/datas'
 
 DB_NAME = 'main_database'
 
-CHANNEL_ID = {
-    'market': -1001916083546,
-    'service': -1002058220863
-}
+CHANNEL_ID = -1001916083546
 
 BOT_ID = 6026823407
 

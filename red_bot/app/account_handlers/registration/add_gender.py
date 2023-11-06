@@ -24,17 +24,11 @@ async def add_gender__cmd_phone(message: types.Message, state: FSMContext) -> No
         :message: тип объкета представления.
     '''
     await state.update_data(gender = message.text)
-<<<<<<< HEAD
-    await state.set_state(AddUser.phone)
-=======
     await state.set_state(phone = types.Contact)
->>>>>>> 9a43b38 (update to aiogram 3)
     await message.answer(
         text = REGISTRATION_MESSAGE['add_phone'],
         reply_markup = get_phone_user
     )
-    for_post_data = await state.get_data()
-    print(for_post_data.keys())
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
     await asyncio.sleep(TIMEOUT_MESSAGES['registration']['phone'])
