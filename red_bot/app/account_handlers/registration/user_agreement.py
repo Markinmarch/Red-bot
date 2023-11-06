@@ -1,5 +1,6 @@
-from aiogram import types
+from aiogram import types, F
 import logging
+from aiogram.filters import Command
 
 
 from red_bot.settings.setting import dp
@@ -8,7 +9,7 @@ from red_bot.utils.keyboards.inline_keyboard import agree_button
 from red_bot.sql_db.users_db import users
 
 
-@dp.callback_query_handler(text = 'create_account')
+@dp.callback_query(F.data == 'create_account')
 async def user_agreement_via_query(callback: types.CallbackQuery) -> None:
     '''
     Данный объект реализует получение согласия от пользователя
@@ -24,7 +25,7 @@ async def user_agreement_via_query(callback: types.CallbackQuery) -> None:
         reply_markup = agree_button
     )
 
-@dp.message_handler(commands = ['create_account'])
+@dp.message(Command('create_account'))
 async def user_agreement_via_command(message: types.Message) -> None:
     '''
     Данный объект реализует получение согласия от пользователя
