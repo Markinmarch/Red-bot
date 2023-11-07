@@ -9,19 +9,22 @@ class Posts(Bot_tables_DB):
     def insert_post(
         self,
         post_id: int,
-        user_id: int
+        user_id: int,
+        chat_url: str
     ):
         self.cur.execute(
             '''
             INSERT INTO posts (
                 id,
-                user_id
+                user_id,
+                chat_url
             )
-            VALUES (?, ?);            
+            VALUES (?, ?, ?);            
             ''',
             (
                 post_id,
                 user_id,
+                chat_url
             )
         )
         self.conn.commit()
@@ -39,6 +42,19 @@ class Posts(Bot_tables_DB):
             (post_id,)
         )
         return self.cur.fetchone()
+    
+    # def select_post(
+    #     self,
+    #     post_id: int
+    # ):
+    #     self.cur.execute(
+    #         '''
+    #         SELECT id FROM posts
+    #         WHERE user_id = (?)
+    #         ''',
+    #         (post_id,)
+    #     )
+    #     return self.cur.fetchall()
     
     def select_posts(
         self,

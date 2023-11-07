@@ -20,17 +20,19 @@ async def show_post(message: types.Message, state: FSMContext) -> None:
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объекта представления.
     '''
-    request_posts_list = posts.select_posts(message.from_user.id)
-    ready_posts_list = [num_posts[0] for num_posts in request_posts_list]
-    if int(message.text) in ready_posts_list:
+    try:
         await state.update_data(num_post = message.text)
         get_num_post = await state.get_data()
         num_post = get_num_post['num_post']
+        if num_post == '0':
+            url = CHANNEL_URL['service']
+        else:
+            url = CHANNEL_URL['market']
         await message.answer(
-            text = f'<a href = "{CHANNEL_URL}/{num_post}">{num_post}</a>',
+            text = f'<a href = "{url}/{message.text[1:]}">{message.text}</a>',
             parse_mode = 'HTML',
             reply_markup = delete_post_button
         )
-    else:
+    except KeyError:
         await message.answer(text = FILTERS_MESSAGE['none_this_post'])
         await state.clear()         

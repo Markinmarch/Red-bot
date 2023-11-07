@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
-from red_bot.settings.config import CHANNEL_ID
+from red_bot.settings.config import CHANNEL_ID, CHANNEL_URL
 from red_bot.sql_db.posts_db import posts
 from red_bot.utils.state import AddPost
 from red_bot.utils.keyboards.inline_keyboard import under_post_buttons
@@ -28,6 +28,7 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         await state.update_data(photo = types.FSInputFile(path = 'red_bot/utils/content/media_content/botik.jpg'))
     else:
         await state.update_data(photo = message.photo[0].file_id)
+
     for_post_data = await state.get_data()
     caption = POST_CONTENT.format(
         for_post_data.get('title'),
@@ -35,10 +36,14 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         for_post_data.get('conditions')
     )
     photo = for_post_data.get('photo')
+
     if for_post_data.get('direction') == 'Услуга':
         chat_id = CHANNEL_ID['service']
+        chat_url = CHANNEL_URL['service']
     else:
         chat_id = CHANNEL_ID['market']
+        chat_url = CHANNEL_URL['market']
+
     msg = await message.bot.send_photo(
         chat_id = chat_id,
         photo = photo,
@@ -50,7 +55,7 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
     # записываем id поста и id пользователя в БД
     posts.insert_post(
         post_id = channel_msg_id,
-        user_id = message.from_user.id
+        user_id = message.from_user.id,
     )
     await message.answer(
         text = PUBLICATION_ACCOUNCEMENT,

@@ -23,11 +23,17 @@ DATA_PATH = 'red_bot/datas'
 
 DB_NAME = 'main_database'
 
-CHANNEL_ID = -1001916083546
+CHANNEL_ID = {
+    'service': -1002058220863,
+    'market': -1001916083546
+}
 
 BOT_ID = 6026823407
 
-CHANNEL_URL = 'https://t.me/sevastopol_adjutor'
+CHANNEL_URL = {
+    'service': 'https://t.me/sev_assistant_service',
+    'market': 'https://t.me/sev_assistant_market'
+}
 
 BOT_URL = 'https://t.me/street_assistant_bot'
 

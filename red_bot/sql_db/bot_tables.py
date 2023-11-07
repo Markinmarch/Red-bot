@@ -45,7 +45,7 @@ class Bot_tables_DB:
                 id INTEGER PRIMARY KEY,
                 user_id INTEGER NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(id)
-            );            
+            );
             '''
         )
         self.conn.commit()

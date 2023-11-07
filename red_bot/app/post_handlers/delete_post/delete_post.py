@@ -9,7 +9,7 @@ from red_bot.utils.state import DeletePost
 from red_bot.utils.content.text_content import DELETE_POST_MESSAGE
 
 
-@dp.callback_query(F.data == 'delete_post', F.state == DeletePost.num_post)
+@dp.callback_query(DeletePost.num_post, F.data == 'delete_post')
 async def delete_post(callback: types.CallbackQuery, state: FSMContext) -> None:
     '''
     Метод отображает ссылку с виджетом выбраной записи по её
@@ -23,8 +23,14 @@ async def delete_post(callback: types.CallbackQuery, state: FSMContext) -> None:
     '''
     get_num_post = await state.get_data()
     num_post = get_num_post['num_post']
+
+    if num_post[0] == 0:
+        channel_id = CHANNEL_ID['service']
+    else:
+        channel_id = CHANNEL_ID['market']
+        
     await callback.bot.delete_message(
-        chat_id = CHANNEL_ID,
+        chat_id = channel_id,
         message_id = num_post,
     )
     posts.delete_post(num_post)
