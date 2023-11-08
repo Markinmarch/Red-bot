@@ -44,6 +44,7 @@ class Bot_tables_DB:
             CREATE TABLE if NOT EXISTS posts(
                 id INTEGER PRIMARY KEY,
                 user_id INTEGER NOT NULL,
+                chat_url TEXT NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(id)
             );
             '''

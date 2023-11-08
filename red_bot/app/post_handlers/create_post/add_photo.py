@@ -56,6 +56,7 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
     posts.insert_post(
         post_id = channel_msg_id,
         user_id = message.from_user.id,
+        chat_url = chat_url
     )
     await message.answer(
         text = PUBLICATION_ACCOUNCEMENT,

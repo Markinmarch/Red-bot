@@ -43,18 +43,18 @@ class Posts(Bot_tables_DB):
         )
         return self.cur.fetchone()
     
-    # def select_post(
-    #     self,
-    #     post_id: int
-    # ):
-    #     self.cur.execute(
-    #         '''
-    #         SELECT id FROM posts
-    #         WHERE user_id = (?)
-    #         ''',
-    #         (post_id,)
-    #     )
-    #     return self.cur.fetchall()
+    def select_url_post(
+        self,
+        post_id: int
+    ):
+        self.cur.execute(
+            '''
+            SELECT chat_url FROM posts
+            WHERE id = (?)
+            ''',
+            (post_id,)
+        )
+        return self.cur.fetchone()
     
     def select_posts(
         self,
