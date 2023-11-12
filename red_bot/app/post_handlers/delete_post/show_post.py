@@ -20,17 +20,28 @@ async def show_post(message: types.Message, state: FSMContext) -> None:
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объекта представления.
     '''
-    # try:
-    await state.update_data(num_post = message.text)
-    get_num_post = await state.get_data()
-    num_post = get_num_post['num_post']
-    get_url_post = posts.select_url_post(num_post)
-    for url_post in get_url_post:
+    try:
+        request_posts_list = posts.select_posts(message.from_user.id)
+        ready_posts_list = [num_posts[0] for num_posts in request_posts_list]
+        if message.text not in ready_posts_list:
+            raise TypeError
+        
+        await state.update_data(num_post = message.text)
+        
+        if message.text[0] == '0':
+            url = CHANNEL_URL['service']
+        else:
+            url = CHANNEL_URL['market']
+
         await message.answer(
-            text = f'<a href = "{url_post}/{num_post}">{num_post}</a>',
+            text = f'<a href = "{url}/{message.text[1:]}">{message.text}</a>',
             parse_mode = 'HTML',
             reply_markup = delete_post_button
         )
-    # except KeyError:
-    #     await message.answer(text = FILTERS_MESSAGE['none_this_post'])
-    #     await state.clear()         
+        
+    except TypeError:
+        await message.answer(
+            text = FILTERS_MESSAGE['none_this_post'],
+            reply_markup = types.ReplyKeyboardRemove()
+        )
+        await state.clear()         

@@ -42,9 +42,8 @@ class Bot_tables_DB:
         self.cur.execute(
             '''
             CREATE TABLE if NOT EXISTS posts(
-                id INTEGER PRIMARY KEY,
+                id TEXT PRIMARY KEY,
                 user_id INTEGER NOT NULL,
-                chat_url TEXT NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(id)
             );
             '''

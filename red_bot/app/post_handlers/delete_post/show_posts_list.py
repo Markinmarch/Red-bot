@@ -30,7 +30,7 @@ async def check_posts(message: types.Message, state: FSMContext) -> None:
     else:
         keyboard_post_num = []
         for num_post in ready_posts_list:
-            num_post_button = types.KeyboardButton(text = str(num_post))
+            num_post_button = types.KeyboardButton(text = num_post)
             keyboard_post_num.append(num_post_button)           
 
         keyboard = types.ReplyKeyboardMarkup(

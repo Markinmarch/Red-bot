@@ -40,9 +40,11 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
     if for_post_data.get('direction') == 'Услуга':
         chat_id = CHANNEL_ID['service']
         chat_url = CHANNEL_URL['service']
+        chat_index = '0'
     else:
         chat_id = CHANNEL_ID['market']
         chat_url = CHANNEL_URL['market']
+        chat_index = '1'
 
     msg = await message.bot.send_photo(
         chat_id = chat_id,
@@ -51,12 +53,11 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         parse_mode = 'HTML',
         reply_markup = under_post_buttons
     )
-    channel_msg_id = msg.message_id
+    channel_msg_id = str(msg.message_id)
     # записываем id поста и id пользователя в БД
     posts.insert_post(
-        post_id = channel_msg_id,
-        user_id = message.from_user.id,
-        chat_url = chat_url
+        post_id = chat_index + channel_msg_id,
+        user_id = message.from_user.id
     )
     await message.answer(
         text = PUBLICATION_ACCOUNCEMENT,
