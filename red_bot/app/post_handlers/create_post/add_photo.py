@@ -47,10 +47,10 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         text = PUBLICATION_ACCOUNCEMENT,
         reply_markup = types.ReplyKeyboardRemove()
         )
-    channel_msg_id = msg['message_id']
+    
     # записываем id поста и id пользователя в БД
     posts.insert_post(
-        post_id = channel_msg_id,
+        post_id = msg.message_id,
         user_id = message.from_user.id
     )
     await state.clear()
