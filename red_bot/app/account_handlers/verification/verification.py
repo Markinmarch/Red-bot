@@ -24,7 +24,7 @@ async def user_verification(message: types.Message) -> None:
     if users.checking_users(message.from_user.id) == False:
         await set_commands_for_new_user(bot = message.bot)
         await message.answer(
-            text = UNREGISTRED_USER.format(message.from_user.last_name),
+            text = UNREGISTRED_USER.format(message.from_user.first_name),
             reply_markup = start_registration_button
         )
     else:
@@ -32,3 +32,4 @@ async def user_verification(message: types.Message) -> None:
         await message.answer(
             text = IF_USER_HAVE_ACCOUNT +'\n'+ UPDATE_MESSAGE,
         )
+        logging.info(f'User {message.from_user.id} authorization')

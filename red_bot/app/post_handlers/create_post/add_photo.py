@@ -36,32 +36,21 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         for_post_data.get('conditions')
     )
     photo = for_post_data.get('photo')
-
-    if for_post_data.get('direction') == 'Услуга':
-        chat_id = CHANNEL_ID['service']
-        chat_url = CHANNEL_URL['service']
-        chat_index = '0'
-    else:
-        chat_id = CHANNEL_ID['market']
-        chat_url = CHANNEL_URL['market']
-        chat_index = '1'
-
     msg = await message.bot.send_photo(
-        chat_id = chat_id,
+        chat_id = CHANNEL_ID,
         photo = photo,
         caption = caption,
         parse_mode = 'HTML',
         reply_markup = under_post_buttons
     )
-    channel_msg_id = str(msg.message_id)
-    # записываем id поста и id пользователя в БД
-    posts.insert_post(
-        post_id = chat_index + channel_msg_id,
-        user_id = message.from_user.id
-    )
     await message.answer(
         text = PUBLICATION_ACCOUNCEMENT,
         reply_markup = types.ReplyKeyboardRemove()
         )
- 
+    channel_msg_id = msg['message_id']
+    # записываем id поста и id пользователя в БД
+    posts.insert_post(
+        post_id = channel_msg_id,
+        user_id = message.from_user.id
+    )
     await state.clear()

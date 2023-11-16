@@ -17,10 +17,10 @@ direction_detection_buttons = ReplyKeyboardMarkup(
             )
         ]
     ],
-    resize_keyboard = True,
     one_time_keyboard = True,
+    is_persistent = True,
+    resize_keyboard = True,
     input_field_placeholder = 'Тема для публикации записи',
-    selective = True
 )
 
 choose_gender = ReplyKeyboardMarkup(
@@ -41,10 +41,10 @@ choose_gender = ReplyKeyboardMarkup(
             )
         ]
     ],
-    resize_keyboard = True,
     one_time_keyboard = True,
+    is_persistent = True,
+    resize_keyboard = True,
     input_field_placeholder = 'Пол пользователя',
-    selective = True
 )
 
 get_phone_user = ReplyKeyboardMarkup(
@@ -61,9 +61,9 @@ get_phone_user = ReplyKeyboardMarkup(
             )
         ]
     ],
-    resize_keyboard = True,
     one_time_keyboard = True,
-    selective = True    
+    is_persistent = True,
+    resize_keyboard = True  
 )
 
 continue_publishing = ReplyKeyboardMarkup(
@@ -79,9 +79,10 @@ continue_publishing = ReplyKeyboardMarkup(
             )
         ]
     ],
-    resize_keyboard = True,
     one_time_keyboard = True,
-    selective = True    
+    is_persistent = True,
+    resize_keyboard = True,
+    input_field_placeholder = 'Прикрепите фото'
 )
 
 by_agreement = ReplyKeyboardMarkup(
@@ -97,9 +98,9 @@ by_agreement = ReplyKeyboardMarkup(
             )
         ]
     ],
-    resize_keyboard = True,
     one_time_keyboard = True,
-    selective = False,
+    is_persistent = True,
+    resize_keyboard = True,
     input_field_placeholder = 'Введите стоимость либо нажмите кнопку'
 )
 
@@ -111,7 +112,7 @@ canseled = ReplyKeyboardMarkup(
             )
         ]
     ],
-    resize_keyboard = True,
     one_time_keyboard = True,
-    selective = False,
+    is_persistent = True,
+    resize_keyboard = True
 )

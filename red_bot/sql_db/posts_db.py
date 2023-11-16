@@ -8,7 +8,7 @@ class Posts(Bot_tables_DB):
 
     def insert_post(
         self,
-        post_id: str,
+        post_id: int,
         user_id: int
     ):
         self.cur.execute(
@@ -29,7 +29,7 @@ class Posts(Bot_tables_DB):
 
     def select_user(
         self,
-        post_id: str
+        post_id: int
     ):
         self.cur.execute(
             '''
@@ -63,7 +63,7 @@ class Posts(Bot_tables_DB):
     
     def delete_post(
         self,
-        post_id: str
+        post_id: int
     ):
         self.cur.execute(
             '''
