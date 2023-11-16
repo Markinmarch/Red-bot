@@ -27,10 +27,7 @@ CHANNEL_ID = -1001916083546
 
 BOT_ID = 6026823407
 
-CHANNEL_URL = {
-    'service': 'https://t.me/sev_assistant_service',
-    'market': 'https://t.me/sev_assistant_market'
-}
+CHANNEL_URL = 'https://t.me/sevastopol_assistant'
 
 BOT_URL = 'https://t.me/street_assistant_bot'
 
