@@ -22,15 +22,10 @@ async def delete_post(callback: types.CallbackQuery, state: FSMContext) -> None:
     '''
     get_num_post = await state.get_data()
     num_post = get_num_post['num_post']
-
-    if num_post[0] == '0':
-        channel_id = CHANNEL_ID['service']
-    else:
-        channel_id = CHANNEL_ID['market']
         
     await callback.bot.delete_message(
-        chat_id = channel_id,
-        message_id = num_post[1:]
+        chat_id = CHANNEL_ID,
+        message_id = num_post
     )
 
     await callback.message.answer(

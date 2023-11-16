@@ -25,16 +25,9 @@ async def show_post(message: types.Message, state: FSMContext) -> None:
         ready_posts_list = [num_posts[0] for num_posts in request_posts_list]
         if message.text not in ready_posts_list:
             raise TypeError
-        
         await state.update_data(num_post = message.text)
-        
-        if message.text[0] == '0':
-            url = CHANNEL_URL['service']
-        else:
-            url = CHANNEL_URL['market']
-
         await message.answer(
-            text = f'<a href = "{url}/{message.text[1:]}">{message.text}</a>',
+            text = f'<a href = "{CHANNEL_URL}/{message.text}">{message.text}</a>',
             parse_mode = 'HTML',
             reply_markup = delete_post_button
         )
