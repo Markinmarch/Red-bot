@@ -23,9 +23,9 @@ async def show_post(message: types.Message, state: FSMContext) -> None:
     try:
         request_posts_list = posts.select_posts(message.from_user.id)
         ready_posts_list = [num_posts[0] for num_posts in request_posts_list]
-        if message.text not in ready_posts_list:
+        if int(message.text) not in ready_posts_list:
             raise TypeError
-        await state.update_data(num_post = message.text)
+        await state.update_data(num_post = int(message.text))
         await message.answer(
             text = f'<a href = "{CHANNEL_URL}/{message.text}">{message.text}</a>',
             parse_mode = 'HTML',
