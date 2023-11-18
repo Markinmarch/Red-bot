@@ -24,7 +24,7 @@ async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContex
     '''
     await state.set_state(AddPost.title)
     await callback.message.answer(
-        text = CREATE_POST_MESSAGE['text'],
+        text = CREATE_POST_MESSAGE['title'],
         reply_markup = direction_detection_buttons
     )
     # конструкция для определения времени ожидания ответа от пользователя

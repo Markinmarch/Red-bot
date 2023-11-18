@@ -57,8 +57,8 @@ class Users(Bot_tables_DB):
             WHERE id = ?
             ''',
             (
-                user_id,
-                set_status
+                set_status,
+                user_id
             )
         )
         self.conn.commit()
@@ -69,12 +69,12 @@ class Users(Bot_tables_DB):
     ) -> bool:
         self.cur.execute(
             '''
-            SELECT status FROM user
+            SELECT status FROM users
             WHERE id = ?
             ''',
             (user_id,)
         )
-        return self.cur.fetchone()
+        return self.cur.fetchone()[0]
 
     def select_user(
         self,
