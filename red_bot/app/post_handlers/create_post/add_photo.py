@@ -3,8 +3,9 @@ from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
-from red_bot.settings.config import CHANNEL_ID, CHANNEL_URL
+from red_bot.settings.config import CHANNEL_ID, COUNT_LIMIT_POSTS
 from red_bot.sql_db.posts_db import posts
+from red_bot.sql_db.users_db import users
 from red_bot.utils.state import AddPost
 from red_bot.utils.keyboards.inline_keyboard import under_post_buttons
 from red_bot.utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNCEMENT
@@ -53,4 +54,9 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         post_id = msg.message_id,
         user_id = message.from_user.id
     )
+    if posts.check_quantity_posts(message.from_user.id) >= COUNT_LIMIT_POSTS:
+        users.update_status(
+            user_id = message.from_user.id,
+            set_status = False
+        )
     await state.clear()

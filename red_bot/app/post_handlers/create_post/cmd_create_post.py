@@ -22,9 +22,9 @@ async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContex
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''
-    await state.set_state(AddPost.direction)
+    await state.set_state(AddPost.title)
     await callback.message.answer(
-        text = CREATE_POST_MESSAGE['direction'],
+        text = CREATE_POST_MESSAGE['text'],
         reply_markup = direction_detection_buttons
     )
     # конструкция для определения времени ожидания ответа от пользователя

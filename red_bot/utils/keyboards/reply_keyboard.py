@@ -8,7 +8,13 @@ direction_detection_buttons = ReplyKeyboardMarkup(
                 text = 'Услуга'
             ),
             KeyboardButton(
-                text = 'Биржа'
+                text = 'Торговля'
+            ),
+            KeyboardButton(
+                text = 'Работа'
+            ),
+            KeyboardButton(
+                text = 'Прочее'
             )
         ],
         [
@@ -17,7 +23,7 @@ direction_detection_buttons = ReplyKeyboardMarkup(
             )
         ]
     ],
-    one_time_keyboard = True,
+    # one_time_keyboard = True,
     is_persistent = True,
     resize_keyboard = True,
     input_field_placeholder = 'Тема для публикации записи',
