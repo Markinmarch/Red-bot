@@ -30,7 +30,8 @@ class Bot_tables_DB:
                 user_name TEXT NOT NULL,
                 user_age INTEGER NOT NULL,
                 user_gender INTEGER NOT NULL,
-                user_phone INTEGER NOT NULL
+                user_phone INTEGER NOT NULL,
+                status INTEGER
             );
             '''
         )

@@ -48,7 +48,7 @@ TIMEOUT_MESSAGES = {
     'delete_post': 60
 }
 
-COUNT_LIMIT_POSTS = 1
+COUNT_LIMIT_POSTS = 2
 
 PAUSE_CREATE_POSTS = 300 #пауза между созданием постов
 

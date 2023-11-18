@@ -78,7 +78,7 @@ class Posts(Bot_tables_DB):
     def check_quantity_posts(
             self,
             user_id: int
-    ):
+    )-> int:
         self.cur.execute(
             '''
             SELECT COUNT(id) FROM posts

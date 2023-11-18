@@ -18,7 +18,8 @@ class Users(Bot_tables_DB):
         user_name: str,
         user_age: int,
         user_gender: int,
-        user_phone: int
+        user_phone: int,
+        status: int = True
     ) -> None:
         self.cur.execute(
             '''
@@ -27,9 +28,10 @@ class Users(Bot_tables_DB):
                 user_name,
                 user_age,
                 user_gender,
-                user_phone
+                user_phone,
+                status
             )
-            VALUES (?, ?, ?, ?, ?);            
+            VALUES (?, ?, ?, ?, ?, ?);            
             ''',
             (
                 user_id,
@@ -37,10 +39,42 @@ class Users(Bot_tables_DB):
                 user_age,
                 user_gender,
                 user_phone,
+                status
             )
         )
         self.conn.commit()
         logging.info(f'New user -- id: {user_id} -- name: {user_name} -- has been added')
+
+    def update_status(
+        self,
+        user_id: int,
+        set_status: int
+    ) -> None:
+        self.cur.execute(
+            '''
+            UPDATE users
+            SET status = ?
+            WHERE id = ?
+            ''',
+            (
+                user_id,
+                set_status
+            )
+        )
+        self.conn.commit()
+
+    def select_status(
+        self,
+        user_id: int
+    ) -> bool:
+        self.cur.execute(
+            '''
+            SELECT status FROM user
+            WHERE id = ?
+            ''',
+            (user_id,)
+        )
+        return self.cur.fetchone()
 
     def select_user(
         self,
