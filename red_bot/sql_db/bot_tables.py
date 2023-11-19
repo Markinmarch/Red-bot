@@ -31,7 +31,7 @@ class Bot_tables_DB:
                 user_age INTEGER NOT NULL,
                 user_gender INTEGER NOT NULL,
                 user_phone INTEGER NOT NULL,
-                status INTEGER
+                quantity_messages INTEGER NOT NULL
             );
             '''
         )

@@ -54,9 +54,6 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         post_id = msg.message_id,
         user_id = message.from_user.id
     )
-    if posts.check_quantity_posts(message.from_user.id) >= COUNT_LIMIT_POSTS:
-        users.update_status(
-            user_id = message.from_user.id,
-            set_status = False
-        )
+    # тут добавили +1 к количеству сообщений закреплённыз за этим пользователем
+    users.add_one_message(message.from_user.id)
     await state.clear()

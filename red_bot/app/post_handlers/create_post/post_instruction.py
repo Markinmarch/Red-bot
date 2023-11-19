@@ -29,7 +29,7 @@ async def user_rules_reminder(message: types.Message) -> None:
             reply_markup = start_registration_button
         )
     else:
-        if users.select_status(user_id = message.from_user.id) == False:
+        if users.select_quantity_messages(user_id = message.from_user.id) >= COUNT_LIMIT_POSTS:
             await message.answer(
                 text = LIMIT_WARNING_PUBLICATION_MESSAGE
             )

@@ -19,7 +19,7 @@ class Users(Bot_tables_DB):
         user_age: int,
         user_gender: int,
         user_phone: int,
-        status: int = True
+        quantity_messages: int = 0
     ) -> None:
         self.cur.execute(
             '''
@@ -29,7 +29,7 @@ class Users(Bot_tables_DB):
                 user_age,
                 user_gender,
                 user_phone,
-                status
+                quantity_messages
             )
             VALUES (?, ?, ?, ?, ?, ?);            
             ''',
@@ -39,37 +39,33 @@ class Users(Bot_tables_DB):
                 user_age,
                 user_gender,
                 user_phone,
-                status
+                quantity_messages
             )
         )
         self.conn.commit()
         logging.info(f'New user -- id: {user_id} -- name: {user_name} -- has been added')
 
-    def update_status(
+    def add_one_message(
         self,
-        user_id: int,
-        set_status: int
+        user_id: int
     ) -> None:
         self.cur.execute(
             '''
             UPDATE users
-            SET status = ?
+            SET quantity_messages = quantity_messages + 1
             WHERE id = ?
             ''',
-            (
-                set_status,
-                user_id
-            )
+            (user_id,)
         )
         self.conn.commit()
 
-    def select_status(
+    def select_quantity_messages(
         self,
         user_id: int
     ) -> bool:
         self.cur.execute(
             '''
-            SELECT status FROM users
+            SELECT quantity_messages FROM users
             WHERE id = ?
             ''',
             (user_id,)
