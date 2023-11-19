@@ -1,10 +1,5 @@
-import os
 import logging
 import sqlite3
-
-
-from red_bot.settings.config import DATA_PATH
-from red_bot.settings.config import DB_NAME
 
 
 class Bot_tables_DB:
@@ -15,9 +10,13 @@ class Bot_tables_DB:
         :conn: параметр реализует подключение к сессии БД
         :cur: параметр указателя БД
     '''
-    def __init__(self):
-        self.name = DB_NAME
-        self.path = DATA_PATH
+    def __init__(
+        self,
+        db_name: str,
+        db_path: str
+        ):
+        self.name = db_name
+        self.path = db_path
         self.conn = sqlite3.connect(f'{self.path}/{self.name}.db')
         self.cur = self.conn.cursor()
 
@@ -27,9 +26,6 @@ class Bot_tables_DB:
             '''
             CREATE TABLE if NOT EXISTS users(
                 id INTEGER PRIMARY KEY,
-                user_name TEXT NOT NULL,
-                user_age INTEGER NOT NULL,
-                user_gender INTEGER NOT NULL,
                 user_phone INTEGER NOT NULL,
                 quantity_messages INTEGER NOT NULL
             );
@@ -75,15 +71,4 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "RESPONDERS" has been created ---')
 
-def create_table() -> None:
-    DB_tables = Bot_tables_DB()
-    DB_tables.create_users_table()
-    DB_tables.create_posts_table()
-    DB_tables.create_responders_table()
-    logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" has been created ---')
 
-
-if DB_NAME + '.db' not in os.listdir(DATA_PATH):
-    create_table()
-else:
-    logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" connection established ---')

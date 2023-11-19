@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_URL
-from red_bot.sql_db.posts_db import posts
+from red_bot.sql_db import posts
 from red_bot.utils.content.text_content import FILTERS_MESSAGE
 from red_bot.utils.keyboards.inline_keyboard import delete_post_button
 from red_bot.utils.state import DeletePost

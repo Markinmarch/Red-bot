@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from red_bot.settings.setting import dp
 from red_bot.utils.content.text_content import WELCOME, IF_USER_HAVE_ACCOUNT, UPDATE_MESSAGE
 from red_bot.utils.keyboards.inline_keyboard import agree_button
-from red_bot.sql_db.users_db import users
+from red_bot.sql_db import users
 
 
 @dp.callback_query(F.data == 'create_account')

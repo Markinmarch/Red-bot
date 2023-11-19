@@ -95,5 +95,3 @@ class Posts(Bot_tables_DB):
             '''
         )
         self.conn.commit()
-
-posts = Posts()

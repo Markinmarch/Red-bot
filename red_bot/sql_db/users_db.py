@@ -15,9 +15,6 @@ class Users(Bot_tables_DB):
     def insert_users(
         self,
         user_id: int,
-        user_name: str,
-        user_age: int,
-        user_gender: int,
         user_phone: int,
         quantity_messages: int = 0
     ) -> None:
@@ -25,25 +22,19 @@ class Users(Bot_tables_DB):
             '''
             INSERT INTO users (
                 id,
-                user_name,
-                user_age,
-                user_gender,
                 user_phone,
                 quantity_messages
             )
-            VALUES (?, ?, ?, ?, ?, ?);            
+            VALUES (?, ?, ?);            
             ''',
             (
                 user_id,
-                user_name,
-                user_age,
-                user_gender,
                 user_phone,
                 quantity_messages
             )
         )
         self.conn.commit()
-        logging.info(f'New user -- id: {user_id} -- name: {user_name} -- has been added')
+        logging.info(f'New user -- id: {user_id} has been added')
 
     def add_one_message(
         self,
@@ -119,5 +110,3 @@ class Users(Bot_tables_DB):
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
-
-users = Users()
