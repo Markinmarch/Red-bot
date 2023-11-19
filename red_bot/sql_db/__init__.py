@@ -11,7 +11,6 @@ from . import users_db
 from red_bot.settings.config import DATA_PATH, DB_NAME
 
 
-
 DB_tables = bot_tables.Bot_tables_DB(
     db_name = DB_NAME,
     db_path = DATA_PATH
