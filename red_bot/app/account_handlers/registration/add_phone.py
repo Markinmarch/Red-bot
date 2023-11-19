@@ -5,7 +5,7 @@ from aiogram.fsm.context import FSMContext
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_ID
-from red_bot.sql_db.users_db import users
+from red_bot.sql_db import users
 from red_bot.utils.state import AddUser
 from red_bot.utils.commands import set_commands_for_users
 from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
@@ -50,16 +50,9 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
 
     #запись данных в SQL
     user_data = await state.get_data()
-    user_name, user_age, user_phone = user_data['name'], user_data['age'], user_data['phone']
-    if user_data['gender'] == 'Мужской':
-        user_gender = 1
-    if user_data['gender'] == 'Женский':
-        user_gender = 0
+    user_phone = user_data['phone']
     users.insert_users(
         user_id = message.from_user.id,
-        user_name = user_name,
-        user_age = user_age,
-        user_gender = user_gender,
         user_phone = user_phone
     )
     await state.clear()

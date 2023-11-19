@@ -8,9 +8,6 @@ class AddPost(StatesGroup):
     photo = State()
 
 class AddUser(StatesGroup):
-    name = State()
-    age = State()
-    gender = State()
     phone = State()
 
 class DeletePost(StatesGroup):
