@@ -1,39 +1,40 @@
-from aiogram import types, F
 import asyncio
+from aiogram import types
 from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import TIMEOUT_MESSAGES
 from red_bot.utils.state import AddPost
-from red_bot.utils.keyboards.reply_keyboard import direction_detection_buttons
+from red_bot.utils.keyboards.reply_keyboard import canseled
 from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
-@dp.callback_query(F.data == 'user_informed')
-async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContext) -> None:
+@dp.message(AddPost.direction)
+async def add_direction__cmd_title(message: types.Message, state: FSMContext) -> None:
     '''
-    Данный объект инициализирует состояние State()
-    и предлагает выбрать тему объявления
+    Данный объект записывает в состояние State()
+    выбранное название темы, затем запрашивает
+    короткое описание объявления
     -----------------------------------------------
     parametrs:
-        :text: фильтр обратного вызова обработчика
         :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''
+    await state.update_data(direction = message.text)
     await state.set_state(AddPost.title)
-    await callback.message.answer(
+    await message.answer(
         text = CREATE_POST_MESSAGE['title'],
-        reply_markup = direction_detection_buttons
+        reply_markup = canseled
     )
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(TIMEOUT_MESSAGES['create_post']['direction'])
+    await asyncio.sleep(TIMEOUT_MESSAGES['create_post']['title'])
     try:
         current_state = await state.get_state()
-        if current_state == 'AddPost:direction':
+        if current_state == 'AddPost:title':
             raise KeyError
     except KeyError:
-        await callback.message.answer(text = INTERRUPTION_MESSAGE)
+        await message.answer(text = INTERRUPTION_MESSAGE)
         await state.clear()
