@@ -5,6 +5,9 @@ from red_bot.sql_db.bot_tables import Bot_tables_DB
 
 class Responders(Bot_tables_DB):
 
+    def __init__(self):
+        super().__init__()
+
     def respond_post(
         self,
         responder_id: int,

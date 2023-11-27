@@ -2,6 +2,9 @@ import logging
 import sqlite3
 
 
+from ..settings.config import DB_PATH, DB_NAME
+
+
 class Bot_tables_DB:
     '''
     Класс реализует создание связанных между собой таблиц базы данных.
@@ -10,13 +13,9 @@ class Bot_tables_DB:
         :conn: параметр реализует подключение к сессии БД
         :cur: параметр указателя БД
     '''
-    def __init__(
-        self,
-        db_name: str,
-        db_path: str
-        ):
-        self.name = db_name
-        self.path = db_path
+    def __init__(self):
+        self.name = DB_NAME
+        self.path = DB_PATH
         self.conn = sqlite3.connect(f'{self.path}/{self.name}.db')
         self.cur = self.conn.cursor()
 

@@ -19,7 +19,7 @@ REDIS_PORT = 6379
 
 REDIS_BD = 1
 
-DATA_PATH = 'red_bot/datas'
+DB_PATH = 'red_bot/datas'
 
 DB_NAME = 'main_database'
 

@@ -12,6 +12,9 @@ class Users(Bot_tables_DB):
     целью управления таблицей :users: по методу CRUD
     '''
 
+    def __init__(self):
+        super().__init__()
+
     def insert_users(
         self,
         user_id: int,
