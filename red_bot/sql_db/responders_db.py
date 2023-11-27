@@ -50,3 +50,5 @@ class Responders(Bot_tables_DB):
             '''
         )
         self.conn.commit()
+
+responders = Responders()

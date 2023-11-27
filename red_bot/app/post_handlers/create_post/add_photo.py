@@ -3,8 +3,8 @@ from aiogram.fsm.context import FSMContext
 
 
 from red_bot.settings.setting import dp
-from red_bot.settings.config import CHANNEL_ID
-from red_bot.sql_db import posts, users
+from red_bot.settings.config import CHANNEL_ID, CHANNEL_URL
+from red_bot.sql_db.posts_db import posts
 from red_bot.utils.state import AddPost
 from red_bot.utils.keyboards.inline_keyboard import under_post_buttons
 from red_bot.utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNCEMENT
@@ -36,23 +36,31 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         for_post_data.get('conditions')
     )
     photo = for_post_data.get('photo')
+
+    if for_post_data.get('direction') == 'Услуга':
+        chat_id = CHANNEL_ID['service']
+        chat_url = CHANNEL_URL['service']
+    else:
+        chat_id = CHANNEL_ID['market']
+        chat_url = CHANNEL_URL['market']
+
     msg = await message.bot.send_photo(
-        chat_id = CHANNEL_ID,
+        chat_id = chat_id,
         photo = photo,
         caption = caption,
         parse_mode = 'HTML',
         reply_markup = under_post_buttons
     )
+    channel_msg_id = msg.message_id
+    # записываем id поста и id пользователя в БД
+    posts.insert_post(
+        post_id = channel_msg_id,
+        user_id = message.from_user.id,
+        chat_url = chat_url
+    )
     await message.answer(
         text = PUBLICATION_ACCOUNCEMENT,
         reply_markup = types.ReplyKeyboardRemove()
         )
-    
-    # записываем id поста и id пользователя в БД
-    posts.insert_post(
-        post_id = msg.message_id,
-        user_id = message.from_user.id
-    )
-    # тут добавили +1 к количеству сообщений закреплённыз за этим пользователем
-    users.add_one_message(message.from_user.id)
+ 
     await state.clear()

@@ -23,16 +23,27 @@ DATA_PATH = 'red_bot/datas'
 
 DB_NAME = 'main_database'
 
-CHANNEL_ID = -1001916083546
+CHANNEL_ID = {
+    'service': -1002058220863,
+    'market': -1001916083546
+}
 
 BOT_ID = 6026823407
 
-CHANNEL_URL = 'https://t.me/sevastopol_assistant'
+CHANNEL_URL = {
+    'service': 'https://t.me/sev_assistant_service',
+    'market': 'https://t.me/sev_assistant_market'
+}
 
 BOT_URL = 'https://t.me/street_assistant_bot'
 
 TIMEOUT_MESSAGES = {
-    'registration': 10,
+    'registration': {
+        'name': 40,
+        'age': 20,
+        'gender': 10,
+        'phone': 10
+    },
     'create_post': {
         'direction': 40,
         'title': 60,
@@ -43,7 +54,7 @@ TIMEOUT_MESSAGES = {
     'delete_post': 60
 }
 
-COUNT_LIMIT_POSTS = 2
+COUNT_LIMIT_POSTS = 1
 
 PAUSE_CREATE_POSTS = 300 #пауза между созданием постов
 

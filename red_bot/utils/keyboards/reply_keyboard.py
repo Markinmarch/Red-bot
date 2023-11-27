@@ -8,13 +8,7 @@ direction_detection_buttons = ReplyKeyboardMarkup(
                 text = 'Услуга'
             ),
             KeyboardButton(
-                text = 'Торговля'
-            ),
-            KeyboardButton(
-                text = 'Работа'
-            ),
-            KeyboardButton(
-                text = 'Прочее'
+                text = 'Биржа'
             )
         ],
         [
@@ -23,10 +17,10 @@ direction_detection_buttons = ReplyKeyboardMarkup(
             )
         ]
     ],
-    # one_time_keyboard = True,
-    is_persistent = True,
     resize_keyboard = True,
+    one_time_keyboard = True,
     input_field_placeholder = 'Тема для публикации записи',
+    selective = True
 )
 
 choose_gender = ReplyKeyboardMarkup(
@@ -47,10 +41,10 @@ choose_gender = ReplyKeyboardMarkup(
             )
         ]
     ],
-    one_time_keyboard = True,
-    is_persistent = True,
     resize_keyboard = True,
+    one_time_keyboard = True,
     input_field_placeholder = 'Пол пользователя',
+    selective = True
 )
 
 get_phone_user = ReplyKeyboardMarkup(
@@ -67,9 +61,9 @@ get_phone_user = ReplyKeyboardMarkup(
             )
         ]
     ],
+    resize_keyboard = True,
     one_time_keyboard = True,
-    is_persistent = True,
-    resize_keyboard = True  
+    selective = True    
 )
 
 continue_publishing = ReplyKeyboardMarkup(
@@ -85,10 +79,9 @@ continue_publishing = ReplyKeyboardMarkup(
             )
         ]
     ],
-    one_time_keyboard = True,
-    is_persistent = True,
     resize_keyboard = True,
-    input_field_placeholder = 'Прикрепите фото'
+    one_time_keyboard = True,
+    selective = True    
 )
 
 by_agreement = ReplyKeyboardMarkup(
@@ -104,9 +97,9 @@ by_agreement = ReplyKeyboardMarkup(
             )
         ]
     ],
-    one_time_keyboard = True,
-    is_persistent = True,
     resize_keyboard = True,
+    one_time_keyboard = True,
+    selective = False,
     input_field_placeholder = 'Введите стоимость либо нажмите кнопку'
 )
 
@@ -118,7 +111,7 @@ canseled = ReplyKeyboardMarkup(
             )
         ]
     ],
+    resize_keyboard = True,
     one_time_keyboard = True,
-    is_persistent = True,
-    resize_keyboard = True
+    selective = False,
 )

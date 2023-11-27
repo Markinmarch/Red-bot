@@ -1,6 +1,7 @@
 from aiogram import Bot
 from aiogram.types import BotCommand, BotCommandScopeDefault
 
+from red_bot.settings.config import CHANNEL_ID
 
 async def set_commands_for_new_user(bot: Bot):
     menu_commands = [

@@ -15,53 +15,32 @@ class Users(Bot_tables_DB):
     def insert_users(
         self,
         user_id: int,
-        user_phone: int,
-        quantity_messages: int = 0
+        user_name: str,
+        user_age: int,
+        user_gender: int,
+        user_phone: int
     ) -> None:
         self.cur.execute(
             '''
             INSERT INTO users (
                 id,
-                user_phone,
-                quantity_messages
+                user_name,
+                user_age,
+                user_gender,
+                user_phone
             )
-            VALUES (?, ?, ?);            
+            VALUES (?, ?, ?, ?, ?);            
             ''',
             (
                 user_id,
+                user_name,
+                user_age,
+                user_gender,
                 user_phone,
-                quantity_messages
             )
         )
         self.conn.commit()
-        logging.info(f'New user -- id: {user_id} has been added')
-
-    def add_one_message(
-        self,
-        user_id: int
-    ) -> None:
-        self.cur.execute(
-            '''
-            UPDATE users
-            SET quantity_messages = quantity_messages + 1
-            WHERE id = ?
-            ''',
-            (user_id,)
-        )
-        self.conn.commit()
-
-    def select_quantity_messages(
-        self,
-        user_id: int
-    ) -> bool:
-        self.cur.execute(
-            '''
-            SELECT quantity_messages FROM users
-            WHERE id = ?
-            ''',
-            (user_id,)
-        )
-        return self.cur.fetchone()[0]
+        logging.info(f'New user -- id: {user_id} -- name: {user_name} -- has been added')
 
     def select_user(
         self,
@@ -110,3 +89,5 @@ class Users(Bot_tables_DB):
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
+
+users = Users()

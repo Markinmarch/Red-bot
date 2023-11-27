@@ -3,9 +3,10 @@ from aiogram.filters import Command
 
 
 from red_bot.settings.setting import dp
-from red_bot.settings.config import COUNT_LIMIT_POSTS
-from red_bot.sql_db import users
-from red_bot.utils.content.text_content import POST_INSTRUCTION, UNREGISTRED_USER, LIMIT_WARNING_PUBLICATION_MESSAGE
+from red_bot.settings.config import COUNT_LIMIT_POSTS, PAUSE_CREATE_POSTS
+from red_bot.sql_db.users_db import users
+from red_bot.sql_db.posts_db import posts
+from red_bot.utils.content.text_content import POST_INSTRUCTION, WAITING_MESSAGE, UNREGISTRED_USER, LIMIT_WARNING_PUBLICATION_MESSAGE
 from red_bot.utils.keyboards.inline_keyboard import continue_filling_button, start_registration_button
 
 
@@ -28,7 +29,7 @@ async def user_rules_reminder(message: types.Message) -> None:
             reply_markup = start_registration_button
         )
     else:
-        if users.select_quantity_messages(user_id = message.from_user.id) >= COUNT_LIMIT_POSTS:
+        if posts.check_quantity_posts(message.from_user.id) > COUNT_LIMIT_POSTS:
             await message.answer(
                 text = LIMIT_WARNING_PUBLICATION_MESSAGE
             )
