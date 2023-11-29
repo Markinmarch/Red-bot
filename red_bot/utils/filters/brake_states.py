@@ -7,8 +7,8 @@ from red_bot.utils.content.text_content import FILTERS_MESSAGE
 from red_bot.utils.state import AddPost, AddUser, DeletePost
 
 @dp.message(
-    F.text == 'Отменить ❌',
-    state = AddUser.__all_states__
+    AddUser,
+    F.text == 'Отменить ❌'
 )
 async def brake_state_AddUser(
     message: types.Message,
@@ -21,8 +21,8 @@ async def brake_state_AddUser(
     await state.clear()
 
 @dp.message(
-    F.text == 'Отменить ❌',
-    state = AddPost.__all_states__
+    AddUser,
+    F.text == 'Отменить ❌'
 )
 async def brake_state_AddPost(
     message: types.Message,
@@ -34,9 +34,9 @@ async def brake_state_AddPost(
         )
     await state.clear()
 
-@dp.message_handler(
-    F.text == 'Отменить ❌',
-    state = DeletePost.__all_states__
+@dp.message(
+    AddUser,
+    F.text == 'Отменить ❌'
 )
 async def brake_state_DeletePost(
     message: types.Message,

@@ -6,17 +6,11 @@ from red_bot.utils.state import AddPost
 from red_bot.utils.content.text_content import FILTERS_MESSAGE
 
     
-@dp.message(
-    len(F.text) > 20,
-    state = AddPost.title
-)
+@dp.message(AddPost.title, F.text.len() > 20)
 async def repeat_enter_title(message: types.Message):
     await message.answer(text = FILTERS_MESSAGE['create_post']['repeat_title'])
 
-@dp.message(
-    len(F.text) < 20,
-    state = AddPost.text
-)
+@dp.message(AddPost.text, F.text.len() < 20)
 async def repeat_enter_text(message: types.Message):
     await message.answer(text = FILTERS_MESSAGE['create_post']['repeat_text'])
 
