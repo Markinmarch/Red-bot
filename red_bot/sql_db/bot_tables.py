@@ -1,5 +1,6 @@
 import logging
 import sqlite3
+import os
 
 
 from ..settings.config import DB_PATH, DB_NAME
@@ -70,4 +71,18 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "RESPONDERS" has been created ---')
 
+def create_db() -> None:
+    if DB_NAME + '.db' not in os.listdir(DB_PATH):
+        Bot_tables_DB().create_users_table()
+        Bot_tables_DB().create_posts_table()
+        Bot_tables_DB().create_responders_table()
+    else:
+        logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" connection established ---')
+
+def start_db() -> None:
+    try:
+        create_db()
+    except FileNotFoundError:
+        os.mkdir('red_bot/datas')
+        create_db()
 
