@@ -33,9 +33,7 @@ async def delete_account(message: types.Message) -> None:
 async def erase_user_data(callback: types.CallbackQuery):
     if users.checking_users(callback.from_user.id) == True:
         user_posts = posts.select_posts(callback.from_user.id)
-        print(user_posts)
         user_posts_list = [num_posts[0] for num_posts in user_posts]
-        print(user_posts_list)
         for num_post in user_posts_list:
             await callback.bot.delete_message(
                 chat_id = CHANNEL_ID,
