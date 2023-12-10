@@ -113,3 +113,12 @@ class Users(Bot_tables_DB):
         )
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
+
+    def erases_quantity_messages(self) -> None:
+        self.cur.execute(
+            '''
+            UPDATE users
+            SET quantity_messages = 0
+            '''
+        )
+        self.conn.commit()

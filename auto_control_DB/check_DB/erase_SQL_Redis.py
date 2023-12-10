@@ -3,8 +3,8 @@ import redis
 import time
 
 
-from red_bot.sql_db.posts_db import posts
-from red_bot.sql_db.responders_db import responders
+
+from red_bot.sql_db import responders, posts, users
 from red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT, DROP_TIME
 
 
@@ -16,7 +16,7 @@ def erase_databases() -> None:
         db = REDIS_BD,
     )
     redis_db.flushdb(asynchronous = True)
-    # очищаем SQL
-    responders.delete_responders_table()
-    posts.delete_posts_table()
+
+    #обнуляем количество сообщений за пользователем в таблице пользователей
+    users.erases_quantity_messages()
     logging.info('--- Databases erased ---')

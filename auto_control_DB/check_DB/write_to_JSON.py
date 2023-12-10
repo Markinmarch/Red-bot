@@ -2,9 +2,8 @@ import json
 import logging
 
 
-from red_bot.sql_db.users_db import users
-from red_bot.sql_db.posts_db import posts
-from red_bot.settings.config import DATA_PATH
+from red_bot.sql_db import users, posts
+from red_bot.settings.config import DB_PATH
 
 
 def forming_dicts() -> list:
@@ -35,7 +34,7 @@ def forming_dicts() -> list:
 def write_data_to_json():
 
     with open(
-        file = f'{DATA_PATH}/user_data.json',
+        file = f'{DB_PATH}/user_data.json',
         mode = 'w'
     ) as user_json:
         json.dump(
@@ -45,7 +44,7 @@ def write_data_to_json():
             indent = 4
         )
     with open(
-        file = f'{DATA_PATH}/post_data.json',
+        file = f'{DB_PATH}/post_data.json',
         mode = 'w'
     ) as post_json:
         json.dump(
