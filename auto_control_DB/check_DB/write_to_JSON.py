@@ -31,7 +31,7 @@ def forming_dicts() -> list:
     return [users_list, posts_list]
     
     
-def write_data_to_json():
+def write_data_to_json() -> None:
 
     with open(
         file = f'{DB_PATH}/user_data.json',
