@@ -1,11 +1,9 @@
 import logging
 import redis
-import time
 
 
-
-from red_bot.sql_db import responders, posts, users
-from red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT, DROP_TIME
+from red_bot.sql_db import users
+from red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT
 
 
 def erase_databases() -> None:

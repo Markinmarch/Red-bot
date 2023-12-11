@@ -5,8 +5,9 @@ if __name__ == '__main__':
     from red_bot.settings.config import DROP_TIME, HOUR, DAY
     while True:
         if time.strftime('%H') == DROP_TIME:
-            from . check_DB import erase_SQL_Redis as erase
-            erase.erase_databases()
+            from . check_DB import *
+            write_to_JSON.write_data_to_json()
+            erase_SQL_Redis.erase_databases()
             time.sleep(DAY)
         else:
             time.sleep(HOUR)
