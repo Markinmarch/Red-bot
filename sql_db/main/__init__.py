@@ -1,7 +1,9 @@
-import os
-import logging
+DB_PATH = 'sql_db/datas'
+
+DB_NAME = 'main_database'
 
 
+from . import run
 from . import bot_tables
 from . import posts_db
 from . import responders_db

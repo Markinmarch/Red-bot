@@ -7,7 +7,7 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path = 'red_bot/settings/config.env')
+load_dotenv(dotenv_path = '.env')
 
 BOT_TOKEN = os.getenv('BOT_TOKEN', '')
 
@@ -18,10 +18,6 @@ REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 
 REDIS_BD = 1
-
-DB_PATH = 'red_bot/datas'
-
-DB_NAME = 'main_database'
 
 CHANNEL_ID = -1001916083546
 

@@ -1,23 +1,17 @@
-import logging
-import sqlite3
-import os
+import logging, sqlite3, os
 
 
-from ..settings.config import DB_PATH, DB_NAME
+from . import DB_PATH, DB_NAME
 
 
 class Bot_tables_DB:
     '''
     Класс реализует создание связанных между собой таблиц базы данных.
-        :name: параметр наименования базы данных
-        :path: параметр маршрута до папки с базой данных
         :conn: параметр реализует подключение к сессии БД
         :cur: параметр указателя БД
     '''
     def __init__(self):
-        self.name = DB_NAME
-        self.path = DB_PATH
-        self.conn = sqlite3.connect(f'{self.path}/{self.name}.db')
+        self.conn = sqlite3.connect(f'{DB_PATH}/{DB_NAME}.db')
         self.cur = self.conn.cursor()
 
     def create_users_table(self) -> None:
@@ -83,6 +77,5 @@ def start_db() -> None:
     try:
         create_db()
     except FileNotFoundError:
-        os.mkdir('red_bot/datas')
+        os.mkdir(DB_PATH)
         create_db()
-

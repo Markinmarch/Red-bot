@@ -2,7 +2,7 @@ import logging
 import redis
 
 
-from red_bot.sql_db import users
+from sql_db.main import users
 from red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT
 
 

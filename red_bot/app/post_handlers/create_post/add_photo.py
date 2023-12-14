@@ -4,7 +4,7 @@ from aiogram.fsm.context import FSMContext
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import CHANNEL_ID
-from red_bot.sql_db import posts, users
+from sql_db.main import posts, users
 from red_bot.utils.state import AddPost
 from red_bot.utils.keyboards.inline_keyboard import under_post_buttons
 from red_bot.utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNCEMENT

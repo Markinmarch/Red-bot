@@ -4,7 +4,7 @@ from aiogram.filters import Command
 
 from red_bot.settings.setting import dp
 from red_bot.settings.config import COUNT_LIMIT_POSTS
-from red_bot.sql_db import users
+from sql_db.main import users
 from red_bot.utils.content.text_content import POST_INSTRUCTION, UNREGISTRED_USER, LIMIT_WARNING_PUBLICATION_MESSAGE
 from red_bot.utils.keyboards.inline_keyboard import continue_filling_button, start_registration_button
 
