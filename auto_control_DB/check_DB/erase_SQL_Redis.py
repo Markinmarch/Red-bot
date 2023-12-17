@@ -3,15 +3,22 @@ import redis
 
 
 from sql_db.main import users
-from red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT
 
 
-def erase_databases() -> None:
+def erase_databases(
+    host,
+    port,
+    db
+) -> None:
+    '''
+    Метод очищает данные из Redis и заменяет* данные 
+    одной из колонок в SQL базе данных
+    '''
     # очищаем redis
     redis_db = redis.Redis(
-        host = REDIS_HOST,
-        port = REDIS_PORT,
-        db = REDIS_BD,
+        host = host,
+        port = port,
+        db = db,
     )
     redis_db.flushdb(asynchronous = True)
 
