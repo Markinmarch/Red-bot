@@ -10,4 +10,3 @@ logger = logging.getLogger(__name__)
 
 def main():
     from sql_db import main
-    

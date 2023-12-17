@@ -6,8 +6,8 @@ if __name__ == '__main__':
     while True:
         if time.strftime('%H') == DROP_TIME:
             from . check_DB import *
-            write_to_JSON.write_data_to_json()
-            erase_SQL_Redis.erase_databases()
+            write_datas
+            erase_db
             time.sleep(DAY)
         else:
             time.sleep(HOUR)
