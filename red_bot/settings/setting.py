@@ -17,12 +17,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-session = AiohttpSession(api = TelegramAPIServer.from_base('http://localhost:8082'))
-
 bot = Bot(
     token = BOT_TOKEN,
-    parse_mode = 'HTML',
-    session = session
+    parse_mode = 'HTML'
 )
 
 storage = RedisStorage(
