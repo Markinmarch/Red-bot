@@ -7,6 +7,8 @@ from . import DB_PATH, DB_NAME
 class Bot_tables_DB:
     '''
     Класс реализует создание связанных между собой таблиц базы данных.
+    ------------------------------------------------------------------
+    parametrs:
         :conn: параметр реализует подключение к сессии БД
         :cur: параметр указателя БД
     '''
@@ -15,6 +17,7 @@ class Bot_tables_DB:
         self.cur = self.conn.cursor()
 
     def create_users_table(self) -> None:
+        '''Метод создаёт таблицу users'''
         self.conn
         self.cur.execute(
             '''
@@ -29,6 +32,7 @@ class Bot_tables_DB:
         logging.info('--- Table "USERS" has been created ---')
 
     def create_posts_table(self) -> None:
+        '''Метод создаёт таблицу posts'''
         self.conn
         self.cur.execute(
             '''
@@ -42,15 +46,8 @@ class Bot_tables_DB:
         self.conn.commit()
         logging.info('--- Table "POSTS" has been created ---')
 
-    def drop_posts_table(self) -> None:
-        self.cur.execute(
-            '''
-            DROP TABLE posts;
-            '''
-        )
-        self.conn.commit()
-
     def create_responders_table(self) -> None:
+        '''Метод создаёт таблицу responders'''
         self.conn
         self.cur.execute(
             '''
@@ -66,6 +63,7 @@ class Bot_tables_DB:
         logging.info('--- Table "RESPONDERS" has been created ---')
 
 def create_db() -> None:
+    '''Метод проверяет наличие БД в директории, при отсутствии создаёт таблицы'''
     if DB_NAME + '.db' not in os.listdir(DB_PATH):
         Bot_tables_DB().create_users_table()
         Bot_tables_DB().create_posts_table()
@@ -74,6 +72,7 @@ def create_db() -> None:
         logging.info('--- Database for "SEVASTOPOL ADJUTOR BOT" connection established ---')
 
 def start_db() -> None:
+    '''Метод проверяет наличие директории, при отсутствии создаёт её'''
     try:
         create_db()
     except FileNotFoundError:

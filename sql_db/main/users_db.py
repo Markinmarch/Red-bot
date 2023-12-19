@@ -5,13 +5,11 @@ from . bot_tables import Bot_tables_DB
 
 
 class Users(Bot_tables_DB):
-
     '''
-    Класс наследует основной класс :Bot_tables_DB:
-    для реализации БД. Данный класс реализован с
-    целью управления таблицей :users: по методу CRUD
+    Объект наследует основной класс :Bot_tables_DB:
+    Данный класс реализован с целью управления таблицей
+    :users: по методу CRUD
     '''
-
     def __init__(self):
         super().__init__()
 
@@ -21,6 +19,14 @@ class Users(Bot_tables_DB):
         user_phone: int,
         quantity_messages: int = 0
     ) -> None:
+        '''
+        Метод добавляет нового пользователя при регистрации в таблицу users
+        -------------------------------------------------------------------
+        parametrs:
+            :users_id: идентификатор пользователя
+            :users_phone: номер телефона пользователя
+            :quantity_messages: количество сообщений пользователя, по умолчания = 0
+        '''
         self.cur.execute(
             '''
             INSERT INTO users (
@@ -43,6 +49,12 @@ class Users(Bot_tables_DB):
         self,
         user_id: int
     ) -> None:
+        '''
+        Метод добавляет в колонку пользователя :quantity_messages: еденицу
+        ------------------------------------------------------------------
+        parametrs:
+            :users_id: идентификатор пользователя
+        '''
         self.cur.execute(
             '''
             UPDATE users
@@ -57,6 +69,12 @@ class Users(Bot_tables_DB):
         self,
         user_id: int
     ) -> bool:
+        '''
+        Метод возвращает количество :quantity_messages: сообщений от пользователя на канале за день
+        -------------------------------------------------------------------------------------------
+        parametrs:
+            :users_id: идентификатор пользователя
+        '''
         self.cur.execute(
             '''
             SELECT quantity_messages FROM users
@@ -70,6 +88,12 @@ class Users(Bot_tables_DB):
         self,
         user_id: int
     ) -> tuple:
+        '''
+        Метод возвращает данные о пользователе по идентификатору пользователя
+        ---------------------------------------------------------------------
+        parametrs:
+            :users_id: идентификатор пользователя
+        '''
         self.cur.execute(
             '''
             SELECT * FROM users
@@ -83,6 +107,12 @@ class Users(Bot_tables_DB):
         self,
         user_id: int
     ) -> bool:
+        '''
+        Метод проверяет наличие пользователя в БД по идентификатору
+        -----------------------------------------------------------
+        parametrs:
+            :users_id: идентификатор пользователя
+        '''
         self.cur.execute(
             '''
             SELECT COUNT(*) FROM users
@@ -92,18 +122,16 @@ class Users(Bot_tables_DB):
         )
         return self.cur.fetchone()[0]
     
-    def select_all_data(self):
-        self.cur.execute(
-            '''
-            SELECT * FROM users
-            '''
-        )
-        return self.cur.fetchall()
-
     def delete_users(
         self,
         user_id: int
     ) -> None:
+        '''
+        Метод удаляет пользователя из БД
+        ---------------------------------
+        parametrs:
+            :users_id: идентификатор пользователя
+        '''
         self.cur.execute(
             '''
             DELETE FROM users
@@ -115,6 +143,7 @@ class Users(Bot_tables_DB):
         logging.info(f'User {user_id} deleted')
 
     def erases_quantity_messages(self) -> None:
+        '''Метод обновляет колонку :quantity_messages: на ноль.'''
         self.cur.execute(
             '''
             UPDATE users

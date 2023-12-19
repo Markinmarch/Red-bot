@@ -1,3 +1,8 @@
+'''
+Модуль создания и управления SQL БД
+'''
+
+
 DB_PATH = 'sql_db/datas'
 
 DB_NAME = 'main_database'

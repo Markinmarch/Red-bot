@@ -5,7 +5,11 @@ from . bot_tables import Bot_tables_DB
 
 
 class Posts(Bot_tables_DB):
-
+    '''
+    Объект наследует основной класс :Bot_tables_DB:
+    Данный класс реализован с целью управления таблицей
+    :posts: по методу CRUD
+    '''
     def __init__(self):
         super().__init__()
 
@@ -14,6 +18,13 @@ class Posts(Bot_tables_DB):
         post_id: int,
         user_id: int
     ):
+        '''
+        Метод добавляет пост от пользователя
+        -------------------------------------
+        parametrs:
+            :post_id: идентификатор поста
+            :user_id: идентификатор пользователя
+        '''
         self.cur.execute(
             '''
             INSERT INTO posts (
@@ -34,6 +45,12 @@ class Posts(Bot_tables_DB):
         self,
         post_id: int
     ):
+        '''
+        Метод получает идентификатор пользователя по индикатору поста
+        -------------------------------------------------------------
+        parametrs:
+            :post_id: идентификатор поста
+        '''
         self.cur.execute(
             '''
             SELECT user_id FROM posts
@@ -47,6 +64,12 @@ class Posts(Bot_tables_DB):
         self,
         user_id: int
     ):
+        '''
+        Метод получает идентификатор постов по идентификатору пользователя
+        ------------------------------------------------------------------
+        parametrs:
+            :user_id: идентификатор пользователя
+        '''
         self.cur.execute(
             '''
             SELECT id FROM posts
@@ -57,6 +80,7 @@ class Posts(Bot_tables_DB):
         return self.cur.fetchall()
     
     def select_all_data(self):
+        '''Метод получает все данные из таблицы posts'''
         self.cur.execute(
             '''
             SELECT * FROM posts
@@ -67,7 +91,13 @@ class Posts(Bot_tables_DB):
     def delete_post(
         self,
         post_id: int
-    ):
+    ) -> None:
+        '''
+        Метод удаляет пост из таблицы posts по идентефикатору поста
+        -----------------------------------------------------------
+        parametrs:
+            :post_id: идентификатор поста
+        '''
         self.cur.execute(
             '''
             DELETE FROM posts
@@ -77,24 +107,3 @@ class Posts(Bot_tables_DB):
         )
         self.conn.commit()
         logging.info(f'Posts {post_id} has been deleted')
-    
-    def check_quantity_posts(
-            self,
-            user_id: int
-    )-> int:
-        self.cur.execute(
-            '''
-            SELECT COUNT(id) FROM posts
-            WHERE user_id = (?)
-            ''',
-            (user_id,)
-        )
-        return self.cur.fetchone()[0]
-
-    def delete_posts_table(self) -> None:
-        self.cur.execute(
-            '''
-            DELETE FROM posts;
-            '''
-        )
-        self.conn.commit()

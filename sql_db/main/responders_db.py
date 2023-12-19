@@ -4,7 +4,11 @@ import logging
 from . bot_tables import Bot_tables_DB
 
 class Responders(Bot_tables_DB):
-
+    '''
+    Объект наследует основной класс :Bot_tables_DB:
+    Данный класс реализован с целью управления таблицей
+    :responders: по методу CRUD
+    '''
     def __init__(self):
         super().__init__()
 
@@ -13,6 +17,13 @@ class Responders(Bot_tables_DB):
         responder_id: int,
         post_id: int
     ):
+        '''
+        Метод добавляет в таблицу responders запись отзыва пользователей на пост
+        ------------------------------------------------------------------------
+        parametrs:
+            :responders_id: идентификатор пользователя, который отозвался на пост
+            :post_id: идентификатор поста пользователя
+        '''
         self.cur.execute(
             '''
             INSERT INTO responders (
@@ -34,6 +45,13 @@ class Responders(Bot_tables_DB):
         responder_id: int,
         post_id: int
     ):
+        '''
+        Метод определяет наличие записи в таблице
+        -----------------------------------------
+        parametrs:
+            :responders_id: идентификатор пользователя, который отозвался на пост
+            :post_id: идентификатор поста пользователя
+        '''
         self.cur.execute(
             '''
             SELECT COUNT(*) FROM responders
@@ -45,11 +63,3 @@ class Responders(Bot_tables_DB):
             )
         )
         return self.cur.fetchone()[0]
-    
-    def delete_responders_table(self) -> None:
-        self.cur.execute(
-            '''
-            DELETE FROM responders;
-            '''
-        )
-        self.conn.commit()
