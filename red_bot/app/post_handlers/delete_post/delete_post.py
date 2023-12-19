@@ -2,11 +2,11 @@ from aiogram import types, F
 from aiogram.fsm.context import FSMContext
 
 
-from red_bot.settings.setting import dp
-from red_bot.settings.config import CHANNEL_ID
-from red_bot.utils.state import DeletePost
-from sql_db.main import posts
-from red_bot.utils.content.text_content import DELETE_POST_MESSAGE
+from ....settings.setting import dp
+from ....settings.config import CHANNEL_ID
+from ....utils.state import DeletePost
+from ....utils.content.text_content import DELETE_POST_MESSAGE
+from .....sql_db.main import posts
 
 
 @dp.callback_query(DeletePost.num_post, F.data == 'delete_post')

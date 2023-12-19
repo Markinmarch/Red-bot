@@ -3,10 +3,10 @@ import logging
 from aiogram.filters import Command
 
 
-from red_bot.settings.setting import dp
-from red_bot.utils.content.text_content import WELCOME, IF_USER_HAVE_ACCOUNT, UPDATE_MESSAGE
-from red_bot.utils.keyboards.inline_keyboard import agree_button
-from sql_db.main import users
+from ....settings.setting import dp
+from ....utils.content.text_content import WELCOME, IF_USER_HAVE_ACCOUNT, UPDATE_MESSAGE
+from ....utils.keyboards.inline_keyboard import agree_button
+from .....sql_db.main import users
 
 
 @dp.callback_query(F.data == 'create_account')
@@ -16,7 +16,7 @@ async def user_agreement_via_query(callback: types.CallbackQuery) -> None:
     на дальнейшую регистрацию через запрос (нажатие кнопки)
     ----------------------------------------------------------
     parametrs:
-        :text: фильтр обратного вызова обработчика
+        :F.data: фильтр обратного вызова обработчика
         :callback: тип объекта представления
     '''
     await callback.message.answer(

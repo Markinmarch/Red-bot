@@ -3,11 +3,11 @@ import asyncio
 from aiogram.fsm.context import FSMContext
 
 
-from red_bot.settings.setting import dp
-from red_bot.settings.config import TIMEOUT_MESSAGES
-from red_bot.utils.state import AddPost
-from red_bot.utils.keyboards.reply_keyboard import direction_detection_buttons
-from red_bot.utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
+from ...import TIMEOUT_MESSAGES
+from ....settings.setting import dp
+from ....utils.state import AddPost
+from ....utils.keyboards.reply_keyboard import direction_detection_buttons
+from ....utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
 @dp.callback_query(F.data == 'user_informed')

@@ -3,13 +3,12 @@ from aiogram.filters import Command
 import logging
 
 
-from red_bot.settings.config import CHANNEL_ID
-from red_bot.settings.setting import dp
-from red_bot.utils.keyboards.inline_keyboard import delete_acc_button
-from red_bot.utils.commands import set_commands_for_new_user
-from sql_db.main import posts, users
-from red_bot.utils.content.text_content import DELETE_ACCOUNT_MESSAGE, BEFORE_DEL_ACC_MESSAGE
-
+from ....settings.config import CHANNEL_ID
+from ....settings.setting import dp
+from ....utils.keyboards.inline_keyboard import delete_acc_button
+from ....utils.commands import set_commands_for_new_user
+from ....utils.content.text_content import DELETE_ACCOUNT_MESSAGE, BEFORE_DEL_ACC_MESSAGE
+from .....sql_db.main import posts, users
 
 
 @dp.message(Command('delete_account'))
@@ -20,7 +19,7 @@ async def delete_account(message: types.Message) -> None:
     аккаунта.
     ---------------------------------------------------
         parametrs:
-            :commands: команда вызова обработчика
+            :Command(*args): команда вызова обработчика
             :message: тип объекта представления
     '''
     await message.answer(

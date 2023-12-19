@@ -3,12 +3,12 @@ from aiogram import types
 from aiogram.fsm.context import FSMContext
 
 
-from red_bot.settings.setting import dp
-from red_bot.settings.config import CHANNEL_ID
-from sql_db.main import users
-from red_bot.utils.state import AddUser
-from red_bot.utils.commands import set_commands_for_users
-from red_bot.utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
+from ....settings.setting import dp
+from ....settings.config import CHANNEL_ID
+from ....utils.state import AddUser
+from ....utils.commands import set_commands_for_users
+from ....utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
+from .....sql_db.main import users
 
 
 @dp.message(AddUser.phone)
@@ -19,9 +19,8 @@ async def add_phone__cmd_finish(message: types.Message, state: FSMContext) -> No
     автоматически блокируется, но всё равно записывается в SQL
     -------------------------------------------------------------------------------------
     parametrs:
+        :AddUser.phone: state
         :state: параметр состояния конечного автомата (FSMContext) телефона пользователя
-        url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
-        :content_types: параметр формата получаемых данных.
         :message: тип объкета представления.
     '''
     # записываем телефон пользователя

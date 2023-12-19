@@ -4,11 +4,11 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
 
-from red_bot.settings.setting import dp
-from sql_db.main import posts
-from red_bot.settings.config import TIMEOUT_MESSAGES
-from red_bot.utils.content.text_content import CHECK_POSTS, NONE_POSTS, INTERRUPTION_MESSAGE
-from red_bot.utils.state import DeletePost
+from ...import TIMEOUT_MESSAGES
+from ....settings.setting import dp
+from ....utils.content.text_content import CHECK_POSTS, NONE_POSTS, INTERRUPTION_MESSAGE
+from ....utils.state import DeletePost
+from .....sql_db.main import posts
 
 
 @dp.message(Command('my_posts'))

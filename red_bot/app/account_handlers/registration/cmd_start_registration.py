@@ -3,11 +3,11 @@ from aiogram.fsm.context import FSMContext
 import asyncio 
 
 
-from red_bot.settings.setting import dp
-from red_bot.settings.config import TIMEOUT_MESSAGES
-from red_bot.utils.state import AddUser
-from red_bot.utils.keyboards.reply_keyboard import get_phone_user
-from red_bot.utils.content.text_content import REGISTRATION_MESSAGE, INTERRUPTION_MESSAGE
+from ...import TIMEOUT_MESSAGES
+from ....settings.setting import dp
+from ....utils.state import AddUser
+from ....utils.keyboards.reply_keyboard import get_phone_user
+from ....utils.content.text_content import REGISTRATION_MESSAGE, INTERRUPTION_MESSAGE
 
 
 @dp.callback_query(F.data == 'user_agree')
@@ -17,7 +17,7 @@ async def cmd_start_registration(callback: types.CallbackQuery, state: FSMContex
     и запрашивает имя нового пользователя
     -----------------------------------------------
     parametrs:
-        :text: фильтр обратного вызова обработчика
+        :F.data: фильтр обратного вызова обработчика
         :callback: тип объекта представления
     '''
     await state.set_state(AddUser.phone)

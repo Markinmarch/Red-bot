@@ -2,12 +2,12 @@ from aiogram import types
 from aiogram.fsm.context import FSMContext
 
 
-from red_bot.settings.setting import dp
-from red_bot.settings.config import CHANNEL_URL
-from sql_db.main import posts
-from red_bot.utils.content.text_content import FILTERS_MESSAGE
-from red_bot.utils.keyboards.inline_keyboard import delete_post_button
-from red_bot.utils.state import DeletePost
+from ....settings.setting import dp
+from ....settings.config import CHANNEL_URL
+from ....utils.content.text_content import FILTERS_MESSAGE
+from ....utils.keyboards.inline_keyboard import delete_post_button
+from ....utils.state import DeletePost
+from .....sql_db.main import posts
 
 
 @dp.message(DeletePost.num_post)
