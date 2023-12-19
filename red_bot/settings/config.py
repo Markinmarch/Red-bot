@@ -28,9 +28,8 @@ CHANNEL_URL = 'https://t.me/sevastopol_assistant'
 BOT_URL = 'https://t.me/street_assistant_bot'
 
 TIMEOUT_MESSAGES = {
-    'registration': 10,
+    'registration': 30,
     'create_post': {
-        'direction': 40,
         'title': 60,
         'text': 600,
         'conditions': 300,
@@ -40,8 +39,6 @@ TIMEOUT_MESSAGES = {
 }
 
 COUNT_LIMIT_POSTS = 2
-
-PAUSE_CREATE_POSTS = 300 #пауза между созданием постов
 
 DROP_TIME = '04'
 

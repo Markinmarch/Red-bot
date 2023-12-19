@@ -4,8 +4,6 @@ from redis import Redis
 
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.redis import RedisStorage
-from aiogram.client.session.aiohttp import AiohttpSession
-from aiogram.client.telegram import TelegramAPIServer
 
 
 from red_bot.settings.config import BOT_TOKEN, REDIS_HOST, REDIS_PORT, REDIS_BD
