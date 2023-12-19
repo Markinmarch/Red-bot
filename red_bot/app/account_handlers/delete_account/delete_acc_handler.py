@@ -8,7 +8,7 @@ from ....settings.setting import dp
 from ....utils.keyboards.inline_keyboard import delete_acc_button
 from ....utils.commands import set_commands_for_new_user
 from ....utils.content.text_content import DELETE_ACCOUNT_MESSAGE, BEFORE_DEL_ACC_MESSAGE
-from .....sql_db.main import posts, users
+from sql_db.main import posts, users
 
 
 @dp.message(Command('delete_account'))

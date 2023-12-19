@@ -8,7 +8,7 @@ from ...import TIMEOUT_MESSAGES
 from ....settings.setting import dp
 from ....utils.content.text_content import CHECK_POSTS, NONE_POSTS, INTERRUPTION_MESSAGE
 from ....utils.state import DeletePost
-from .....sql_db.main import posts
+from sql_db.main import posts
 
 
 @dp.message(Command('my_posts'))

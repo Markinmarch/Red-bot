@@ -26,22 +26,3 @@ BOT_ID = 6026823407
 CHANNEL_URL = 'https://t.me/sevastopol_assistant'
 
 BOT_URL = 'https://t.me/street_assistant_bot'
-
-TIMEOUT_MESSAGES = {
-    'registration': 30,
-    'create_post': {
-        'title': 60,
-        'text': 600,
-        'conditions': 300,
-        'photo': 120
-    },
-    'delete_post': 60
-}
-
-COUNT_LIMIT_POSTS = 2
-
-DROP_TIME = '04'
-
-HOUR = 3600
-
-DAY = HOUR * 24

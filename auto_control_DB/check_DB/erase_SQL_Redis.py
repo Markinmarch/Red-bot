@@ -2,7 +2,7 @@ import logging
 import redis
 
 
-from ...sql_db.main import users
+from sql_db.main import users
 
 
 def erase_databases(

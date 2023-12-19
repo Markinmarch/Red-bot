@@ -2,10 +2,10 @@
 Модуль каждый день очищает SQL и NoSQL базы данных
 с последующей записью в отдельный файл формата JSON
 '''
-from .import erase_SQL_Redis
-from .import write_to_JSON
-from ...red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT
-from ...sql_db.main import users, posts, DB_PATH
+from . import erase_SQL_Redis
+from . import write_to_JSON
+from red_bot.settings.config import REDIS_BD, REDIS_HOST, REDIS_PORT
+from sql_db.main import users, posts, DB_PATH
 
 # Время сброса данных о постах пользователей на канале и очистка NoSQL
 DROP_TIME = '04'

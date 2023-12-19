@@ -8,7 +8,7 @@ from ....settings.config import CHANNEL_ID
 from ....utils.state import AddUser
 from ....utils.commands import set_commands_for_users
 from ....utils.content.text_content import UPDATE_MESSAGE, OUTSIDER_MESSAGE
-from .....sql_db.main import users
+from sql_db.main import users
 
 
 @dp.message(AddUser.phone)

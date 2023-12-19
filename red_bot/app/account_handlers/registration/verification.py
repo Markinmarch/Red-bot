@@ -7,7 +7,7 @@ from ....settings.setting import dp
 from ....utils.keyboards.inline_keyboard import start_registration_button
 from ....utils.content.text_content import UNREGISTRED_USER, IF_USER_HAVE_ACCOUNT, UPDATE_MESSAGE
 from ....utils.commands import set_commands_for_new_user, set_commands_for_users
-from .....sql_db.main import users
+from sql_db.main import users
 
 
 @dp.message(CommandStart())

@@ -1,9 +1,9 @@
 from aiogram import types, F
 
 
-from red_bot.settings.setting import dp
-from red_bot.settings.config import CHANNEL_URL
-from red_bot.utils.content.text_content import FEEDBACK, ALREADY_RESPONDED_MESSAGE, FEEDBACK_SEND
+from ....settings.setting import dp
+from ....settings.config import CHANNEL_URL
+from ....utils.content.text_content import FEEDBACK, ALREADY_RESPONDED_MESSAGE, FEEDBACK_SEND
 from sql_db.main import posts, responders
 
 

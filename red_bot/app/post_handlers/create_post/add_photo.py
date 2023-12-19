@@ -7,7 +7,7 @@ from ....settings.config import CHANNEL_ID
 from ....utils.state import AddPost
 from ....utils.keyboards.inline_keyboard import under_post_buttons
 from ....utils.content.text_content import POST_CONTENT, PUBLICATION_ACCOUNCEMENT
-from .....sql_db.main import posts, users
+from sql_db.main import posts, users
 
 
 @dp.message(AddPost.photo)
