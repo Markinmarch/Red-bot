@@ -142,6 +142,14 @@ class Users(Bot_tables_DB):
         self.conn.commit()
         logging.info(f'User {user_id} deleted')
 
+    def select_all_data(self):
+        self.cur.execute(
+            '''
+            SELECT * FROM users
+            '''
+        )
+        return self.cur.fetchall()
+
     def erases_quantity_messages(self) -> None:
         '''Метод обновляет колонку :quantity_messages: на ноль.'''
         self.cur.execute(
