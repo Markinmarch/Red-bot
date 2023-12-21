@@ -1,7 +1,7 @@
 import time
 
 if __name__ == '__main__':
-    from auto_control_DB import check_DB
+    from control_DB import check_DB
     while True:
         from .check_DB import *
         if time.strftime('%H') == DROP_TIME:
