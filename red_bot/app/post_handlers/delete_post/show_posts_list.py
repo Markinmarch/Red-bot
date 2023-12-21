@@ -4,7 +4,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 
 
-from ...import TIMEOUT_MESSAGES
+from ....settings.config import TIMEOUT_MESSAGES
 from ....settings.setting import dp
 from ....utils.content.text_content import CHECK_POSTS, NONE_POSTS, INTERRUPTION_MESSAGE
 from ....utils.state import DeletePost

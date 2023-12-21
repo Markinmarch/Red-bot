@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 import asyncio 
 
 
-from ...import TIMEOUT_MESSAGES
+from ....settings.config import TIMEOUT_MESSAGES
 from ....settings.setting import dp
 from ....utils.state import AddUser
 from ....utils.keyboards.reply_keyboard import get_phone_user
