@@ -1,5 +1,6 @@
 import json
 import logging
+from datetime import date
 
 
 def forming_dicts(
@@ -46,8 +47,9 @@ def write_data_to_json(
         :db_path: путь к папке с базой данных
         :forming_datas: сформированный список из БД
     '''
+    now_day = date.today()
     with open(
-        file = f'{db_path}/user_data.json',
+        file = f'{db_path}/user_data-{now_day}.json',
         mode = 'w'
     ) as user_json:
         json.dump(
@@ -57,7 +59,7 @@ def write_data_to_json(
             indent = 4
         )
     with open(
-        file = f'{db_path}/post_data.json',
+        file = f'{db_path}/post_data-{now_day}.json',
         mode = 'w'
     ) as post_json:
         json.dump(
