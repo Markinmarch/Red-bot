@@ -29,7 +29,7 @@ async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContex
     )
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
-    await asyncio.sleep(TIMEOUT_MESSAGES['create_post']['direction'])
+    await asyncio.sleep(TIMEOUT_MESSAGES['create_post']['title'])
     try:
         current_state = await state.get_state()
         if current_state == 'AddPost:direction':

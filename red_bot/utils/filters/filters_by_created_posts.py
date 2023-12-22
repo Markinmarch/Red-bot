@@ -18,7 +18,7 @@ async def repeat_enter_text(message: types.Message):
 # Фильтр, который указывает пользователю, что необходимо в условиях указывать цену (в цифрах)
 @dp.message(
     AddPost.conditions,
-    F.text != int or F.text != 'По договорённости'
+    ~F.text == int or ~F.text == 'По договорённости'
 )
 async def repeat_enter_condition(message: types.Message):
     await message.answer(
@@ -29,7 +29,7 @@ async def repeat_enter_condition(message: types.Message):
 # Фильтр, который позволяет выбрать тему только из предложенных вариантов на клавиатуре
 @dp.message(
     AddPost.title,
-    F.text not in [button[0]['text'] for button in title_detection_buttons['keyboard']],
+    ~F.text.in_([button.text for button in title_detection_buttons.keyboard[0]]),
 )
 async def repeat_enter_title(message: types.Message):
     await message.answer(
