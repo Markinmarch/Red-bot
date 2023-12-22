@@ -1,22 +1,38 @@
 from aiogram import types, F
 
 
-from red_bot.settings.setting import dp
-from red_bot.utils.state import AddPost
-from red_bot.utils.content.text_content import FILTERS_MESSAGE
+from ...settings.setting import dp
+from ..keyboards.reply_keyboard import by_agreement, title_detection_buttons
+from ..state import AddPost
+from ..content.text_content import FILTERS_MESSAGE
 
     
-@dp.message(AddPost.title, F.text.len() > 20)
-async def repeat_enter_title(message: types.Message):
-    await message.answer(text = FILTERS_MESSAGE['create_post']['repeat_title'])
-
-@dp.message(AddPost.text, F.text.len() < 20)
+# Фильтр, который требует от пользователя ввести не менее 20 символов для описания
+@dp.message(
+    AddPost.text,
+    F.text.len() < 20
+)
 async def repeat_enter_text(message: types.Message):
     await message.answer(text = FILTERS_MESSAGE['create_post']['repeat_text'])
 
-# @dp.message(
-#     lambda message: message.text not in [button[0]['text'] for button in direction_detection_buttons['keyboard']],
-#     state = AddPost.direction
-# )
-# async def repeat_enter_direction(message: types.Message):
-#     await message.answer(text = FILTERS_MESSAGE['create_post']['repeat_direction'])
+# Фильтр, который указывает пользователю, что необходимо в условиях указывать цену (в цифрах)
+@dp.message(
+    AddPost.conditions,
+    F.text != int or F.text != 'По договорённости'
+)
+async def repeat_enter_condition(message: types.Message):
+    await message.answer(
+        text = FILTERS_MESSAGE['create_post']['repeat_condition'],
+        reply_markup = by_agreement
+    )
+
+# Фильтр, который позволяет выбрать тему только из предложенных вариантов на клавиатуре
+@dp.message(
+    AddPost.title,
+    F.text not in [button[0]['text'] for button in title_detection_buttons['keyboard']],
+)
+async def repeat_enter_title(message: types.Message):
+    await message.answer(
+        text = FILTERS_MESSAGE['create_post']['repeat_title'],
+        reply_markup = title_detection_buttons
+    )

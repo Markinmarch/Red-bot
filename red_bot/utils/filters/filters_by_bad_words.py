@@ -1,9 +1,9 @@
 from aiogram import types, F
 
 
-from red_bot.settings.setting import dp
-from red_bot.utils.content.text_content import BAD_WORDS, FILTERS_MESSAGE
-from red_bot.utils.state import AddPost
+from ...settings.setting import dp
+from ..content.text_content import BAD_WORDS, FILTERS_MESSAGE
+from ..state import AddPost
 
 
 @dp.message(AddPost.__all_states__)
