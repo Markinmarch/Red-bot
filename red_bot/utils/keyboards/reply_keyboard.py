@@ -1,7 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 
-direction_detection_buttons = ReplyKeyboardMarkup(
+title_detection_buttons = ReplyKeyboardMarkup(
     keyboard = [
         [
             KeyboardButton(
@@ -29,29 +29,29 @@ direction_detection_buttons = ReplyKeyboardMarkup(
     input_field_placeholder = 'Тема для публикации записи',
 )
 
-choose_gender = ReplyKeyboardMarkup(
-    keyboard = [
-        [
-            KeyboardButton(
-                text = 'Мужской'
-            )
-        ],
-        [
-            KeyboardButton(
-                text = 'Женский'
-            )
-        ],
-        [
-            KeyboardButton(
-                text = 'Отменить ❌'
-            )
-        ]
-    ],
-    one_time_keyboard = True,
-    is_persistent = True,
-    resize_keyboard = True,
-    input_field_placeholder = 'Пол пользователя',
-)
+# choose_gender = ReplyKeyboardMarkup(
+#     keyboard = [
+#         [
+#             KeyboardButton(
+#                 text = 'Мужской'
+#             )
+#         ],
+#         [
+#             KeyboardButton(
+#                 text = 'Женский'
+#             )
+#         ],
+#         [
+#             KeyboardButton(
+#                 text = 'Отменить ❌'
+#             )
+#         ]
+#     ],
+#     one_time_keyboard = True,
+#     is_persistent = True,
+#     resize_keyboard = True,
+#     input_field_placeholder = 'Пол пользователя',
+# )
 
 get_phone_user = ReplyKeyboardMarkup(
     keyboard = [

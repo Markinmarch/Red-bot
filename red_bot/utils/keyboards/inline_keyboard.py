@@ -1,5 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from red_bot.settings.config import CHANNEL_URL, BOT_URL
+
+
+from ...settings.config import BOT_URL
 
 
 agree_button = InlineKeyboardMarkup(

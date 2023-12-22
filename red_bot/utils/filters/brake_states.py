@@ -2,8 +2,8 @@ from aiogram import types, F
 from aiogram.fsm.context import FSMContext
 
 
-from red_bot.settings.setting import dp
-from red_bot.utils.content.text_content import FILTERS_MESSAGE
+from ...settings.setting import dp
+from ..content.text_content import FILTERS_MESSAGE
 
 
 @dp.message(F.text == 'Отменить ❌')

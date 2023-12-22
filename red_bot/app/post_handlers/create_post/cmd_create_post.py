@@ -6,7 +6,7 @@ from aiogram.fsm.context import FSMContext
 from ....settings.config import TIMEOUT_MESSAGES
 from ....settings.setting import dp
 from ....utils.state import AddPost
-from ....utils.keyboards.reply_keyboard import direction_detection_buttons
+from ....utils.keyboards.reply_keyboard import title_detection_buttons
 from ....utils.content.text_content import INTERRUPTION_MESSAGE, CREATE_POST_MESSAGE
 
 
@@ -25,7 +25,7 @@ async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContex
     await state.set_state(AddPost.title)
     await callback.message.answer(
         text = CREATE_POST_MESSAGE['title'],
-        reply_markup = direction_detection_buttons
+        reply_markup = title_detection_buttons
     )
     # конструкция для определения времени ожидания ответа от пользователя
     # благодаря осуществляемому способу защищаем сервер от перегрузок
