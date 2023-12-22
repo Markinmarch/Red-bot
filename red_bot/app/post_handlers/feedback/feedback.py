@@ -1,4 +1,5 @@
 from aiogram import types, F
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 from ....settings.setting import dp
@@ -36,8 +37,21 @@ async def feedback_user(callback: types.CallbackQuery) -> None:
             show_alert = True
         )
         creator_id = posts.select_user(callback.message.message_id)
+
+        # Отдельную кнопку создаём здесь, потому что аиограм писали пьяные гуси, которые
+        # принебрегают созданием функций внтури объекта с наполнением аргументами.
+        write_to = InlineKeyboardMarkup(
+            inline_keyboard = [
+                [
+                    InlineKeyboardButton(
+                        text = 'Написать пользователю',
+                        url = callback.from_user.url
+                    )
+                ]
+            ]
+        )
         await callback.bot.send_message(
             chat_id = creator_id[0],
             text = FEEDBACK.format(callback.from_user.url, callback.from_user.full_name, CHANNEL_URL, callback.message.message_id),
-            parse_mode = 'HTML'
+            reply_markup = write_to
         )
