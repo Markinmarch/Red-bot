@@ -18,7 +18,7 @@ async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContex
     -----------------------------------------------
     parametrs:
         :text: фильтр обратного вызова обработчика
-        :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
+        :state: (str) параметр состояния конечного автомата (FSMContext)
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''
@@ -32,7 +32,7 @@ async def cmd_start_create_post(callback: types.CallbackQuery, state = FSMContex
     await asyncio.sleep(TIMEOUT_MESSAGES['create_post']['title'])
     try:
         current_state = await state.get_state()
-        if current_state == 'AddPost:direction':
+        if current_state == 'AddPost:title':
             raise KeyError
     except KeyError:
         await callback.message.answer(text = INTERRUPTION_MESSAGE)

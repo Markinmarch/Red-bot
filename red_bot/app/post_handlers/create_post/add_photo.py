@@ -19,7 +19,7 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
     с id поста в БД и завершает State()
     -----------------------------------------------
     parametrs:
-        :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
+        :state: (str) параметр состояния конечного автомата (FSMContext) 
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления
         :content_types: тип данных

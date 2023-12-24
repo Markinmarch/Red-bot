@@ -17,7 +17,7 @@ async def add_conditions__cmd_photo(message: types.Message, state: FSMContext) -
     условия, затем запрашивает фоторафию к объявлению.
     -----------------------------------------------
     parametrs:
-        :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
+        :state: (str) параметр состояния конечного автомата (FSMContext) 
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''

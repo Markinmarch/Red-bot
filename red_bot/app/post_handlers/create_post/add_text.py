@@ -20,7 +20,7 @@ async def add_text__cmd_conditions(message: types.Message, state: FSMContext) ->
     кнопку "По договорённости"
     -----------------------------------------------
     parametrs:
-        :state: (str) параметр состояния конечного автомата (FSMContext) пола пользователя
+        :state: (str) параметр состояния конечного автомата (FSMContext) 
         url https://docs.aiogram.dev/en/dev-3.x/dispatcher/finite_state_machine/index.html
         :message: тип объкета представления.
     '''

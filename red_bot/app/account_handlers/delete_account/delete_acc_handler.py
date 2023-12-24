@@ -6,7 +6,7 @@ import logging
 from ....settings.config import CHANNEL_ID
 from ....settings.setting import dp
 from ....utils.keyboards.inline_keyboard import delete_acc_button
-from ....utils.commands import set_commands_for_new_user
+from ....utils.commands import set_commands_for_users
 from ....utils.content.text_content import DELETE_ACCOUNT_MESSAGE, BEFORE_DEL_ACC_MESSAGE
 from sql_db.main import posts, users
 
@@ -40,7 +40,7 @@ async def erase_user_data(callback: types.CallbackQuery):
             )
             posts.delete_post(num_post)
         users.delete_users(user_id = callback.from_user.id)
-        await set_commands_for_new_user(bot = callback.bot)
+        await set_commands_for_users(bot = callback.bot)
         await callback.answer(
             text = DELETE_ACCOUNT_MESSAGE,
             show_alert = True
