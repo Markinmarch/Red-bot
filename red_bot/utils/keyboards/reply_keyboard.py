@@ -57,7 +57,7 @@ get_phone_user = ReplyKeyboardMarkup(
     keyboard = [
         [
             KeyboardButton(
-                text = 'Да! Отправить телефон',
+                text = 'Согласен!',
                 request_contact = True
             )
         ],
