@@ -12,3 +12,6 @@ class AddUser(StatesGroup):
 
 class DeletePost(StatesGroup):
     num_post = State()
+
+class MessageToAdmin(StatesGroup):
+    message_to_admin = State()
