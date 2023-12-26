@@ -11,6 +11,8 @@ load_dotenv(dotenv_path = '.env')
 
 BOT_TOKEN = os.getenv('BOT_TOKEN', '')
 
+RULES_URL = os.getenv('RULES_URL', '')
+
 ADMIN_ID = 805875522
 
 REDIS_HOST = 'localhost'
