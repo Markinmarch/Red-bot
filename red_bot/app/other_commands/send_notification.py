@@ -13,7 +13,7 @@ from sql_db.main import users
 
 
 @dp.message(Command('contact'))
-async def user_agreement_via_command(message: types.Message, state = FSMContext) -> None:
+async def contact_with_admins(message: types.Message, state = FSMContext) -> None:
     '''
     Данный объект реализует получение от пользователя сообщения,
     адресованное администрации канала анонимно.
@@ -45,7 +45,7 @@ async def user_agreement_via_command(message: types.Message, state = FSMContext)
 
 
 @dp.message(MessageToAdmin.message_to_admin)
-async def add_title__cmd_text(message: types.Message, state: FSMContext) -> None:
+async def add_message_to_admin__send(message: types.Message, state: FSMContext) -> None:
     '''
     Данный объект записывает в состояние State()
     сообщение администрации канала, затем отправляет
@@ -64,3 +64,4 @@ async def add_title__cmd_text(message: types.Message, state: FSMContext) -> None
         chat_id = ADMIN_ID,
         text = MESSAGE_TO_ADMIN.format(message.from_user.url, message.from_user.full_name) + f'{message_to_admin}'
     )
+    await state.clear()

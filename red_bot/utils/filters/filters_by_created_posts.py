@@ -30,6 +30,7 @@ async def repeat_enter_condition(message: types.Message):
 @dp.message(
     AddPost.title,
     ~F.text.in_([button.text for button in title_detection_buttons.keyboard[0]]),
+    ~F.text == 'Отменить ❌'
 )
 async def repeat_enter_title(message: types.Message):
     await message.answer(
