@@ -24,25 +24,29 @@ async def add_photo__cmd_publish(message: types.Message, state: FSMContext) -> N
         :message: тип объкета представления
         :content_types: тип данных
     '''
-    if message.text == 'Продолжить публикацию':
-        await state.update_data(photo = types.FSInputFile(path = 'red_bot/utils/content/media_content/botik.jpg'))
-    else:
-        await state.update_data(photo = message.photo[0].file_id)
-
     for_post_data = await state.get_data()
     caption = POST_CONTENT.format(
         for_post_data.get('title'),
         for_post_data.get('text'),
         for_post_data.get('conditions')
     )
-    photo = for_post_data.get('photo')
-    msg = await message.bot.send_photo(
-        chat_id = CHANNEL_ID,
-        photo = photo,
-        caption = caption,
-        parse_mode = 'HTML',
-        reply_markup = under_post_buttons
-    )
+    # если пользователь нажал кнопку "Продолжить публикацию" - тогда просто публикуется сообщение
+    if message.text == 'Продолжить публикацию':
+        msg = await message.bot.send_message(
+            chat_id = CHANNEL_ID,
+            text = caption,
+            reply_markup = under_post_buttons
+        )
+    else:
+        await state.update_data(photo = message.photo[0].file_id)
+        photo = for_post_data.get('photo')
+        msg = await message.bot.send_photo(
+            chat_id = CHANNEL_ID,
+            photo = photo,
+            caption = caption,
+            parse_mode = 'HTML',
+            reply_markup = under_post_buttons
+        )
     await message.answer(
         text = PUBLICATION_ACCOUNCEMENT,
         reply_markup = types.ReplyKeyboardRemove()
