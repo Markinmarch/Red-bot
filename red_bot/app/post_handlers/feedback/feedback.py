@@ -5,7 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from ....settings.setting import dp
 from ....settings.config import CHANNEL_URL
 from ....utils.content.text_content import FEEDBACK, ALREADY_RESPONDED_MESSAGE, FEEDBACK_SEND
-from sql_db.main import posts, responders
+from sql_db import posts, responders
 
 
 @dp.callback_query(F.data == 'respond_to_ad')

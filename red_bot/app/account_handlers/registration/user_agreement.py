@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from ....settings.setting import dp
 from ....utils.content.text_content import WELCOME, IF_USER_HAVE_ACCOUNT, UPDATE_MESSAGE
 from ....utils.keyboards.inline_keyboard import agree_button
-from sql_db.main import users
+from sql_db import users
 
 
 @dp.callback_query(F.data == 'create_account')

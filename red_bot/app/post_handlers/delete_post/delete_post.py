@@ -6,7 +6,7 @@ from ....settings.setting import dp
 from ....settings.config import CHANNEL_ID
 from ....utils.state import DeletePost
 from ....utils.content.text_content import DELETE_POST_MESSAGE
-from sql_db.main import posts
+from sql_db import posts
 
 
 @dp.callback_query(DeletePost.num_post, F.data == 'delete_post')

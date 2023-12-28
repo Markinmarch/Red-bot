@@ -7,7 +7,7 @@ from ....settings.config import CHANNEL_URL
 from ....utils.content.text_content import FILTERS_MESSAGE
 from ....utils.keyboards.inline_keyboard import delete_post_button
 from ....utils.state import DeletePost
-from sql_db.main import posts
+from sql_db import posts
 
 
 @dp.message(DeletePost.num_post)

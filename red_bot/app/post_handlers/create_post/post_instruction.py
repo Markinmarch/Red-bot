@@ -6,7 +6,7 @@ from ....settings.config import COUNT_LIMIT_POSTS
 from ....settings.setting import dp
 from ....utils.content.text_content import POST_INSTRUCTION, UNREGISTRED_USER, LIMIT_WARNING_PUBLICATION_MESSAGE
 from ....utils.keyboards.inline_keyboard import continue_filling_button, start_registration_button
-from sql_db.main import users
+from sql_db import users
 
 
 @dp.message(Command('create_post'))

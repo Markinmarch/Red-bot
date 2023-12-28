@@ -9,7 +9,7 @@ from ...settings.config import ADMIN_ID, TIMEOUT_MESSAGES
 from ...utils.content.text_content import UNREGISTRED_USER, INTERRUPTION_MESSAGE, MESSAGE_TO_ADMIN, BEFORE_TO_SEND_MESSAGE_ADMINS
 from ...utils.state import MessageToAdmin
 from ...utils.keyboards.inline_keyboard import start_registration_button
-from sql_db.main import users
+from sql_db import users
 
 
 @dp.message(Command('contact'))

@@ -17,5 +17,5 @@ async def get_rules(message: types.Message) -> None:
         :message: тип объекта представления
     '''
     await message.answer(
-        text = {RULES_URL}
+        text = RULES_URL
     )

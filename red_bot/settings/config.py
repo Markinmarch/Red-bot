@@ -11,7 +11,7 @@ load_dotenv(dotenv_path = '.env')
 
 BOT_TOKEN = os.getenv('BOT_TOKEN', '')
 
-RULES_URL = 'https//telegra.ph/fcvfcvfc-12-26'
+RULES_URL = 'https://telegra.ph/fcvfcvfc-12-26'
 
 ADMIN_ID = 805875522
 
