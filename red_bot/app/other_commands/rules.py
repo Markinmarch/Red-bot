@@ -1,4 +1,4 @@
-from aiogram import types, F
+from aiogram import types
 from aiogram.filters import Command
 
 
@@ -17,5 +17,5 @@ async def get_rules(message: types.Message) -> None:
         :message: тип объекта представления
     '''
     await message.answer(
-        text = RULES_URL
+        text = {RULES_URL}
     )
