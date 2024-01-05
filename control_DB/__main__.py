@@ -7,6 +7,6 @@ if __name__ == '__main__':
         if time.strftime('%H') == DROP_TIME:
             write_datas
             erase_db
-            time.sleep(check_DB.DAY)
+            time.sleep(DAY)
         else:
-            time.sleep(check_DB.HOUR)
+            time.sleep(HOUR)
