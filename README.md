@@ -31,11 +31,11 @@
 
 ```redis-cli fulshall``` или ```redis-cli flushdb 0```
 
-7. Установка зависимостей
+8. Установка зависимостей
 
 ```pip install -r requirements.txt```
 
-8. Запуск скрипта для демонстрации возможностей Red bot в [фоновом](https://losst.pro/kak-zapustit-protsess-v-fone-linux) режиме 
+9. Запуск скрипта для демонстрации возможностей Red bot в [фоновом](https://losst.pro/kak-zapustit-protsess-v-fone-linux) режиме 
 
 ```python -m red_bot & python -m control_DB &```
 
