@@ -3,13 +3,12 @@
 
 <!--Установка-->
 ## Установка (Linux)
-У вас должны быть установлены [зависимости проекта](https://github.com/Markinmarch/Red-bot#зависимости)
 
 1. Клонирование репозитория 
 
 ```git clone https://github.com/Markinmarch/Red-bot.git```
 
-2. Переход в директорию Oxygen
+2. Переход в директорию Red bot
 
 ```cd Red-bot```
 
